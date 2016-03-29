@@ -5,28 +5,27 @@ define("_SITE_MODE", "debug"); // debug, production
 
 // SITE CONSTANTS
 //------------------------------------------------------------------------------
-// define("_SITE_URL", "http://centurysoftwares.com/cleaning/");
-define("_SITE_URL", "http://localhost/cleaning/");
+// define("_SITE_URL", "http://centurysoftwares.com/cleaning");
+define("_SITE_URL", "http://localhost/cleaning");
 define("_PANEL_NAME", "Admin Panel");
-define("_SITE_NAME", "Unwritten Cleaning");
+define("_SITE_NAME", "Website Cleaning");
 define("_SITE_ADDRESS", "localhost.com");
 define("_SITE_LANGUAGE", "en");
 define("_ADMIN_EMAIL", "admin@domain.com");
-define("_CSS_STYLE", "global");
-define("_DB_PREFIX", "tbl_cleaning_");
+define("_DB_PREFIX", "wc_cleaning_");
 
 /*Directry URL*/
-define("ROOT_PATH", dirname(dirname(__FILE__)));
-define("BOOKING_PATH", dirname(dirname(__FILE__)).'/bookings');
-define("INCLUDE_PATH", dirname(dirname(__FILE__)).'/includes');
-define("CSS_URL", _SITE_URL.'/css');
-define("BOOTSTRAP_URL", _SITE_URL.'/bootstrap');
-define("JS_URL", _SITE_URL.'/js');
+define("_ROOT_PATH", dirname(dirname(__FILE__)));
+define("_BOOKING_PATH", dirname(dirname(__FILE__)).'/bookings');
+define("_INCLUDE_PATH", dirname(dirname(__FILE__)).'/includes');
+define("_CSS_URL", _SITE_URL.'/css');
+define("_BOOTSTRAP_URL", _SITE_URL.'/bootstrap');
+define("_JS_URL", _SITE_URL.'/js');
 
 // *** encrypt or not admin password true|false
-define("USE_PASSWORD_ENCRYPTION", true);
+define("_USE_PASSWORD_ENCRYPTION", true);
 // *** type of encryption - AES|MD5
-define("PASSWORD_ENCRYPTION_TYPE", "base64_encode");
+define("_PASSWORD_ENCRYPTION_TYPE", "base64_encode");
 
 //------------------------------------------------------------------------------
 if(_SITE_MODE == "debug"){

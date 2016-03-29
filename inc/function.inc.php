@@ -30,9 +30,8 @@ function getLogin($uname,$pword,$ulevel) {
 }
 function getMenus() {
     $db = new Config();
-    $sql_query = "SELECT * FROM "._DB_PREFIX."menus WHERE txtIsMenuGroup = 1 AND txtIsHidden = 1";
+    $sql_query = "SELECT * FROM "._DB_PREFIX."menus WHERE txtIsMenuGroup = 1 AND txtIsHidden = 0";
     $execute = $db->query($sql_query);
-    $execute = $db->numRows();
     $collection = array();
     while ($row = $db->fetchAssoc($execute)) {
         array_push($collection, $row);
@@ -48,14 +47,16 @@ function displayName($tableName,$columnName,$id,$columnIdName) {
     }
 }
 function checkUser($username,$email) {
+    $db = new Config();
     $sql_chk = "SELECT * FROM tbl_user WHERE txtusername = '$username' OR txtEmail = '$email'";
-    $mysql_query = mysql_query($sql_chk);
-    return mysql_num_rows($mysql_query);
+    $mysql_query = $db->query($sql_chk);
+    return $mysql_query = $db->numRows();
 }
 function checkEmail($email) {
+    $db = new Config();
     $sql_chk = "SELECT * FROM tbl_user WHERE txtEmail = '$email'";
-    $mysql_query = mysql_query($sql_chk);
-    return mysql_num_rows($mysql_query);
+    $mysql_query = $db->query($sql_chk);
+    return $mysql_query = $db->numRows();
 }
 function getOptions($collection,$id,$name,$selected) {
     echo "<option value='0'>-- Select --</option>";
@@ -69,13 +70,15 @@ function getOptions($collection,$id,$name,$selected) {
     }
 }
 function registerUser($username,$password,$email) {
+    $db = new Config();
     $insertQuery = "INSERT INTO tbl_user(txtUsername,txtPassword,txtEmail,txtStatus)
                                   VALUES('$username','$password','$email','0')";
-    mysql_query($insertQuery);
+    $db->query($insertQuery);
 }
 function forgotPassword($uid,$password) {
+    $db = new Config();
     $updateQuery = "UPDATE tbl_user SET txtPassword = '$password' WHERE txtid = '$uid'";
-    mysql_query($updateQuery);
+    $db->query($updateQuery);
 }
 function randomPassword() {
     $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
@@ -118,14 +121,5 @@ function randomNumber($length) {
     }
     return $result;
 }
-function getCustId() {
-    $sqlQuery = "SELECT txtId FROM tbl_clients ORDER BY txtId DESC";
-    $mysql_query = mysql_query($sqlQuery);
-    mysql_num_rows($mysql_query);
-    while ($row = mysql_fetch_assoc($mysql_query)) {
-        return "100".$row["txtId"];
-    }
-}
-
 
 ?>

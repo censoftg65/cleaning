@@ -9,6 +9,8 @@ $db = new Config();
 $collection = getMenus();
 $menu_group_count = count(getMenus());
 
+$collection2 = getMenus();
+
 ?>
 <script>
 function prepareFilterBlocks() {
@@ -34,7 +36,7 @@ for($i = 0; $i < $menu_group_count; $i++) {
     	<div id="textfilters" style="border:0px;">
             <?php foreach ($collection as $list) {?>
             <div class="curtainBox <?php echo $FilterCatIds[$menu_group_index];?>" id="filter<?php echo $menu_group_index;?>" style="width:150px;">
-    		    <div class="header switch" style="height:20px;">
+    		    <div class="header switch" style="height:20px;width:200px">
         			<span class="expand" id='plusbox<?php echo $menu_group_index;?>'><IMG class="plusbox" alt="(+)" src="images/expand.gif"></span> 
         			<span class="collapse" id='minusbox<?php echo $menu_group_index;?>'><IMG class="plusbox" alt="(-)" src="images/collapse.gif"></span> 
         			<strong><?php echo $list['txtMenu'];?></strong>
@@ -63,7 +65,7 @@ for($i = 0; $i < $menu_group_count; $i++) {
         </div>
 
         <tr><td vAlign=top height="10px" nowrap><hr class="divider"></td></tr>	
-    	<tr><td vAlign=top><a href="<?php echo _SITE_URL?>logout.php" onclick="prepareFilterBlocks()">Log Out</a></td></tr>
+    	<tr><td vAlign=top><a href="<?php echo _SITE_URL?>/logout.php" onclick="prepareFilterBlocks()">Log Out</a></td></tr>
     	<tr><td vAlign=top>&nbsp;</td></tr>    
     	<tr><td vAlign=top>&nbsp;</td></tr>
     	<tr><td vAlign=top>&nbsp;</td></tr>

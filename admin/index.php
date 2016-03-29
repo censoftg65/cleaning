@@ -31,9 +31,11 @@ $msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";
     <title><?php echo _SITE_NAME?> :: Admin Panel</title>
     <meta http-equiv=Content-Type content="text/html; charset=utf-8">
     <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-    <link href="<?php echo _SITE_URL?>css/style_<?php echo _CSS_STYLE?>.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _SITE_URL?>bootstrap/css/bootstrap.min.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _SITE_URL?>bootstrap/css/bootstrap-theme.min.min.css" type=text/css rel=stylesheet>
+    <link href="<?php echo _CSS_URL?>/style_menu.css" type="text/css" rel="stylesheet">
+    <link href="<?php echo _CSS_URL?>/pr-tools.css" type="text/css" rel="stylesheet">
+    <link href="<?php echo _CSS_URL?>/style_global.css" type=text/css rel=stylesheet>
+    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap.min.css" type=text/css rel=stylesheet>
+    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap-theme.min.min.css" type=text/css rel=stylesheet>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
@@ -42,11 +44,10 @@ $msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";
     <div class="row row-centered">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <form name="frmLogin" id="frmLogin" action="check_login.php" method="post">
-        <!-- <form name="frmLogin" id="frmLogin" method="post"> -->
             <input type="hidden" value="login" name="do">
             <div class="col-md-4"></div>
             <div class="col-md-4 col-centered alt2 raised">
-                <h4>LOG-IN HERE</h4>
+                <h4>LOGIN HERE</h4>
                 <div>
                     <label>Username / Email</label>
                     <input class="form-control" type="text" id="txtUsername" name="txtUsername" value="<?php echo $db->getParam('txtUsername')?>" required="">
@@ -78,9 +79,12 @@ $msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";
 </div>
 </body>
 </html>
-<script type="text/javaScript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javaScript" src="<?php echo _SITE_URL?>bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javaScript" src="<?php echo _SITE_URL?>js/script_custom.js"></script>
+<script type="text/javaScript" src="<?php echo _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
+<script type="text/javaScript" src="<?php echo _JS_URL?>/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="<?php echo _JS_URL?>/jquery-1.1.2.js"></script>
+<script type="text/JavaScript" src="<?php echo _JS_URL?>/functions.js"></script>    
+<script type="text/javascript" src="<?php echo _JS_URL?>/pr-tools.js"></script>
+<script type="text/javaScript" src="<?php echo _JS_URL?>/script_custom.js"></script>
 <script>
 document.getElementById("txtUsername").focus();
 function rememberMe(val) {
