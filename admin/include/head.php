@@ -11,8 +11,11 @@
     <link href="<?php echo _CSS_URL?>/style_menu.css" type="text/css" rel="stylesheet">
     <link href="<?php echo _CSS_URL?>/pr-tools.css" type="text/css" rel="stylesheet">
     <link href="<?php echo _CSS_URL?>/style_global.css" type=text/css rel=stylesheet>
+    <link href="<?php echo _CSS_URL?>/editor.css" type="text/css" rel="stylesheet">
+    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap.css" type=text/css rel=stylesheet>
     <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap.min.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap-theme.min.min.css" type=text/css rel=stylesheet>
+    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap-theme.css" type=text/css rel=stylesheet>
+    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap-theme.min.css" type=text/css rel=stylesheet>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 

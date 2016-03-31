@@ -30,7 +30,7 @@ function getLogin($uname,$pword,$ulevel) {
 }
 function getMenus() {
     $db = new Config();
-    $sql_query = "SELECT * FROM "._DB_PREFIX."menus WHERE txtIsMenuGroup = 1 AND txtIsHidden = 0";
+    $sql_query = "SELECT * FROM "._DB_PREFIX."menus WHERE txtIsMenuGroup = 1 AND txtIsHidden = 0 AND txtParentId = 0";
     $execute = $db->query($sql_query);
     $collection = array();
     while ($row = $db->fetchAssoc($execute)) {

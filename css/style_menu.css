@@ -32,9 +32,6 @@ DIV#textfilters {
 #textfilters .header .plusbox {
 	FLOAT: right; MARGIN: 2px 0px
 }
-#textfilters UL {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 2px 0px 6px 4px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
-}
-#textfilters LI {
-	PADDING-RIGHT: 0px; PADDING-LEFT: 7px; BACKGROUND: url(../images/listbullet.gif) no-repeat 1px 6px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+#textfilters UL {list-style-type: none;margin: 10px 0 10px 20px;padding: 0;}
+#textfilters LI {PADDING-RIGHT: 0px; PADDING-LEFT: 7px; BACKGROUND: url(../images/listbullet.gif) no-repeat 1px 6px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
 }

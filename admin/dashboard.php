@@ -44,8 +44,8 @@ if($adm_logged == true) {
 <frameset rows="90px,*" FRAMEBORDER="no" FRAMESPACING="0" BORDER="0">
      <frame src="header.php" name="header" scrolling="no">
      <frameset cols="170px,*"  FRAMEBORDER="no" FRAMESPACING="0" BORDER="0">
-          <frame src="<?php // echo $left_menu_page; ?>" name="left_menu" scrolling="no">
-          <frame src="<?php // echo $content_page; ?>" name="frameMain">
+          <frame src="<?php echo $left_menu_page; ?>" name="left_menu" scrolling="no">
+          <frame src="<?php echo $content_page; ?>" name="frameMain">
      </frameset>
 </frameset>
 

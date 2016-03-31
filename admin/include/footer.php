@@ -4,7 +4,9 @@
 */
 ?>
 
-<div>
+<div style="clear: both"></div>
+<br>
+<div style="border:1px solid #ccc;height:100px;background:#ccc;font-size:12px;text-align:center;line-height:30px">
 	Terms & Conditions Privacy Policy<br/>
 	Materials available on copyright.com are protected by the copyright laws of the United States and other countries. © 2015-2016
 	<br/>Copyright Website Cleaning Inc. All rights reserved.
@@ -18,3 +20,4 @@
 <script type="text/JavaScript" src="<?php echo _JS_URL?>/functions.js"></script>    
 <script type="text/javascript" src="<?php echo _JS_URL?>/pr-tools.js"></script>
 <script type="text/javaScript" src="<?php echo _JS_URL?>/script_custom.js"></script>
+<script type="text/javaScript" src="<?php echo _EDITOR_URL	?>/tinymce.min.js"></script>
