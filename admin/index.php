@@ -12,8 +12,9 @@ foreach($_GET as $get_key => $get_value) {
     }
 }
 
-include '../inc/config.inc.php';
-include '../inc/function.inc.php';
+require_once dirname(__DIR__).'/inc/config.inc.php';
+include_once dirname(__DIR__).'/inc/function.inc.php';
+$_SESSION['page_title'] = "Login | "._PANEL_NAME." :: "._SITE_NAME;
 $db = new Config(); 
 
 // check if previouse name was saved
@@ -25,73 +26,68 @@ $msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";
 
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title><?php echo _SITE_NAME?> :: Admin Panel</title>
-    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-    <link href="<?php echo _CSS_URL?>/style_menu.css" type="text/css" rel="stylesheet">
-    <link href="<?php echo _CSS_URL?>/pr-tools.css" type="text/css" rel="stylesheet">
-    <link href="<?php echo _CSS_URL?>/style_global.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap.min.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _BOOTSTRAP_URL?>/css/bootstrap-theme.min.min.css" type=text/css rel=stylesheet>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= $_SESSION['page_title']?></title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="<?= _ADMIN_CSS_ASSETS?>/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= _ADMIN_CSS_ASSETS?>/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= _ADMIN_CSS_ASSETS?>/css/form-elements.css">
+    <link rel="stylesheet" href="<?= _ADMIN_CSS_ASSETS?>/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Javascript -->
+    <script src="<?= _ADMIN_CSS_ASSETS?>/js/jquery-1.11.1.min.js"></script>
+    <script src="<?= _ADMIN_CSS_ASSETS?>/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= _ADMIN_CSS_ASSETS?>/js/jquery.backstretch.min.js"></script>
+    <script src="<?= _ADMIN_CSS_ASSETS?>/js/scripts.js"></script>
 </head>
 
 <body>
-<div class="container">
-    <div class="row row-centered">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <form name="frmLogin" id="frmLogin" action="check_login.php" method="post">
-            <input type="hidden" value="login" name="do">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 col-centered alt2 raised">
-                <h4>LOGIN HERE</h4>
-                <div>
-                    <label>Username / Email</label>
-                    <input class="form-control" type="text" id="txtUsername" name="txtUsername" value="<?php echo $db->getParam('txtUsername')?>" required="">
-                </div>
-                <br>
-                <div>
-                    <label>Password</label>
-                    <input class="form-control" type="password" id="txtPassword" name="txtPassword" value="<?php echo $db->getParam('txtpassword')?>" required="">
-                </div>
-                <br>
-                <div>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="txtRemember" name="txtRemember" value="1" <?php echo $remember_me?> title="Remember Me">
-                        <small>Remember me</smal>
-                    </label>
-                </div>
-                <br>
-                <?php if(!empty($error)) { echo $error; } ?>
-                <?php if($msg == "1") { echo "<span class='msg_error'>Invalid Username Or Password..! <br>Please Try Again..!</span>"; } ?>
-                <br>
-                <div>
-                    <input accessKey="s" type="submit" class="btn btn-md btn-success" name="btnLogin" value="Login" onClick="rememberMe(); return onSubmitCheck(document.forms['frmLogin'], false,false);">
+<div class="top-content">
+	<div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>Admin</strong> Login Form</h1>
                 </div>
             </div>
-            <div class="col-md-4"></div>
-        </form>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                	<div class="form-top">
+                		<div class="form-top-left">
+                			<h3>Login to your admin panel</h3>
+                            <p>
+                            <?php if($msg == "1") {echo "<span>Invalid Username Or Password..! Please Try Again..!<span>";}?>
+                            </p>
+                    	</div>
+                		<div class="form-top-right">
+                			<i class="fa fa-key"></i>
+                		</div>
+                    </div>
+                    <div class="form-bottom">
+	                    <form name="frmLogin" id="frmLogin" action="check_login.php" method="post">
+	                    	<div class="form-group">
+	                    		<label class="sr-only" for="form-username">Username</label>
+	                        	<input type="text" name="txtUsername" placeholder="Username..." class="form-username form-control" id="txtUsername">
+	                        </div>
+	                        <div class="form-group">
+	                        	<label class="sr-only" for="form-password">Password</label>
+	                        	<input type="password" name="txtPassword" placeholder="Password..." class="form-password form-control" id="txtPassword">
+	                        </div>
+                            <button type="submit" name="btnLogin" class="btn">Sign In!</button>
+	                    </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </body>
 </html>
-<script type="text/javaScript" src="<?php echo _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
-<script type="text/javaScript" src="<?php echo _JS_URL?>/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="<?php echo _JS_URL?>/jquery-1.1.2.js"></script>
-<script type="text/JavaScript" src="<?php echo _JS_URL?>/functions.js"></script>    
-<script type="text/javascript" src="<?php echo _JS_URL?>/pr-tools.js"></script>
-<script type="text/javaScript" src="<?php echo _JS_URL?>/script_custom.js"></script>
-<script>
-document.getElementById("txtUsername").focus();
-function rememberMe(val) {
-    if(document.getElementById("txtRemember").checked == true) {
-        setCookie("remember_name",document.getElementById("txtUsername").value,14);       
-    } else {
-        setCookie("remember_name","",-2);       
-    }
-}
-</script>

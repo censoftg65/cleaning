@@ -10,7 +10,31 @@ $ip_address = $_SERVER['REMOTE_ADDR'];
 */
 function getLogin($uname,$pword,$ulevel) {
     $db = new Config();
-    $sql_login = "SELECT * FROM "._DB_PREFIX."user WHERE txtUsername = '$uname' AND txtPassword = '$pword' AND txtUserLevel = '$ulevel' AND txtStatus = '1'";
+    $sql_login = $db->select('*');
+    $sql_login .= $db->from(_DB_PREFIX.'user');
+    $sql_login .= $db->where("txtUsername = '".$uname."' AND txtPassword = '".$pword."' AND txtUserLevel = '".$ulevel."'");
+    $execute = $db->query($sql_login);
+    $execute = $db->numRows();
+    if ($execute != 0) {
+        while ($row = $db->fetchAssoc($execute)) {
+            $_SESSION['ad_logged']   = true;
+            $_SESSION["txtId"]        = $row["txtId"];
+            $_SESSION["txtEmail"]     = $row["txtEmail"];
+            $_SESSION["txtUsername"]  = $row["txtUsername"];
+            $_SESSION["txtUserLevel"] = $row["txtUserLevel"];
+            $_SESSION["txtStatus"]    = $row["txtStatus"];
+            $error = "";
+        }
+    } else {
+        $error = "<span class='error'>Invalid Username Or Password..! <br>Please Try Again..!</span>";
+    }
+    return $error;
+}
+function getUserLogin($uname,$pword,$ulevel) {
+    $db = new Config();
+    $sql_login = $db->select('*');
+    $sql_login .= $db->from(_DB_PREFIX.'user');
+    $sql_login .= $db->where("txtUsername = '".$uname."' AND txtPassword = '".$pword."' AND txtUserLevel = '".$ulevel."'");
     $execute = $db->query($sql_login);
     $execute = $db->numRows();
     if ($execute != 0) {
@@ -46,15 +70,9 @@ function displayName($tableName,$columnName,$id,$columnIdName) {
         return $row[$columnName];
     }
 }
-function checkUser($username,$email) {
+function checkUser($email) {
     $db = new Config();
-    $sql_chk = "SELECT * FROM tbl_user WHERE txtusername = '$username' OR txtEmail = '$email'";
-    $mysql_query = $db->query($sql_chk);
-    return $mysql_query = $db->numRows();
-}
-function checkEmail($email) {
-    $db = new Config();
-    $sql_chk = "SELECT * FROM tbl_user WHERE txtEmail = '$email'";
+    $sql_chk = "SELECT * FROM "._DB_PREFIX."user WHERE txtEmail = '$email'";
     $mysql_query = $db->query($sql_chk);
     return $mysql_query = $db->numRows();
 }
@@ -71,13 +89,13 @@ function getOptions($collection,$id,$name,$selected) {
 }
 function registerUser($username,$password,$email) {
     $db = new Config();
-    $insertQuery = "INSERT INTO tbl_user(txtUsername,txtPassword,txtEmail,txtStatus)
-                                  VALUES('$username','$password','$email','0')";
+    $insertQuery = "INSERT INTO "._DB_PREFIX."user(txtUsername,txtPassword,txtEmail,txtStatus)
+                                            VALUES('$username','$password','$email','0')";
     $db->query($insertQuery);
 }
 function forgotPassword($uid,$password) {
     $db = new Config();
-    $updateQuery = "UPDATE tbl_user SET txtPassword = '$password' WHERE txtid = '$uid'";
+    $updateQuery = "UPDATE "._DB_PREFIX."user SET txtPassword = '$password' WHERE txtid = '$uid'";
     $db->query($updateQuery);
 }
 function randomPassword() {
@@ -91,7 +109,6 @@ function randomPassword() {
     return implode($pass); //turn the array into a string
 }
 function getCurrentDateTime($mode) {
-    $timezone = new DateTimeZone("Asia/Kolkata");
     $date = new DateTime();
     $date->setTimezone($timezone );
     if($mode == "all") {
@@ -121,5 +138,9 @@ function randomNumber($length) {
     }
     return $result;
 }
-
+function pr($array = array()) {
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+}
 ?>

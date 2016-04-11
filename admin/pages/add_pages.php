@@ -1,6 +1,13 @@
 <?php
 session_start();
 ob_start();
+
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:/cleaning/admin/index.php");
+}
+
+$uid   = $_SESSION["txtId"];
+$uname = $_SESSION["txtUsername"];
 //--------------------------------------------------------------------------
 // *** remote file inclusion, check for strange characters in $_GET keys
 // *** all keys with "/", "\", ":" or "%-0-0" are blocked, so it becomes virtually impossible
@@ -12,54 +19,52 @@ foreach($_GET as $get_key => $get_value) {
     }
 }
 
-require_once(dirname(dirname(__DIR__)).'/inc/config.inc.php');
-include(dirname(dirname(__DIR__)).'/inc/function.inc.php');
-include 'cls_pages.php';
+require_once (dirname(dirname(__DIR__)).'/inc/config.inc.php');
+include_once (dirname(dirname(__DIR__)).'/inc/function.inc.php');
+include_once 'cls_pages.php';
+$_SESSION['page_title'] = "Add Menus | "._PANEL_NAME." :: "._SITE_NAME;
 $db = new Config(); 
-$objPage = new Pages();
 
 ?>
 
-<head>
-    <title><?php echo _SITE_NAME ?> :: Pages | Add Pages</title>
-</head>
+<?php include dirname(__DIR__).'/include/header.php' ?>
 
-<?php include '../include/header.php' ?>
+    <?php include dirname(__DIR__).'/include/left_menu.php' ?>
 
-<?php include '../include/left_menu.php' ?>
-
-<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <form name="frmAddPages" id="frmAddPages" method="post">
-                <div class="col-md-12"><h4><strong>ADD PAGE</strong></h4></div>
-                <div class="col-md-12">&nbsp;</div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Page Title : </label>
-                        <input class="form-control input-sm" type="text" id="txtPageTitle" name="txtPageTitle" value="">
-                    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="col-lg-12"><h4><strong>ADD PAGE</strong></h4></div>
+        <form name="frmAddPages" id="frmAddPages" method="post">
+            <div class="col-md-12">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Page Title : </label>
+                    <input class="form-control input-sm" type="text" id="txtPageTitle" name="txtPageTitle" value="">
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Page Url Link : </label>
-                        <input class="form-control input-sm" type="text" id="txtPageUri" name="txtPageUri" value="">
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Page Url Link : </label>
+                    <input class="form-control input-sm" type="text" id="txtPageUri" name="txtPageUri" value="">
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Page Content</label>
-                        <textarea class="form-control" id="txtPageContent" name="txtPageContent"></textarea> 
-                    </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Slider Content</label>
+                    <textarea class="form-control" id="txtPageSliderContent" name="txtPageSliderContent"></textarea> 
                 </div>
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-md btn-success" name="btnCreatePage" id="btnCreatePage">
-                        <span style="display:none" id="loading"></span>&nbsp;&nbsp;Create Page
-                    </button>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Text Content</label>
+                    <textarea class="form-control" id="txtPageTextContent" name="txtPageTextContent"></textarea> 
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="col-md-12">
+                <button type="button" class="btn btn-md btn-success" name="btnCreatePage" id="btnCreatePage">
+                    <span style="display:none" id="loading"></span>&nbsp;&nbsp;Create Page
+                </button>
+            </div>
+        </form>
     </div>
-</div>
 
-<?php include '../include/footer.php' ?>
+    <?php include dirname(__DIR__).'/include/footer.php' ?>

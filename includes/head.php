@@ -1,26 +1,50 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML  PUBL IC "-//W3C//DTD HTML  4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html lang="en">
 <head>
-	<title>Website Cleaning</title>
+	<!-- AL L  META TAGGS INCL UDE HERE -->
+    <meta http-equiv=Content-Type content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+    <meta name="googlebot-news" content="noindex,nofollow">
+    <meta name="keywords" content="crm">
+    <meta name="description" content="Website Back-End management script that provides access to the control features of your site.">
+    <meta name="author" content="Cleaning Company">
+    <meta name="generator" content="ApPHP AdminPanel">
 
-	<!-- BEGIN META -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="crm">
-	<meta name="description" content="Website Cleaning">
-	<!-- END META -->
+    <title><?= $_SESSION['page_title']?></title>
 
-	<!-- include css -->
-	<link href="<?= BOOTSTRAP_URL ?>/css/bootstrap.css" rel="stylesheet">
-	<link href="<?= CSS_URL ?>/materialadmin.css" rel="stylesheet">
-	<link href="<?= CSS_URL ?>/font-awesome.css" rel="stylesheet">
-	<link href="<?= CSS_URL ?>/style_global.css" rel="stylesheet">
+    <!-- ALL STYLE TAGGS INCL UDE HERE -->
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap.css" rel="stylesheet">
+    <link href="<?= _BOOTSTRAP_URL?>/css/datepicker3.css" rel="stylesheet">
+    <link href="<?= _BOOTSTRAP_URL?>/css/datetimepicker.min.css" rel="stylesheet">
+    <link href="<?= _CSS_URL?>/font-awesome.css" type="text/css" rel="stylesheet">
+    <link href="<?= _CSS_URL?>/style.css" rel="stylesheet" type="text/css">
+    <link href="<?= _CSS_URL?>/style_global.css" type="text/css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,800,700italic,700,800italic" rel="stylesheet" type="text/css">
 
-	<!-- include js -->
-	<script src="<?= JS_URL ?>/jquery-1.11.2.js"></script>
-	<script src="<?= JS_URL ?>/jquery-migrate-1.2.1.min.js"></script>
-	<script src="<?= BOOTSTRAP_URL ?>/js/bootstrap.js"></script>
-	<script src="<?= BOOTSTRAP_URL ?>/js/bootstrap.min.js"></script>
-	<script src="<?= JS_URL ?>/jquery.validate.min.js"></script>
-	<script src="<?= JS_URL ?>/AppForm.js"></script>
-	<body>
+    <!-- ALL SCRIPT TAGGS INCL UDE HERE -->
+    <script src="<?= _JS_URL?>/jquery-1.11.2.min.js"></script>
+    <script src="<?= _JS_URL?>/jquery-1.1.2.js"></script>
+    <script src="<?= _BOOTSTRAP_URL?>/js/bootstrap.js"></script>
+    <script src="<?= _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
+    <script src="<?= _JS_URL?>/functions.js"></script>    
+    <script src="<?= _JS_URL?>/pr-tools.js"></script>
+    <script src="<?= _EDITOR_URL?>/tinymce.min.js"></script>
+    <script src="<?= _JS_URL?>/script_custom.js"></script>
+
+    <!-- SCRIPTS FROM BOOKING FORM -->
+    <script src="<?= _JS_URL?>/jquery-migrate-1.2.1.min.js"></script>
+    <script src="<?= _JS_URL?>/jquery.validate.js"></script>
+    <script src="<?= _BOOTSTRAP_URL?>/js/datetimepicker.min.js"></script>
+    <script src="<?= _BOOTSTRAP_URL?>/js/datepicker.js"></script>
+    <script src="<?= _JS_URL?>/AppForm.js"></script>
+    
+    <!-- SCRIPT TO SET THE COOKIES -->
+    <script src="<?= _JS_URL?>/jquery.cookie.js"></script>
+    <script>
+    $.cookie('_SITE_URL', '<?= _SITE_URL?>', { path: '/' });
+    var _SITE_URL = $.cookie('_SITE_URL');
+    </script>
+</head>

@@ -1,0 +1,10 @@
+[06-Apr-2016 10:24:38 UTC] PHP Notice:  Undefined index: txtPageEntity in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 13
+[06-Apr-2016 10:24:38 UTC] PHP Notice:  Undefined index: txtUpdateTime in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 18
+[06-Apr-2016 10:24:38 UTC] PHP Notice:  Undefined index: txtStatus in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 19
+[06-Apr-2016 10:24:38 UTC] PHP Notice:  Undefined index: txtTitle in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 21
+[06-Apr-2016 10:24:38 UTC] PHP Notice:  Undefined index: txtContactDetails in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 22
+[06-Apr-2016 10:24:56 UTC] PHP Notice:  Undefined index: txtPageEntity in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 13
+[06-Apr-2016 10:24:56 UTC] PHP Notice:  Undefined index: txtUpdateTime in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 18
+[06-Apr-2016 10:24:56 UTC] PHP Notice:  Undefined index: txtStatus in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 19
+[06-Apr-2016 10:24:56 UTC] PHP Notice:  Undefined index: txtTitle in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 21
+[06-Apr-2016 10:24:56 UTC] PHP Notice:  Undefined index: txtContactDetails in /home/centurys/public_html/cleaning/admin/pages/cls_pages.php on line 22

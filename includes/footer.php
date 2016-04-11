@@ -4,10 +4,8 @@
 */
 ?>
 
-<div  class="dummy">
-Terms & Conditions Privacy Policy<br/>
-Materials available on copyright.com are protected by the copyright laws of the United States and other countries. © 2015-2016
-<br/>Copyright Website Cleaning Inc. All rights reserved.
+<div class="copyright">
+    <p>&copy; 2016 <a href="http://www.unwrittencleaning.com/" target="_blank">www.unwrittencleaning.com</a> All Rights Reserved</p>
 </div>
 </body>
 </html>

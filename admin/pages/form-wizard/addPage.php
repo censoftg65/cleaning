@@ -6,24 +6,15 @@ include '../../../inc/config.inc.php';
 include '../../../inc/function.inc.php';
 include '../cls_pages.php';
 $db = new Config(); 
-$objPage = new Pages(); 
 
-$pageTitle = $db->getParam('pagetitle');
-$pageUrl = $db->getParam('pageurl');
-$pageContent = mysql_real_escape_string($db->getParam('pagecontent'));
+$arr_page['txtPageEntity']      = strtolower($db->getParam('pagetitle'));
+$arr_page['txtPageTitle']       = $db->getParam('pagetitle');
+$arr_page['txtPageUrl']         = $db->getParam('pageurl');
+$arr_page['txtSliderContent']   = mysql_real_escape_string($db->getParam('pageslidercontent'));
+$arr_page['txtTextContent']     = mysql_real_escape_string($db->getParam('pagetextcontent'));
+$arr_page['txtStatus']          = '1';
 
-$sql_query = "INSERT INTO "._DB_PREFIX."pages (
-                                                    txtPageTitle,
-                                                    txtPageUrl,
-                                                    txtPageContent,
-                                                    txtPageStatus
-                                                )
-                                        VALUES (
-                                                    '$pageTitle',
-                                                    '$pageUrl',
-                                                    '$pageContent',
-                                                    '1'
-                                                )";
-$result = $db->query($sql_query);
+$setDetails = $objPage->setDetails($arr_page);
+$execute = $objPage->insertPage();
 
 ?>

@@ -1,6 +1,6 @@
-<?php
+<?php 
 session_start();
-
+ob_start();
 //--------------------------------------------------------------------------
 // *** remote file inclusion, check for strange characters in $_GET keys
 // *** all keys with "/", "\", ":" or "%-0-0" are blocked, so it becomes virtually impossible
@@ -12,65 +12,36 @@ foreach($_GET as $get_key => $get_value) {
     }
 }
 
-include 'inc/config.inc.php';
-include 'inc/function.inc.php';
+require_once 'inc/config.inc.php';
+require 'inc/function.inc.php';
+require 'pages/cls_pages.php';
 $db = new Config(); 
+$collection = $objPage->getWelcomeDetails();
 
-// check if previouse name was saved
-$username = (isset($_COOKIE['remember_name']) && ($_COOKIE['remember_name'] != "")) ? strip_tags($_COOKIE['remember_name']) : "";
-$remember_me = (isset($_COOKIE['remember_name']) && ($_COOKIE['remember_name'] != "")) ? "checked" : "";
-
-$log = (isset($_REQUEST['log'])) ? "out" : "";
-$msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";
+$_SESSION['page_title'] = "Welcome | Unwritten Cleaning";
 
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-    <title><?php echo _PANEL_NAME?> :: Admin Panel</title>
-    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-    <link href="<?php echo _SITE_URL?>css/style_<?php echo _CSS_STYLE?>.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _SITE_URL?>bootstrap/css/bootstrap.min.css" type=text/css rel=stylesheet>
-    <link href="<?php echo _SITE_URL?>bootstrap/css/bootstrap-theme.min.min.css" type=text/css rel=stylesheet>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-</head>
+<?php include 'includes/header.php' ?>
 
-<body>
-<div class="container">
-    <div class="row row-centered">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <form name="frmLogin" id="frmLogin" action="check_login.php" method="post">
-        <!-- <form name="frmLogin" id="frmLogin" method="post"> -->
-            <input type="hidden" value="login" name="do">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 col-centered alt2 raised">
-                <h1>HOME</h1>
-                <br>
-                <a href="<?php echo _SITE_URL?>user/login.php">Login</a>
-                <br><br>
-                <a href="<?php echo _SITE_URL?>user/register.php">Register</a>
-                <br><br>
-                <a href="<?php echo _SITE_URL?>user/forgot-password.php">Forgot Password</a>
-            </div>
-            <div class="col-md-4"></div>
-        </form>
+<body class="home">
+<div class="introBox">
+    <div class="introBoxInner">
+        <?php
+        foreach ($collection as $welcomeContent) {
+            if ($welcomeContent["txtPageEntity"] == "welcome") {
+                echo $welcomeContent["txtSliderContent"];
+                echo $welcomeContent["txtTextContent"];
+            }
+        }
+        ?>
+        <div class="socialBox">
+            <a href="#" class="link"></a>
+            <a href="#" class="twit"></a>
+            <a href="#" class="fb"></a>
         </div>
     </div>
+    <div class="clear"></div>
 </div>
-</body>
-</html>
-<script type="text/javaScript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javaScript" src="<?php echo _SITE_URL?>bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javaScript" src="<?php echo _SITE_URL?>js/script_custom.js"></script>
-<script>
-document.getElementById("txtUsername").focus();
-function rememberMe(val) {
-    if(document.getElementById("txtRemember").checked == true) {
-        setCookie("remember_name",document.getElementById("txtUsername").value,14);       
-    } else {
-        setCookie("remember_name","",-2);       
-    }
-}
-</script>
+
+<?php include 'includes/footer.php' ?>

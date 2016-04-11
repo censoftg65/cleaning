@@ -4,11 +4,12 @@
 */
 
 /*this include header section*/
-include_once('head.php');
+include_once 'head.php';
 
 ?>
 
-<div style="border:1px solid #ccc;height:100px;background:#ccc;font-size:20px;text-align:center;line-height:100px">
-	Header Part
-</div>
-<br>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<div class="row">
+		<div class="header-admin">Admin Header</div>
+			<br>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

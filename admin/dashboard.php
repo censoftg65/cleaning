@@ -2,6 +2,12 @@
 session_start();
 ob_start();
 
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:/cleaning/admin/index.php");
+}
+
+$uid   = $_SESSION["txtId"];
+$uname = $_SESSION["txtUsername"];
 //--------------------------------------------------------------------------
 // *** remote file inclusion, check for strange characters in $_GET keys
 // *** all keys with "/", "\", ":" or "%-0-0" are blocked, so it becomes virtually impossible
@@ -13,17 +19,16 @@ foreach($_GET as $get_key => $get_value) {
     }
 }
 
-$uid = $_SESSION["txtId"];
-
-include '../inc/config.inc.php';
-include '../inc/function.inc.php';
+require_once dirname(__DIR__).'/inc/config.inc.php';
+include_once dirname(__DIR__).'/inc/function.inc.php';
+$_SESSION['page_title'] = "Dashboard | "._PANEL_NAME." :: "._SITE_NAME;
 $db = new Config(); 
 
 $log = (isset($_REQUEST['log'])) ? "out" : "";
 $msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";
 
-$adm_logged = (isset($_SESSION['adm_logged'])) ? $_SESSION['adm_logged'] : false;
-if($adm_logged == true) {
+$ad_logged = (isset($_SESSION['ad_logged'])) ? $_SESSION['ad_logged'] : false;
+if($ad_logged == true) {
 	$left_menu_page = "left_menu.php";
 	$content_page = "home.php";
 } else {
@@ -33,20 +38,12 @@ if($adm_logged == true) {
   
 ?>
 
-<head>
-  <title><?php echo _SITE_NAME?> :: Dashboard</title>
-</head>
-
 <?php include 'include/header.php' ?>
 
-<?php include 'include/left_menu.php' ?>
+  <?php include 'include/left_menu.php' ?>
 
-<frameset rows="90px,*" FRAMEBORDER="no" FRAMESPACING="0" BORDER="0">
-     <frame src="header.php" name="header" scrolling="no">
-     <frameset cols="170px,*"  FRAMEBORDER="no" FRAMESPACING="0" BORDER="0">
-          <frame src="<?php echo $left_menu_page; ?>" name="left_menu" scrolling="no">
-          <frame src="<?php echo $content_page; ?>" name="frameMain">
-     </frameset>
-</frameset>
+  <div class="col-md-9">
+    <h4>WELCOME TO THE ADMIN SECTION</h4>
+  </div>
 
-<?php include 'include/footer.php' ?>
+  <?php include 'include/footer.php' ?>

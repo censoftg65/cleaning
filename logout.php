@@ -7,6 +7,6 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
 }
 
 if(session_destroy()) {
-    header("location:../mind-online/index.php");
+    header("location:"._SITE_URL."/");
 }
 ?>
