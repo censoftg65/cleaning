@@ -126,7 +126,7 @@ if(isset($_POST['btnSubmit'])){
 				<div class="card-actionbar-row">
 					<button type="submit" class="btn btn-flat btn-primary ink-reaction" name="btnSubmit">Create Account</button>
 				</div>
-			<<div class="card-actionbar-row">
+			<div class="card-actionbar-row">
 					<button type="submit" class="btn btn-flat btn-primary ink-reaction" name="btnPreview">Preview</button>
 				</div>
 			</div>

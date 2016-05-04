@@ -34,15 +34,16 @@ function getUserLogin($uname,$pword,$ulevel) {
     $db = new Config();
     $sql_login = $db->select('*');
     $sql_login .= $db->from(_DB_PREFIX.'user');
-    $sql_login .= $db->where("txtUsername = '".$uname."' AND txtPassword = '".$pword."' AND txtUserLevel = '".$ulevel."'");
+    $sql_login .= $db->where("txtUsername = '".$uname."' AND txtPassword = '".$pword."' AND txtUserLevel = '".$ulevel."' AND txtStatus = '1'");
     $execute = $db->query($sql_login);
     $execute = $db->numRows();
     if ($execute != 0) {
         while ($row = $db->fetchAssoc($execute)) {
-            $_SESSION['ad_logged']   = true;
             $_SESSION["txtId"]        = $row["txtId"];
             $_SESSION["txtEmail"]     = $row["txtEmail"];
             $_SESSION["txtUsername"]  = $row["txtUsername"];
+            $_SESSION["txtFirstName"] = $row["txtFirstName"];
+            $_SESSION["txtLastName"]  = $row["txtLastName"];
             $_SESSION["txtUserLevel"] = $row["txtUserLevel"];
             $_SESSION["txtStatus"]    = $row["txtStatus"];
             $error = "";
@@ -54,7 +55,20 @@ function getUserLogin($uname,$pword,$ulevel) {
 }
 function getMenus() {
     $db = new Config();
-    $sql_query = "SELECT * FROM "._DB_PREFIX."menus WHERE txtIsMenuGroup = 1 AND txtIsHidden = 0 AND txtParentId = 0";
+    $sql_query = $db->select('*');
+    $sql_query .= $db->from(_DB_PREFIX.'menus');
+    $sql_query .= $db->where("txtIsMenuGroup = 1 AND txtIsHidden = 0 AND txtParentId = 0");
+    $execute = $db->query($sql_query);
+    $collection = array();
+    while ($row = $db->fetchAssoc($execute)) {
+        array_push($collection, $row);
+    }
+    return $collection;
+}
+function getSiteConfig() {
+    $db = new Config();
+    $sql_query = $db->select('*');
+    $sql_query .= $db->from(_DB_PREFIX.'settings');
     $execute = $db->query($sql_query);
     $collection = array();
     while ($row = $db->fetchAssoc($execute)) {
@@ -68,6 +82,14 @@ function displayName($tableName,$columnName,$id,$columnIdName) {
     $execute = $db->query($sql_query);
     while ($row = $db->fetchAssoc($execute)) {
         return $row[$columnName];
+    }
+}
+function displayDoubleName($tableName,$columnName1,$columnName2,$id,$columnIdName) {
+    $db = new Config();
+    $sql_query = "SELECT $columnName1,$columnName2 FROM $tableName WHERE $columnIdName = '$id' ";
+    $execute = $db->query($sql_query);
+    while ($row = $db->fetchAssoc($execute)) {
+        return $row[$columnName1]." ".$row[$columnName2];
     }
 }
 function checkUser($email) {
@@ -110,7 +132,7 @@ function randomPassword() {
 }
 function getCurrentDateTime($mode) {
     $date = new DateTime();
-    $date->setTimezone($timezone );
+    // $date->setTimezone($timezone);
     if($mode == "all") {
         return $date->format("Y-m-d H:i:s");
     }

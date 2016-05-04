@@ -15,32 +15,33 @@
     <title><?= $_SESSION['page_title']?></title>
 
     <!-- ALL STYLE TAGGS INCL UDE HERE -->
-    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="<?= _IMAGE_URL?>/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap.css" rel="stylesheet">
-    <link href="<?= _BOOTSTRAP_URL?>/css/datepicker3.css" rel="stylesheet">
-    <link href="<?= _BOOTSTRAP_URL?>/css/datetimepicker.min.css" rel="stylesheet">
-    <link href="<?= _CSS_URL?>/font-awesome.css" type="text/css" rel="stylesheet">
+    <link href="<?= _BOOTSTRAP_URL?>/css/jquery.timepicker.css" rel="stylesheet" type="text/css">
+    <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
     <link href="<?= _CSS_URL?>/style.css" rel="stylesheet" type="text/css">
     <link href="<?= _CSS_URL?>/style_global.css" type="text/css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,800,700italic,700,800italic" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
     <!-- ALL SCRIPT TAGGS INCL UDE HERE -->
     <script src="<?= _JS_URL?>/jquery-1.11.2.min.js"></script>
-    <script src="<?= _JS_URL?>/jquery-1.1.2.js"></script>
     <script src="<?= _BOOTSTRAP_URL?>/js/bootstrap.js"></script>
     <script src="<?= _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
+    <script src="<?= _BOOTSTRAP_URL?>/js/jquery.timepicker.js" type="text/javascript"></script>
+    <script src="<?= _BOOTSTRAP_URL?>/js/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="<?= _JS_URL?>/functions.js"></script>    
     <script src="<?= _JS_URL?>/pr-tools.js"></script>
     <script src="<?= _EDITOR_URL?>/tinymce.min.js"></script>
     <script src="<?= _JS_URL?>/script_custom.js"></script>
+    <script src="<?= _JS_URL?>/user_custom.js"></script>
 
     <!-- SCRIPTS FROM BOOKING FORM -->
     <script src="<?= _JS_URL?>/jquery-migrate-1.2.1.min.js"></script>
     <script src="<?= _JS_URL?>/jquery.validate.js"></script>
-    <script src="<?= _BOOTSTRAP_URL?>/js/datetimepicker.min.js"></script>
-    <script src="<?= _BOOTSTRAP_URL?>/js/datepicker.js"></script>
-    <script src="<?= _JS_URL?>/AppForm.js"></script>
-    
+    <!-- <script src="<?= _JS_URL?>/AppForm.js"></script>
+    <script src="<?= _BOOKING_URL ?>/js/booking.js"></script> -->
+
     <!-- SCRIPT TO SET THE COOKIES -->
     <script src="<?= _JS_URL?>/jquery.cookie.js"></script>
     <script>

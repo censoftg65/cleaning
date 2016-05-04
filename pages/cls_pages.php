@@ -22,7 +22,7 @@ class Pages
 
     public function getPageContent(){
         $db = new Config();
-        $sql_query = "SELECT * FROM "._DB_PREFIX."pages ORDER BY txtId ASC";
+        $sql_query = "SELECT * FROM "._DB_PREFIX."pages";
         $result = $db->query($sql_query);
         $collection = array();
         while ($rows = $db->fetchAssoc($result)) {

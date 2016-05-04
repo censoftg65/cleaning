@@ -12,22 +12,27 @@
     <title><?= $_SESSION['page_title']?></title>
 
     <!-- ALL STYLE TAGGS INCLUDE HERE -->
+    <link href="<?= _IMAGE_URL?>/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="<?= _CSS_URL?>/style_menu.css" type="text/css" rel="stylesheet">
     <link href="<?= _CSS_URL?>/pr-tools.css" type="text/css" rel="stylesheet">
     <link href="<?= _CSS_URL?>/style_global.css" type=text/css rel=stylesheet>
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap.css" type=text/css rel=stylesheet>
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap.min.css" type=text/css rel=stylesheet>
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap-theme.min.css" type=text/css rel=stylesheet>
-    <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap-theme.min.css" type=text/css rel=stylesheet>
+    <link href="<?= _BOOTSTRAP_URL?>/css/jquery.timepicker.css" rel="stylesheet" type="text/css">
+    <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     
     <!-- ALL SCRIPT TAGGS INCLUDE HERE -->
-    <script type="text/javaScript" src="<?php echo _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
-    <script type="text/javaScript" src="<?php echo _JS_URL?>/jquery-1.11.2.min.js"></script>
-    <script type="text/JavaScript" src="<?php echo _JS_URL?>/functions.js"></script>    
-    <script type="text/javascript" src="<?php echo _JS_URL?>/pr-tools.js"></script>
-    <script type="text/javaScript" src="<?php echo _EDITOR_URL?>/tinymce.min.js"></script>
-    <script type="text/javaScript" src="<?php echo _JS_URL?>/script_custom.js"></script>
+    <script type="text/javaScript" src="<?= _BOOTSTRAP_URL?>/js/bootstrap.js"></script>
+    <script type="text/javaScript" src="<?= _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= _BOOTSTRAP_URL?>/js/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="<?= _BOOTSTRAP_URL?>/js/bootstrap-datepicker.js"></script>
+    <script type="text/javaScript" src="<?= _JS_URL?>/jquery-1.11.2.min.js"></script>
+    <script type="text/JavaScript" src="<?= _JS_URL?>/functions.js"></script>    
+    <script type="text/javascript" src="<?= _JS_URL?>/pr-tools.js"></script>
+    <script type="text/javaScript" src="<?= _EDITOR_URL?>/tinymce.min.js"></script>
+    <script type="text/javaScript" src="<?= _JS_URL?>/script_custom.js"></script>
 
     <script>
     function rememberMe(val) {

@@ -1,9 +1,8 @@
-/*body {background: #efefef;font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;color: #000000;}*/
-/*body.left_menu {background-color: #efefef;margin: 5px;	}*/
-/*body a:link {color: #22229c}*/
-body a:visited {color: #22229c}
-body a:hover {color: #ff4400}
-body a:active {color: #ff4400}
+/*body {background-image: url("../images/bg-images2.jpg");background-size: cover;}*/
+/*body a:link {color: #22229c;text-decoration:none }
+body a:visited {color: #22229c;text-decoration:none}*/
+body a:hover {color: #ff4400;text-decoration:none}
+body a:active {color: #ff4400;text-decoration:none}
 body.header{margin: 5px;}
 body.content{margin: 0px;}
 
@@ -26,35 +25,111 @@ li {font: 13px/20px verdana,geneva,lucida,"lucida grande",arial,helvetica,sans-s
 /*
 * Auther : Vinek T.
 * Description : CSS for all pages in back-end customization
-* Date : 26th March'2016
+* Date : 20th April'2016
 */
 .header-admin {background: #333 none repeat scroll 0 0;border: 1px solid #333;color: #fff;font-size: 20px;font-weight: 600;height: 100px;line-height: 100px;text-align: center;}
-.footer-admin {background: #333 none repeat scroll 0 0;border: 1px solid #333;color: #fff;font-size: 13px;height: 100px;padding-top: 20px;text-align: center;}
+.footer-admin {color: #222222;padding: 30px;text-align: center;}
 label {font-weight: 500 !important}
 .clear { clear: both; }
 
 /*-- Admin menus --*/
-#nav {border-top: 1px solid #999;border-right: 1px solid #999;border-left: 1px solid #999;padding:0;}
-#nav li a {display: block;padding: 10px 15px;background: #ccc;border-top: 1px solid #eee;border-bottom: 1px solid #999;text-decoration: none;color: #000;}
-#nav li a:hover, #nav li a.active {background: #999;color: #fff;}
+/*#nav {border-top: 1px solid #999;border-right: 1px solid #999;border-left: 1px solid #999;padding:0;}*/
+/*#nav li a {display: block;padding: 10px 15px;background: #ccc;border-top: 1px solid #eee;border-bottom: 1px solid #999;text-decoration: none;color: #000;}*/
+/*#nav li a:hover, #nav li a.active {background: #999;color: #fff;}*/
+/*#nav li ul li a {padding: 10px 25px;background: #ececec;border-bottom: 1px dotted #ccc;}*/
+/*#nav li ul li a {background: #999999 none repeat scroll 0 0;border-bottom: 1px dotted #ccc;padding: 10px 25px;}*/
+#nav {padding:0;}
+#nav li a {background: #574135 none repeat scroll 0 0;border-top: 1px solid #eee;/*border-top-left-radius: 4px;border-top-right-radius: 4px;*/color: #fff;display: block;font-size: 13px;font-weight: 600;padding: 10px 15px;text-decoration: none;}
+#nav li a:hover, #nav li a.active {background: #907959 none repeat scroll 0 0;color: #fff;}
 #nav li ul {display: none;}
-#nav li ul li a {padding: 10px 25px;background: #ececec;border-bottom: 1px dotted #ccc;}
+#nav li ul li a {background: #ccc none repeat scroll 0 0;border-bottom: 1px dotted #ccc;color: #444;font-size: 11px;padding: 10px 40px;}
 #sub-nav { padding:0; }
 .frmMenus label span {color: red;}
 .table {border-bottom: 1px solid #cccccc !important;border-left: 1px solid #cccccc !important;border-right: 1px solid #cccccc !important;}
+.dropdown-menu > span {float: right;padding-right: 15px;}
+.col-md-12.col-md-12.col-sm-12.col-xs-12.border-partition {border: 1px solid #bbac99;margin-bottom: 10px;margin-top: 10px;}
+.table > thead > tr > th {background-color: #574135 !important;}
+a#uname {color: #275e8e;text-decoration: none;text-transform: uppercase;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.content-area {min-height: 450px;}
 
 /*-- Admin pop-ups --*/
 #back-color {background: #333 none repeat scroll 0 0;height:100%;opacity: 0.5;position: fixed;top: 0;width: 100%;z-index: 1}
+.pop-up-user-form {left: 10px;margin: 0;position: fixed;right: 10px;top: 10%;z-index: 1;}
 .pop-up-form {left: 10px;margin: 0;position: fixed;right: 10px;top: 10%;z-index: 1;}
+.profile-pop-up-form {left: 10px;margin: 0;position: fixed;right: 10px;top: 10%;z-index: 1;}
+.account-pop-up-form {left: 10px;margin: 0;position: fixed;right: 10px;top: 10%;z-index: 1;}
 .tile-links {font-size: 13px;}
 .tile-links a {text-decoration: underline;}
 .tile-links a:hover {text-decoration: none;}
+#msg-back-color {background: #333 none repeat scroll 0 0;height:100%;opacity: 0.5;position: fixed;top: 0;width: 100%;z-index: 1}
+.open-up-msg {position: fixed;z-index: 1;}
+#success-dialog {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
+#success-dialog-offer {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
+#save-offer-dialog {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
+#site-info-success {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
+#footer-success-dialog {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
+#user-success-dialog {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
+.nav-tabs > li {cursor: pointer;}
+.nav-tabs > li > a {border:1px solid #ccc !important;color:#555;font-weight:bold;}
+.nav-tabs > li > a:hover {background-color:#286090 !important;border-color:#286090 !important;color:#fff;font-weight:bold;}
+.col-md-12.extract-div {margin-top: 10px;padding: initial;}
+.no-record {background-color:#f5f5f5;color:#BC5438;text-align:center;font-weight:bold}
+.log-img {width: 30px;}
+#admin-back-color {background: #333 none repeat scroll 0 0;height:100%;opacity: 0.5;position: fixed;top: 0;width: 100%;z-index: 1}
+#show-profile {background-color: #dddddd;border: 1px solid #ccc;font-weight: 600;padding: 15px;position: absolute;width: 500px;z-index: 999;}
+#page-success {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
 
 
 /*
 * Auther : Vinek T.
 * Description : CSS for all pages in front-end customization
 * Date : 8th April'2016
+* Updated : 17th April'2016
 */
 /*-- Login page --*/
 #frmUserLogin span {color: red;font-size: 14px;font-weight: 600;line-height: 40px;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.user_form {box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);margin: 10px 0 0;padding: 10px;position: relative;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.user_form::after {bottom: 0;content: "";height: 100px;left: 15%;position: absolute;width: 70%;z-index: -1;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.log_box {box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);margin: 10px 0 30px;padding: 10px;position: relative;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.log_box::after {bottom: 0;content: "";height: 100px;left: 15%;position: absolute;width: 70%;z-index: -1;}
+#frmUserLogin h2 {color: #574135}
+#frmUserLogin > span {color: red;}
+.control-label > span {color: red;}
+button > span > img {width: 20px;}
+#succ-resp {border:1px solid transparent;font-weight:600;margin-bottom:10px;margin-top:10px;z-index:9999;}
+
+/*-- Register page --*/
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.reg_box {box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);margin: 10px 0 30px;padding: 10px;position: relative;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.reg_box::after {bottom: 0;content: "";height: 100px;left: 15%;position: absolute;width: 70%;z-index: -1;}
+#frm-registration h2 {color: #574135}
+#frm-registration > span {color: red;}
+.control-label > span {color: red;}
+button > span > img {width: 20px;}
+#succ-resp {border:1px solid transparent;font-weight:600;margin-bottom:10px;margin-top:10px;z-index:9999;}
+
+/*-- Forgot password page --*/
+#frmForpass .inputfocus::-webkit-input-placeholder {color: red !important;}    
+#frmForpass .inputfocus::-moz-placeholder {color: red !important;}
+#frmForpass .inputfocus:-moz-placeholder {color: red !important;}
+#frmForpass .inputfocus:-ms-input-placeholder {color: red !important;}
+
+/*-- Custom Pages --*/
+.page-container {min-height: 300px;}
+.col-md-6 p.suc-msg-box {background-color: #0b610b;border: 3px solid #f1f8e0;border-radius: 43px;color: #ffffff;font-size: 13px;font-weight: bold;line-height: 25px;padding: 15px;text-align: center;}
+.col-md-6 p.err-msg-box {background-color: #B40404;border: 3px solid #f1f8e0;border-radius: 43px;color: #ffffff;font-size: 13px;font-weight: bold;line-height: 25px;padding: 15px;text-align: center;}
+#frmResetPass .inputfocus::-webkit-input-placeholder {color: red !important;}    
+#frmResetPass .inputfocus::-moz-placeholder {color: red !important;}
+#frmResetPass .inputfocus:-moz-placeholder {color: red !important;}
+#frmResetPass .inputfocus:-ms-input-placeholder {color: red !important;}
+
+label.btn span {font-size:1em;}
+.btn.stat-btn {background-color: #7c706b;border-color: #555;color: #fff;font-size: 13px;font-weight: 600;}
+.btn.stat-btn.active {background-color: #EAE6E1;border-color: #555;color: #333;font-size: 13px;font-weight: 600;}
+.merge-side {margin: 0 116px !important;}
+.bookingButtons {margin: 30px 0 20px; width: 100%; float:left; padding:0 0 0 15px;}
+.bookingButtons a {background:url(../images/btm-btn-bg.png) repeat-x scroll 0 0; border: 1px solid #736660; color: #ffffff; float: left; font-size: 17px; font-weight: 400; height: 37px; line-height: normal; padding: 7px 17px 0; margin:0 10px 0 0;}
+.bookingButtons a:hover {opacity:0.6;}
+.bookingButtons a.cancelBtn{background:url(../images/cancel-btn-bg.png) repeat-x 0 0; border:1px solid #cbcaca; color:#3c3c3c; text-shadow:none;}
+#frmBookCleaning .err { color: red }
+.col-sm-9.ser-left-pad {padding-left: 5px;}
+#success-preview {font-size: 18px;left: 380px;line-height: 38px;margin: 0;position: fixed;text-align: center;top: 15%;z-index: 1;}

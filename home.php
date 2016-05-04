@@ -18,6 +18,7 @@ require 'pages/cls_pages.php';
 $db = new Config(); 
 $collection = $objPage->getPageContent();
 
+$_SESSION['page_title'] = "Home | Unwritten Cleaning";
 ?>
 
 <?php include 'includes/header.php' ?>

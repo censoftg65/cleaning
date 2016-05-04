@@ -2,12 +2,8 @@
 session_start();
 ob_start();
 
-if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
-   header("location:/cleaning/admin/index.php");
-}
-
 $uid   = $_SESSION["txtId"];
-$uname = $_SESSION["txtUsername"];
+$uname = $_SESSION["txtUsername"]; 
 //--------------------------------------------------------------------------
 // *** remote file inclusion, check for strange characters in $_GET keys
 // *** all keys with "/", "\", ":" or "%-0-0" are blocked, so it becomes virtually impossible
@@ -22,7 +18,10 @@ foreach($_GET as $get_key => $get_value) {
 require_once dirname(__DIR__).'/inc/config.inc.php';
 include_once dirname(__DIR__).'/inc/function.inc.php';
 $_SESSION['page_title'] = "Dashboard | "._PANEL_NAME." :: "._SITE_NAME;
-$db = new Config(); 
+$db = new Config();
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:"._SITE_URL."/admin/");
+}
 
 $log = (isset($_REQUEST['log'])) ? "out" : "";
 $msg = (isset($_REQUEST['msg'])) ? $_REQUEST['msg'] : "";

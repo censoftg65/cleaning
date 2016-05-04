@@ -2,10 +2,6 @@
 session_start();
 ob_start();
 
-if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
-   header("location:/cleaning/admin/index.php");
-}
-
 $uid   = $_SESSION["txtId"];
 $uname = $_SESSION["txtUsername"];
 //--------------------------------------------------------------------------
@@ -23,7 +19,11 @@ require_once (dirname(dirname(__DIR__)).'/inc/config.inc.php');
 include_once (dirname(dirname(__DIR__)).'/inc/function.inc.php');
 include_once 'cls_pages.php';
 $_SESSION['page_title'] = "View Pages | "._PANEL_NAME." :: "._SITE_NAME;
-$db = new Config(); 
+$db = new Config();
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:"._SITE_URL."/admin/");
+}
+
 $collection_page = $objPage->getPageDetails("all","");
 
 $del_id = base64_decode($db->getParam('flag'));
@@ -39,17 +39,28 @@ if (!empty($del_id)) {
   <?php include dirname(__DIR__).'/include/left_menu.php' ?>
 
   <div class="col-md-9">
-      <h4><strong>VIEW PAGES</strong></h4>
-      <div class="col-md-12">&nbsp;</div>
-      <div class="container"></div>
-      <div class="table-responsive">
+      <div class="col-md-12">
+        <h4><strong>VIEW PAGES</strong></h4>
+        <div class="pull-left">
+          <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
+        </div>
+        <div class="pull-right">
+          <button type="button" id="btnDelActPages" id="btnDelActPages" class="btn btn-sm  btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>&nbsp;Delete
+          </button>
+        </div>
+        <div class="col-xs-12">&nbsp;</div>
+      </div>
+      <div class="col-md-12">
         <form name="frmViewPages" id="frmViewPages" method="post">
             <table class="table table-bordered table-hover">
               <thead class="thead-default">
                 <tr>
                   <th>#</th>
+                  <th><center><input type="checkbox" name="selAllPage" id="selAllPage" value=""></center></th>
                   <th>PAGE TITLE</th>
                   <th>PAGE URL</th>
+                  <th>CREATED DATE</th>
                   <th>PAGE STATUS</th>
                   <th><center>ACTION</center></th>
                 </tr>
@@ -61,19 +72,27 @@ if (!empty($del_id)) {
                 ?>
                 <tr>
                   <th scope="row"><?php echo $i?></th>
-                  <td><?php echo $pages['txtPageTitle']?></td>
-                  <td><?php echo $pages['txtPageUrl']?></td>
-                  <td><?php echo $active = ($pages['txtStatus'] == 1) ? "Publish" : "Disabled";?></td>
+                  <td><center><input class="check-page" type="checkbox" name="allSelPage[]" id="allSelPage" value="<?= $pages['txtId']?>"></center></td>
+                  <td>
+                    <?php if ($pages['txtId'] == 1 || $pages['txtId'] == 2 || $pages['txtId'] == 3) { ?>
+                    <a href="<?= _SITE_URL?>/<?= $pages['txtPageUrl']?>.php" title="View Page" id target="_blank"><?php echo strtoupper($pages['txtPageTitle'])?></a>
+                    <?php } else { ?>
+                    <a href="<?= _SITE_URL?>/pages/pages.php?pagename=<?= $pages['txtPageEntity']?>" title="View Page" id target="_blank"><?php echo strtoupper($pages['txtPageTitle'])?></a>
+                    <?php } ?>
+                  </td>
+                  <td><?php echo "pages/".$pages['txtPageUrl']?></td>
+                  <td><?php echo $pages['txtDateTime']?></td>
+                  <td><?php echo $active = ($pages['txtStatus'] == 1) ? "Published" : "Un-published";?></td>
                   <td>
                     <center>
-                        <a title="Edit" href="edit_pages.php?pid=<?= base64_encode($pages['txtId'])?>">
-                            <button type="button" title="Edit">
-                                <i class="fa fa-pencil-square-o"></i>
+                        <a title="Edit/Update" href="edit_pages.php?pid=<?= base64_encode($pages['txtId'])?>">
+                            <button type="button" title="Edit/Update">
+                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
                             </button>
                         </a>
                         &nbsp;&nbsp;
                         <a title="Delete">
-                            <button type="button" title="Delete/Disabled" id="deletePage" value="<?php echo $pages['txtId']?>">
+                            <button type="button" title="Delete/Un-published" id="deletePage" value="<?php echo $pages['txtId']?>">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </a>
@@ -85,7 +104,9 @@ if (!empty($del_id)) {
                 }
                 if (empty($collection_page)) {
                 ?>
-                <tr><td colspan="10">Sorry..! No records found.</td></tr>
+                <tr class="no-record">
+                  <td colspan="10">Sorry..! No records found.</td>
+                </tr>
                 <?php } ?>
               </tbody>
             </table>

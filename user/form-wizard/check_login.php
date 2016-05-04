@@ -23,7 +23,7 @@ if(_USE_PASSWORD_ENCRYPTION) {
 
 $user_login = getUserLogin($u_name,$p_word,"user");
 if (empty($user_login)) {
-	header("location:"._SITE_URL."/user/dashboard.php");	
+	header("location:"._SITE_URL."/user/my_profile.php");	
 } else {
 	header("location:"._SITE_URL."/user/login.php".$log."&msg=1");	
 }

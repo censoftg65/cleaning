@@ -7,9 +7,9 @@ include '../../../inc/function.inc.php';
 include '../cls_pages.php';
 $db = new Config(); 
 
-$arr_page['txtPageEntity']      = strtolower($db->getParam('pagetitle'));
 $arr_page['txtPageTitle']       = $db->getParam('pagetitle');
-$arr_page['txtPageUrl']         = $db->getParam('pageurl');
+$arr_page['txtPageEntity'] 		= strtolower(str_replace(' ', '_', $db->getParam('pagetitle')));
+$arr_page['txtPageUrl']         = strtolower(str_replace(' ', '_', $db->getParam('pagetitle')));
 $arr_page['txtSliderContent']   = mysql_real_escape_string($db->getParam('pageslidercontent'));
 $arr_page['txtTextContent']     = mysql_real_escape_string($db->getParam('pagetextcontent'));
 $arr_page['txtStatus']          = '1';

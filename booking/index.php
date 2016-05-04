@@ -1,10 +1,7 @@
  <?php
-/*index.php
-* This file for book now form
-*/
-?>
+session_start();
+ob_start();
 
-<?php
 //--------------------------------------------------------------------------
 // *** remote file inclusion, check for strange characters in $_GET keys
 // *** all keys with "/", "\", ":" or "%-0-0" are blocked, so it becomes virtually impossible
@@ -15,21 +12,22 @@ foreach($_GET as $get_key => $get_value) {
 		die("A hacking attempt has been detected. For security reasons, we're blocking any code execution.");
 	}
 }
+
+require_once(dirname(__DIR__).'/inc/config.inc.php');
+include_once(dirname(__DIR__).'/pages/cls_pages.php');
+$_SESSION['page_title'] = "Booking Form";
+include_once('cls_common.php');
+
+include_once(_INCLUDE_PATH.'/header.php');
+
 ?>
-<?php require_once(dirname(__DIR__).'/inc/config.inc.php');?>
-<?php include_once(dirname(__DIR__).'/pages/cls_pages.php');?>
-<?php $_SESSION['page_title'] = "Booking Form";?><!-- Show page title -->
-<?php include_once(_INCLUDE_PATH.'/header.php');?>
 
 <!-- THIS CSS FOR BOOKING FORM -->
-<link href="<?= _CSS_URL  ?>/booking-awesome.css" rel="stylesheet">
-<link href="<?= _CSS_URL  ?>/wizard.css" rel="stylesheet"/>
-    <!-- END THIS CSS FOR BOOKING FORM -->
+<link href="<?= _CSS_URL ?>/booking-awesome.css" rel="stylesheet">
+<link href="<?= _CSS_URL ?>/wizard.css" rel="stylesheet"/>
+<!-- END THIS CSS FOR BOOKING FORM -->
 
-<script src="js/booking.js"></script><!-- ALL BOKKING JS SCRIPT -->
-
-
-<?php include_once('cls_common.php');?>
+<script src="<?= _BOOKING_URL ?>/js/booking.js"></script><!-- ALL BOKKING JS SCRIPT -->
 
 <body class="inner">
 	<div id="wrapper">
@@ -43,6 +41,7 @@ foreach($_GET as $get_key => $get_value) {
 					<div class="card-body ">
 						<div id="rootwizard2" class="form-wizard form-wizard-horizontal">
 							<form class="form-horizontal form-validation" id="bookingForm" role="form" method="post">
+								<!-- Allotted spets start -->
 								<div class="form-wizard-nav">
 									<div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
 									<ul class="nav nav-justified">
@@ -50,11 +49,12 @@ foreach($_GET as $get_key => $get_value) {
 										<li><a href="#step2" id="step2_booking" data-toggle="tab"><span class="step">2</span> <span class="title">BOOKING</span></a></li>
 										<li><a href="#step3" id="step3_confirm"  data-toggle="tab"><span class="step">3</span> <span class="title">CONFIRM</span></a></li>
 									</ul>
-								</div><!--end .form-wizard-nav -->
+								</div> <!-- Allotted spets end -->
+
 								<div class="tab-content clearfix">
-									<!--Step1-->
+									<!-- Step-1 starts -->
 									<div class="tab-pane active" id="step1">
-										<br/><br/>
+										<br/>
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="form-group">
@@ -106,12 +106,12 @@ foreach($_GET as $get_key => $get_value) {
 												<div class="form-group">
 													<label for="txtState" class="col-sm-4 control-label">State/Provience</label>
 													<div class="col-sm-8">
-														<select id="txtState" name="txtState" class="form-control" required="" />
-														<option value="">(please select)</option>
-														<?php $USSates =  $USStateListingObj->getUSStateListing(); ?>
-														<?php foreach ($USSates as $value):?>
-														<option value="<?= $value['txtAbbreviation']?>"><?= $value['txtState']?></option>
-														<?php endforeach?>
+														<select id="txtState" name="txtState" class="form-control" required="">
+															<option value="">(please select)</option>
+															<?php $USSates =  $USStateListingObj->getUSStateListing(); ?>
+															<?php foreach ($USSates as $value):?>
+															<option value="<?= $value['txtAbbreviation']?>"><?= $value['txtState']?></option>
+															<?php endforeach?>
 														</select>
 													</div>
 												</div>
@@ -123,9 +123,9 @@ foreach($_GET as $get_key => $get_value) {
 												<div class="form-group">
 													<label for="txtCity" class="col-sm-4 control-label">City</label>
 													<div class="col-sm-8">
-														<select id="txtCity" name="txtCity" class="form-control" required="" />
-														<option value="">(please select)</option>
-													</select>
+														<select id="txtCity" name="txtCity" class="form-control" required="">
+															<option value="">(please select)</option>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -165,15 +165,15 @@ foreach($_GET as $get_key => $get_value) {
 											</div>
 										</div>
 
-										<br/><br/>
+										<br/>
 										<div class="card-actionbar">
 											<div class="card-actionbar-row">
 												<button type="button" class="next-step1-preview btn btn-primary">Preview</button>
 											</div>
 										</div>
-									</div><!--end #step1 -->
+									</div> <!-- Step-1 ends -->
 
-									<!--Step2-->
+									<!-- Step-2 starts -->
 									<div class="tab-pane" id="step2">
 										<br/><br/>
 										<input type="hidden" value="XXX" name="is_step_2"><!-- Don't change this value -->
@@ -231,120 +231,117 @@ foreach($_GET as $get_key => $get_value) {
 														</label>
 													</div>
 												</div>
-											<?php endforeach;?>
+												<?php endforeach;?>
+											</div>
+										</div>	
+										<!-- This input box for Date Preview Logic Purpose# Don't change this value# -->
+										<input type="hidden" name="txtPreviewDate" value="XXX" required="" >
+
+										<div class="form-group">
+											<label for="txtServiceDateTime" class="col-sm-2 control-label">Service Date</label>
+											<div class="col-sm-10">
+												<input type="text" name="txtServiceDateTime" id="txtServiceDateTime" class="form-control" required="" readOnly>
+											</div>
 										</div>
-									</div>	
-									<!-- This input box for Date Preview Logic Purpose# Don't change this value# -->
-									<input type="hidden" name="txtPreviewDate" value="XXX" required="" >
 
-								<!-- <div class="row">
-								<div class="col-sm-12"> -->
-									<div class="form-group">
-										<label for="txtServiceDateTime" class="col-sm-2 control-label">Service Date</label>
-										<div class="col-sm-10">
-											<input type="text" name="txtServiceDateTime" id="txtServiceDateTime" class="form-control" required="" readOnly>
+										<div class="form-group">
+											<label for="txtServiceHours" class="col-sm-2 control-label">Choose No. of Hours</label>
+											<div class="col-sm-10">
+												<select id="txtServiceHours" name="txtServiceHours" class="form-control" required="" >
+													<option value="">(please select)</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+												</select>
+											</div>
 										</div>
-									</div>
 
-								<div class="form-group">
-									<label for="txtServiceHours" class="col-sm-2 control-label">Choose No. of Hours</label>
-									<div class="col-sm-10">
-										<select id="txtServiceHours" name="txtServiceHours" class="form-control" required="" />
-											<option value="">(please select)</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</div>
+										<div class="form-group">
+											<label for="txtServiceTip" class="col-sm-2 control-label">Add Tip</label>
+											<div class="col-sm-10">
+												<input type="text" name="txtServiceTip" id="txtServiceTip" class="form-control" data-rule-minlength="2" required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="txtTotal" class="col-sm-2 control-label">Total  ($)</label>
+											<div class="col-sm-10">
+												<select id="txtTotal" name="txtTotal" class="form-control" required="" >
+													<option value="">(please select)</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+												</select>
+											</div>
+										</div>
+
+										<br/><br/>
+										<div class="card-actionbar">
+											<div class="card-actionbar-row">
+												<button type="button" class="next-step2-preview btn btn-primary">Preview</button>
+											</div>
+										</div>
+									</div> <!-- Step-2 starts -->
+
+									<!-- Step-3 starts -->
+									<div class="tab-pane" id="step3">
+										<br/><br/>
+										<div class="card-actionbar">
+											<div class="card-actionbar-row">
+												<button type="submit" id="btnSaveBookingForm" name="btnSaveBookingForm" class="btn btn-primary">Save All</button>
+											</div>
+										</div>
+									</div> <!-- Step-3 ends -->
 								</div>
-
-								<div class="form-group">
-									<label for="txtServiceTip" class="col-sm-2 control-label">Add Tip</label>
-									<div class="col-sm-10">
-										<input type="text" name="txtServiceTip" id="txtServiceTip" class="form-control" data-rule-minlength="2" required>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label for="txtTotal" class="col-sm-2 control-label">Total  ($)</label>
-									<div class="col-sm-10">
-											<select id="txtTotal" name="txtTotal" class="form-control" required="" />
-											<option value="">(please select)</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-										</select>
-									</div>
-								</div>
-
-								<br/><br/>
-								<div class="card-actionbar">
-									<div class="card-actionbar-row">
-										<button type="button" class="next-step2-preview btn btn-primary">Preview</button>
-									</div>
-								</div>
-							</div><!--end #step2 -->
-
-							<!--start #step3 -->
-							<div class="tab-pane" id="step3">
-								<br/><br/>
-								<div class="card-actionbar">
-									<div class="card-actionbar-row">
-										<button type="submit" id="btnSaveBookingForm" name="btnSaveBookingForm" class="btn btn-primary">Save All</button>
-									</div>
-								</div>
-							</div><!--end #step3 -->
-
-						</div><!--end .tab-content -->
-					</form>
-				</div><!--end #rootwizard -->
-			</div><!--end .card-body -->
-		</div><!--end .card -->
-	</div><!--end .col -->
-</div><!--end .row -->
-
-
-<!-- Step1 Preview Confirmation Model Popup-->
-<div class="modal fade" id="step1-preview" tabindex="-1" role="dialog" aria-labelledby="step1-preview" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="step1_previewLabel">Profile Preview</h4>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="modal-body" style="padding-bottom:160px !important;">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel & Edit</button>
-				<button type="button" class="gotoStep2 btn btn-primary" data-dismiss="modal">Confirm & Next</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- End of Step1 Preview Confirmation Model Popup-->
+		</div>
 
-<!-- Step2 Preview Confirmation Model Popup-->
-<div class="modal fade" id="step2-preview" tabindex="-1" role="dialog" aria-labelledby="step1-preview" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="step1_previewLabel">Booking Preview</h4>
-			</div>
-			<div class="modal-body" style="padding-bottom:160px !important;">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel & Edit</button>
-				<button type="button" class="gotoStep3 btn btn-primary" data-dismiss="modal">Confirm & Next</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- End of Step2 Preview Confirmation Model Popup-->
 
-<!-- complete-booking-form -->
+		<!-- Step1 Preview Confirmation Model Popup-->
+		<div class="modal fade" id="step1-preview" tabindex="-1" role="dialog" aria-labelledby="step1-preview" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="step1_previewLabel">Profile Preview</h4>
+					</div>
+					<div class="modal-body" style="padding-bottom:160px !important;">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel & Edit</button>
+						<button type="button" class="gotoStep2 btn btn-primary" data-dismiss="modal">Confirm & Next</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<!-- End of Step1 Preview Confirmation Model Popup-->
 
-<?php include_once(_INCLUDE_PATH.'/footer-upper-grid.php'); ?>
-<?php include_once(_INCLUDE_PATH.'/footer.php'); ?>
+		<!-- Step2 Preview Confirmation Model Popup-->
+		<div class="modal fade" id="step2-preview" tabindex="-1" role="dialog" aria-labelledby="step1-preview" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="step1_previewLabel">Booking Preview</h4>
+					</div>
+					<div class="modal-body" style="padding-bottom:160px !important;">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel & Edit</button>
+						<button type="button" class="gotoStep3 btn btn-primary" data-dismiss="modal">Confirm & Next</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<!-- End of Step2 Preview Confirmation Model Popup-->
+		
+		<!-- complete-booking-form -->
+
+		<?php include_once(_INCLUDE_PATH.'/footer-upper-grid.php'); ?>
+	<?php include_once(_INCLUDE_PATH.'/footer.php'); ?>

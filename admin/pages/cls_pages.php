@@ -78,7 +78,7 @@ class Pages
     public function deletePage($param) {
         $db = new Config();
         $date_time = getCurrentDateTime("all");
-        echo $sql_query = "UPDATE "._DB_PREFIX."pages SET txtStatus = '0',txtUpdateTime = '$date_time' WHERE txtId = '$param'";
+        $sql_query = "UPDATE "._DB_PREFIX."pages SET txtStatus = '0',txtUpdateTime = '$date_time' WHERE txtId = '$param'";
         $db->query($sql_query);
     }
 
@@ -92,6 +92,24 @@ class Pages
         }
         return $collection;
     }
+    
+    public function getTrashPagesDetails(){
+        $db = new Config();
+        $sql_query = "SELECT * FROM "._DB_PREFIX."pages WHERE txtStatus = '0' ORDER BY txtId DESC";
+        $result = $db->query($sql_query);
+        $collection = array();
+        while ($rows = $db->fetchAssoc($result)) {
+            array_push($collection, $rows);
+        }
+        return $collection;
+    }
+
+    public function deletePagePermanent($param) {
+        $db = new Config();
+        $sql_query = "DELETE FROM "._DB_PREFIX."pages WHERE txtId = '$param'";
+        $db->query($sql_query);
+    }
+
 }
 
 $objPage = new Pages();

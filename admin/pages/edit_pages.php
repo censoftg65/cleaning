@@ -2,10 +2,6 @@
 session_start();
 ob_start();
 
-if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
-   header("location:/cleaning/admin/index.php");
-}
-
 $uid   = $_SESSION["txtId"];
 $uname = $_SESSION["txtUsername"];
 //--------------------------------------------------------------------------
@@ -24,8 +20,11 @@ include_once (dirname(dirname(__DIR__)).'/inc/function.inc.php');
 include_once 'cls_pages.php';
 $_SESSION['page_title'] = "Edit Menus | "._PANEL_NAME." :: "._SITE_NAME;
 $db = new Config(); 
-$pid = base64_decode($db->getParam('pid'));
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:"._SITE_URL."/admin/");
+}
 
+$pid = base64_decode($db->getParam('pid'));
 if (!empty($pid)) {
     $update_page = $objPage->getPageDetails("edit",$pid);
     $page = $update_page[0];
@@ -37,7 +36,7 @@ if (!empty($pid)) {
 
     <?php include dirname(__DIR__).'/include/left_menu.php' ?>
 
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+    <div class="col-md-9">
         <div class="col-md-12"><h4><strong>EDIT PAGE</strong></h4></div>
         <form name="frmAddPages" id="frmAddPages" method="post">
             <input type="hidden" name="hidPageId" id="hidPageId" value="<?= $pid?>">
@@ -50,8 +49,15 @@ if (!empty($pid)) {
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Page Url Link : </label>
-                    <input class="form-control input-sm" type="text" id="txtEditPageUri" name="txtEditPageUri" value="<?= $page['txtPageUrl']?>" readonly>
+                    <label>Page Url : </label>
+                    <?php
+                    if ($pid == 1 || $pid == 2 || $pid == 3) {
+                        $url = _SITE_URL."/".$page['txtPageUrl'].".php";
+                    } else {
+                        $url = _SITE_URL."/pages/pages.php?pagename=".$page['txtPageUrl'];
+                    }
+                    ?>
+                    <input class="form-control input-sm" type="text" id="txtEditPageUri" name="txtEditPageUri" value="<?= $url?>" readonly>
                 </div>
             </div>
             <div class="col-md-12">
@@ -67,10 +73,21 @@ if (!empty($pid)) {
                 </div>
             </div>
 
-            <div class="col-md-12">
-                <button type="button" class="btn btn-md btn-success" name="btnUpdatePage" id="btnUpdatePage">
-                    <span style="display:none" id="edit_loading"></span>&nbsp;&nbsp;Update Page
-                </button>
+            <div class="col-md-12 extract-div">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-md btn-success" name="btnUpdatePage" id="btnUpdatePage">
+                            <span style="display:none" id="edit_loading"></span>&nbsp;&nbsp;Update Page
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 open-up-msg">
+                    <div class="form-group">
+                        <div id="page-success" title="Thank you" style="display: none">
+                            Page updated successfully.
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

@@ -4,6 +4,10 @@
 */
 $db = new Config(); 
 $collection = getMenus();
+
+// $act_cls = ($_SERVER['REQUEST_URI'] == "/cleaning/admin/dashboard.php") ? "active" : "";
+// $act_cls = ($_SERVER['REQUEST_URI'] == "/cleaning/admin/dashboard.php") ? "active" : "";
+
 ?>
     
         <div class="col-md-3">
@@ -21,7 +25,12 @@ $collection = getMenus();
                             }
                             $db->query($sql);
                             while($_list = $db->fetchAssoc()){
-                                echo "<li><a href='"._SITE_URL."/admin/".$_list['txtMenuUrl']."'>".$_list['txtMenuIcon']."&nbsp;&nbsp;".$_list['txtMenu']."</a></li>";
+                                if ($_list['txtMenuUrl'] == '') {
+                                    $menu_url = "#";
+                                } else {
+                                    $menu_url = _SITE_URL."/admin/".$_list['txtMenuUrl'];
+                                }
+                                echo "<li><a href='$menu_url'>".$_list['txtMenuIcon']."&nbsp;&nbsp;".$_list['txtMenu']."</a></li>";
                             }
                             ?>
                         </ul>

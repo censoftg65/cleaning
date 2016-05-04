@@ -13,21 +13,23 @@
   <?php
   $db = new Config();
 
-  /*#######Login Start Here#########*/
+  /*#######Logic Start Here#########*/
+
+  $message = "Unexpected error occured, please Contact admin";
+  $success = "no";
+  $data = array('message' => $message, 'success' => $success);
 
   $registration_arr = $_POST;
-
   $seperator = ',';
   $registration_data = '';
-  $output = "Unexpected Error Occured Contact admin";
+
   
   $txtEmail = $registration_arr['txtEmail'];
   $checkEmailExist = checkUser($txtEmail);/*check email exist*/
 
   if($checkEmailExist > 0){
-    $output = "Email - '".$txtEmail."'already exist";
-    echo $output;
-    exit;
+    $message = "User already register with us. Please try again..!";
+    $success = "no";
   }else{
      
     $verifyCode = rand();
@@ -35,31 +37,32 @@
     $txtPassword = randomPassword();
 
     $registration_arr['txtUsername'] = $txtUsername;
-    $registration_arr['txtPassword'] = $txtPassword;
-    $registration_arr['txtUserLevel'] = "";
+    $registration_arr['txtPassword'] = base64_encode($txtPassword);
+    $registration_arr['txtUserLevel'] = "user";
     $registration_arr['txtIpAddress'] = $ip_address;
-    //$registration_arr['txtStatus'] = 1;
 
     foreach ($registration_arr as $value) {
       $registration_data .= "'" . $value . "'" . $seperator;
     }
-
-    $registration_data = substr($registration_data, 0, -1);
+    $registration_data .= 1;/*Staus 1 fo Registration Activation*/
 
     $adminEmail = "censoftg78@gmail.com";
 
-    /*Insert in Cleaning User */
- echo   $query_user = "INSERT INTO 
+    /*=========Insert in Cleaning User==========*/
+    $query_user = "INSERT INTO 
     `" . _DB_PREFIX . "user`(
       `txtFirstname`, `txtLastname`, `txtAddressLine1`, `txtAddressLine2`, `txtCountry`,
-        `txtCity`, `txtState`, `txtZipcode`, `txtEmail`, `txtPhone`,
-         `txtUsername`, `txtPassword`, `txtUserLevel`, `txtIpAddress`)
-            VALUES(" . $registration_data . ")";
-  $result_user = $db->query($query_user);
+         `txtState`, `txtCity`, `txtZipcode`, `txtEmail`, `txtPhone`,
+            `txtUsername`, `txtPassword`, `txtUserLevel`, `txtIpAddress`, `txtStatus`)
+                VALUES(" . $registration_data . ")";
+    
+    $result_user = $db->query($query_user);
 
   if($result_user){
 
-    $output = "success";
+    $message = "Thanks for registering us, we will get back you very soon !";
+    $success = "yes";
+
     /*====SEND MAIL IF SUCCESS=======*/
     $mail = new PHPMailer();
     $mail->isSMTP();
@@ -87,23 +90,25 @@
               </b>
               <br><br>
               Please click on below mentioned link to activate your account.<br><br>
-                      http://centurysoftwares.com/cleaning/user/login.php?virifycode='.base64_encode($verifyCode).'&mail='.base64_encode($txtEmail).'<br><br>
+                      http://centurysoftwares.com/cleaning/user/login.php?verifycode='.base64_encode($verifyCode).'&mail='.base64_encode($txtEmail).'<br><br>
                       <br><br>
                       <b>
                       Thanks & Regards,<br>
                       Unwritten Cleaning
                       </b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     if(!$mail->send()){
-      echo "Error to sent";
+      $message .= "<br/>but there might be Server problem to send you email";
     }
-
-    /*END*/
+    /*END OF EMAIL SENDING*/
  }
 }
-  echo $output;
 
-  $db->freeResult();
-  $db->close();/*close mysql connection*/
 
+$db->freeResult();
+$db->close();/*close mysql connection*/
+
+$data = array('message' => $message, 'success' => $success);
+$output = json_encode($data);
+echo $output;
+exit;
 ?>

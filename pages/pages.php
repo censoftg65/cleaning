@@ -12,34 +12,54 @@ foreach($_GET as $get_key => $get_value) {
     }
 }
 
-include 'inc/config.inc.php';
-include 'inc/function.inc.php';
+require_once dirname(__DIR__).'/inc/config.inc.php';
+include_once dirname(__DIR__).'/inc/function.inc.php';
+include 'cls_pages.php';
 $db = new Config(); 
+$coolection = $objPage->getPageContent();
+
+$page_entity = $db->getParam('pagename');
+$_SESSION['page_title'] = ucfirst($page_entity)." | "._SITE_NAME;
 
 ?>
 
-<?php include 'includes/header.php' ?>
+<?php include dirname(__DIR__).'/includes/header.php' ?>
 
-<div class="container">
-    <div class="row row-centered">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <form name="frmLogin" id="frmLogin" action="check_login.php" method="post">
-        <!-- <form name="frmLogin" id="frmLogin" method="post"> -->
-            <input type="hidden" value="login" name="do">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 col-centered alt2 raised">
-                <h1>HOME</h1>
-                <br>
-                <a href="<?php echo _SITE_URL?>user/login.php">Login</a>
-                <br><br>
-                <a href="<?php echo _SITE_URL?>user/register.php">Register</a>
-                <br><br>
-                <a href="<?php echo _SITE_URL?>user/forgot-password.php">Forgot Password</a>
-            </div>
-            <div class="col-md-4"></div>
-        </form>
-        </div>
-    </div>
-</div>
+<body class="inner">
+    <div id="wrapper">
 
-<?php include 'includes/footer.php'; ?>
+		<?php include dirname(__DIR__).'/includes/header-menu.php' ?>
+
+		<div style="margin-top:200px !important;"></div>
+		<div id="main-content">
+	    	<div class="container page-container">
+	        	<div class="row">
+	        		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	        			<?php
+		        		foreach ($coolection as $page) {
+		        			if ($page['txtPageEntity'] ==  $page_entity) {
+		        		?>
+						<div class="col-md-6">
+							<h2><?= $page['txtPageTitle']?></h2>
+						</div>
+						<div class="col-md-12"><hr></div>
+						<div class="col-md-12 page-content">
+							<?= $page['txtSliderContent']?>
+						</div>
+						<div class="col-md-12 page-content">
+							<?= $page['txtTextContent']?>
+						</div>
+						<?php 
+							}
+						}	
+						?>
+						<div class="col-md-12">&nbsp;</div>
+	        		</div>
+				</div>
+			</div>
+		</div>			
+	</div>	
+
+	<?php include dirname(__DIR__).'/includes/footer-upper-grid.php' ?>
+
+<?php include dirname(__DIR__).'/includes/footer.php'; ?>

@@ -2,10 +2,6 @@
 session_start();
 ob_start();
 
-if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
-   header("location:/cleaning/admin/index.php");
-}
-
 $uid   = $_SESSION["txtId"];
 $uname = $_SESSION["txtUsername"];
 //--------------------------------------------------------------------------
@@ -23,17 +19,22 @@ include_once (dirname(dirname(__DIR__)).'/inc/function.inc.php');
 include 'cls_users.php';
 $_SESSION['page_title'] = "View users | "._PANEL_NAME." :: "._SITE_NAME;
 $db = new Config(); 
-$collection_users = $objUser->getDeactiveUserDetails("all","");
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:"._SITE_URL."/admin/");
+}
+
+$collection_users = $objUser->getDeactiveUserDetails();
 
 $user_id = base64_decode($db->getParam('flag'));
-$status = $db->getParam('status');
-if (!empty($user_id) && empty($status)):
+$user_stat = $db->getParam('status');
+
+if (!empty($user_id) && ($user_stat == 'active')):
+  $objUser->activateUser($user_id);
+  header("Location:".basename($_SERVER['PHP_SELF']));
+endif;
+if (!empty($user_id) && ($user_stat == 'delete')):
   $objUser->deleteUserPermanantly($user_id);
   header("Location:".basename($_SERVER['PHP_SELF']));
-elseif (!empty($user_id) && !empty($status)):
-  $objUser->changeUserStatus($user_id);
-  header("Location:".basename($_SERVER['PHP_SELF']));
-else: echo ""; 
 endif;
 ?>
 
@@ -41,69 +42,79 @@ endif;
 
   <?php include dirname(__DIR__).'/include/left_menu.php' ?>
 
-  <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-      <div class="pull-left"><h4><strong>VIEW DEACTIVE USERS</strong></h4></div>
-      <div class="clear"></div>
-      <div class="col-md-12">&nbsp;</div>
-      <form name="frmViewDeactiveUsers" id="frmViewDeactiveUsers" method="post">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>NAME</th>
-              <th>EMAIL ID</th>
-              <th>PHONE</th>
-              <th>COUNTRY</th>
-              <th>USER LEVEL</th>
-              <th><center>#</center></th>
-              <th><center>#</center></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $i = 1;
-            foreach ($collection_users as $users) {
-            ?>
-            <tr>
-              <th scope="row"><?php echo $i?></th>
-              <td><?= $users['txtFirstName']." ".$users['txtLastName']?></td>
-              <td><?= $users['txtEmail']?></td>
-              <td><?= $users['txtPhone']?></td>
-              <td><?= $users['txtCountry']?></td>
-              <td><?= $users['txtUserLevel']?></td>
-              <td>
-                <center>
-                    <?php if ($users['txtId'] == 1) {?>
-                    <a title="Delete">
-                        <button type="button" title="Not allow" disabled="">
-                            <i class="fa fa-trash"></i>
+  <div class="col-md-9">
+      <div class="col-md-12">
+        <h4><strong>VIEW DEACTIVE USERS</strong></h4>
+        <div class="pull-left">
+          <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
+        </div>
+        <div class="pull-right">
+          <button type="button" id="btnMoveAll" id="btnMoveAll" class="btn btn-sm btn-warning">
+            <span class="glyphicon glyphicon-share-alt"></span>&nbsp;Active
+          </button>
+          &nbsp;&nbsp;
+          <button type="button" id="btnDeleteAll" id="btnDeleteAll" class="btn btn-sm  btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>&nbsp;Delete
+          </button>
+        </div>
+        <div class="col-md-12">&nbsp;</div>
+      </div>
+      
+      <div class="col-md-12">
+        <form name="frmViewDeactiveUsers" id="frmViewDeactiveUsers" method="post">
+          <table class="table table-bordered table-hover" id="table-data">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th><center><input type="checkbox" name="selAllUser" id="selAllUser" value=""></center></th>
+                <th>NAME</th>
+                <th>EMAIL ID</th>
+                <th>PHONE</th>
+                <th>ACCESS LEVEL</th>
+                <th><center>ACTION</center></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $i = 1;
+              foreach ($collection_users as $users) {
+              ?>
+              <tr>
+                <th scope="row"><?php echo $i?></th>
+                <td><center><input class="checkbox1" type="checkbox" name="allSelect[]" id="allSelect" value="<?= $users['txtId']?>"></center></td>
+                <td><a id="uname" title="User Name"><?= $users['txtFirstName']." ".$users['txtLastName']?></a></td>
+                <td><?= $users['txtEmail']?></td>
+                <td><?= $users['txtPhone']?></td>
+                <td><?= $users['txtUserLevel']?></td>
+                <td>
+                  <center>
+                      <a title="Enable/Activate User">
+                        <button type="button" title="Enable/Activate User" name="btnActivate" id="btnActivate" value="<?= $users['txtId']?>">
+                          <i class="fa fa-share" aria-hidden="true"></i>
                         </button>
-                    </a>
-                    <?php } else { ?>
-                    <a title="Delete">
-                        <button type="button" title="Delete Permanently" id="deleteUser_permant" value="<?= $users['txtId']?>">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </a>
-                    <?php } ?>
-                </center>
-              </td>
-              <td>
-                <center>
-                    <input type="checkbox" name="txtStatus[]" id="txtStatus" title="Activate User Profile" value="<?= $users['txtId']?>">
-                </center>
-              </td>
-            </tr>
-            <?php
-              $i++;
-            }
-            if (empty($collection_users)) {
-            ?>
-            <tr><td colspan="10">Sorry..! No records found.</td></tr>
-            <?php } ?>
-          </tbody>
-        </table>
-      </form>
+                      </a> 
+                      &nbsp;&nbsp;
+                      <a title="Delete">
+                          <button type="button" title="Delete User" id="deleteUser_permant" value="<?= $users['txtId']?>">
+                              <i class="fa fa-trash"></i>
+                          </button>
+                      </a>
+                  </center>
+                </td>
+              </tr>
+              <?php
+                $i++;
+              }
+              if (empty($collection_users)) {
+              ?>
+              <tr class="no-record">
+                <td colspan="10">Sorry..! No records found.</td>
+              </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </form>
+      </div>
   </div>
 
   <?php include dirname(__DIR__).'/include/footer.php' ?>

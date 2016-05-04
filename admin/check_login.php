@@ -1,9 +1,16 @@
 <?php
-// Initialize the session.
 session_start();
+ob_start();
+
+$uid   = $_SESSION["txtId"];
+$uname = $_SESSION["txtUsername"]; 
+
 include '../inc/config.inc.php';
 include '../inc/function.inc.php';
 $db = new Config(); 
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:"._SITE_URL."/admin/");
+}
 
 $log = (isset($_REQUEST['log'])) ? "?log=out" : "?log=none" ;
 

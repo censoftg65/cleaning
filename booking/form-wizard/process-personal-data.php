@@ -47,7 +47,7 @@ if (isset($_POST) && $form_request == "state") {
     echo $output;
     $db->freeResult();
 }
-
+/*On change City*/
 if (isset($_POST) && $form_request == "city") {
     $table_name = _DB_PREFIX . 'zipcity';
     $query2     = $db->select('txtZip');

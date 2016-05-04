@@ -70,23 +70,23 @@
                     step2_model_preview += '</div></div></div>';
                 }
             });
-$(".modal-body").html(step2_model_preview);
-$("#step2-preview").modal('show');
-/*$("#step3_confirm").prop("disabled",false);*/
-};
-})
+            $(".modal-body").html(step2_model_preview);
+            $("#step2-preview").modal('show');
+            /*$("#step3_confirm").prop("disabled",false);*/
+        };
+    })
 
 $(".gotoStep2").click(function() {
     $("#step2_booking").trigger('click');
 })
 $(".gotoStep3").click(function() {
     $("#step3_confirm").trigger('click');
-    /*$("#btnSaveBookingForm").prop("disabled",false);*/
-})
+        /*$("#btnSaveBookingForm").prop("disabled",false);*/
+    })
 })
 
 /*for booking calculation*/
-$(document).ready(function() {
+$(document).ready(function(){
 
     /*##### Initilise all variable #####*/
     var bathroom = [
@@ -100,13 +100,18 @@ $(document).ready(function() {
     ];
 
     var bathrooms;
-    var service_price = 0;
+    var service_price = 0.0;
     var bedroom = 0;
-    var price = 0;
+    var price = 0.0;
     var bathroom_options = $("#txtBathroom");
     var hours_options = $("#txtServiceHours");
     var prices_options = $("#txtTotal");
-    var price_options = $("#txtTotal option");
+    var price_value = 0.0;
+    var price_text = 0.0;
+    var hour_value = 0;
+    var hour_text = 0;
+    var extra_hour = 0;
+
     /*##### End Initilise all variable #####*/
 
 
@@ -164,6 +169,11 @@ $(document).ready(function() {
                 });
                 $.each(cal_data[bedroom], function(index, jsonObject) {
                     $.each(jsonObject, function(index, value) {
+                        var temp = index.toString();
+                        var lastNum = parseInt(temp[temp.length - 1]); // it's 2
+                        if(lastNum == 0){
+                            index = index.slice(0, -2);
+                        }
                         hours_options.append(new Option(index, index));
                         prices_options.append(new Option(Number(value + price).toFixed(2), Number(value + price).toFixed(2)));
                     });
@@ -175,36 +185,61 @@ $(document).ready(function() {
         }
     });
 
-/*Change Total On change Hours Selection*/
-$("#txtServiceHours").change(function() {
-    var price_options = $('#txtTotal option');
-    var selectedIndex = $(this)[0].selectedIndex;
-    price_options.eq(selectedIndex).prop('selected', true);
-});
+    /*Change Total On change Hours Selection*/
+    $("#txtServiceHours").change(function() {
+        var price_options = $('#txtTotal option');
+        var selectedIndex = $(this)[0].selectedIndex;
+        price_options.eq(selectedIndex).prop('selected', true);
+    });
 
-/*On click extra services*/
-$("input[type=checkbox]").click(function() {
-    var price_options = $('#txtTotal option');
-    var price_value;
-    var price_text;
-    if ($(this).prop("checked") === true) {
-        service_price = Number($(this).attr('data-serviceprice')); /*Add Extra Charge*/
-        $.map(price_options, function(option) {
-            price_value = Number(option.value) + service_price;
-            price_text = Number(option.label) + service_price;
-            option.value = price_value.toFixed(2);
-            option.text = price_text.toFixed(2);
-        });
-    } else {
-        service_price = Number($(this).attr('data-serviceprice')); /*Substract Extra Charge*/
-        $.map(price_options, function(option) {
-            price_value = Number(option.value) - service_price;
-            price_text = Number(option.label) - service_price;
-            option.value = price_value.toFixed(2);
-            option.text = price_text.toFixed(2);
-        });
-    }
-});
+    /*On click extra services*/
+    $("input[type=checkbox]").click(function() {
+        var hour_options  = $("#txtServiceHours option");
+        var price_options = $("#txtTotal option");
+        if ($(this).prop("checked") === true) {
+            service_price = Number($(this).attr('data-serviceprice')); /*Add Extra Charge*/
+
+            /*Add Extra Services*/
+            $.map(price_options, function(option) {
+                price_value = Number(option.value) + service_price;
+                price_text = Number(option.label) + service_price;
+                option.value = price_value.toFixed(2);
+                option.text = price_text.toFixed(2);
+            });
+
+            /*Add Extra Hours*/
+            if(service_price == 15 || service_price == 20){
+                extra_hour = 0.5;
+            }
+            $.map(hour_options, function(option) {
+                hour_value = Number(option.value) + extra_hour;
+                hour_text = Number(option.label) + extra_hour;
+                option.value = hour_value.toFixed(2);
+                option.text = hour_text.toFixed(2);
+            });
+
+
+        } else {
+            service_price = Number($(this).attr('data-serviceprice')); /*Substract Extra Charge*/
+            $.map(price_options, function(option) {
+                price_value = Number(option.value) - service_price;
+                price_text = Number(option.label) - service_price;
+                option.value = price_value.toFixed(2);
+                option.text = price_text.toFixed(2);
+            });
+
+            /*Substract Extra Hours*/
+            if(service_price == 15 || service_price == 20){
+                extra_hour = 0.5;
+            }
+            $.map(hour_options, function(option) {
+                hour_value = Number(option.value) - extra_hour;
+                hour_text = Number(option.label) - extra_hour;
+                option.value = hour_value.toFixed(2);
+                option.text = hour_text.toFixed(2);
+            });
+        }
+    });
 })
 
 

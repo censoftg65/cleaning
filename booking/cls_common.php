@@ -28,7 +28,7 @@ $extraBookingServiceObj = new extraBookingService();
 class USStateListing{
 	public function getUSStateListing(){
 		$db = new Config();
-	    $query = "SELECT `txtAbbreviation`, `txtState` FROM `"._DB_PREFIX."us_states` ";
+	    $query = "SELECT `txtAbbreviation`, `txtState` FROM `"._DB_PREFIX."us_states` WHERE ";
 		$result = $db->query($query);
 		$data = array();
 		while($rows = $db->fetchAssoc($result)){

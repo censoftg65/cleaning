@@ -2,10 +2,6 @@
 session_start();
 ob_start();
 
-if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
-   header("location:/cleaning/admin/index.php");
-}
-
 $uid   = $_SESSION["txtId"];
 $uname = $_SESSION["txtUsername"];
 //--------------------------------------------------------------------------
@@ -24,8 +20,11 @@ include_once (dirname(dirname(__DIR__)).'/inc/function.inc.php');
 include_once 'cls_pages.php';
 $_SESSION['page_title'] = "Footer Contact Details | "._PANEL_NAME." :: "._SITE_NAME;
 $db = new Config(); 
-$contactId = "1";
+if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
+   header("location:"._SITE_URL."/admin/");
+}
 
+$contactId = "1";
 if (!empty($contactId)) {
     $contact_details = $objPage->getContactDetails($contactId);
     $contact = $contact_details[0];    
@@ -33,11 +32,12 @@ if (!empty($contactId)) {
 
 ?>
 
+<div style="display:none;" id="msg-back-color"></div>
 <?php include dirname(__DIR__).'/include/header.php' ?>
 
     <?php include dirname(__DIR__).'/include/left_menu.php' ?>
 
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+    <div class="col-md-9">
         <div class="col-md-12"><h4><strong>CONTACT DETAILS</strong></h4></div>
         <form name="frmContactDetails" id="frmContactDetails" method="post">
             <div class="col-md-12">&nbsp;</div>
@@ -54,10 +54,15 @@ if (!empty($contactId)) {
                     <textarea class="form-control" id="txtEditContactDetails" name="txtEditContactDetails"><?= $contact['txtContactDetails']?></textarea> 
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <button type="button" class="btn btn-md btn-success" name="btnContactDetails" id="btnContactDetails">
                     <span style="display:none" id="contact_loading"></span>&nbsp;&nbsp;Update Contact Details
                 </button>
+            </div>
+            <div class="col-md-6 open-up-msg">
+                <div id="footer-success-dialog" title="Thank you" style="display: none">
+                    Footer details successfully updated
+                </div>
             </div>
         </form>
     </div>
