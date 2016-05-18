@@ -5,17 +5,17 @@
 $db = new Config(); 
 $collection = getMenus();
 
-// $act_cls = ($_SERVER['REQUEST_URI'] == "/cleaning/admin/dashboard.php") ? "active" : "";
-// $act_cls = ($_SERVER['REQUEST_URI'] == "/cleaning/admin/dashboard.php") ? "active" : "";
-
 ?>
     
         <div class="col-md-3">
             <?php if(isset($_SESSION['ad_logged']) && $_SESSION['ad_logged'] == true){ ?>
         	<div class="col-md-12">
                 <ul id="nav">
-                    <?php foreach ($collection as $list) { ?>
-                    <li><a href="#"><?= $list['txtMenuIcon']?>&nbsp;&nbsp;<?= $list['txtMenu']?></a>
+                    <?php 
+                    $i = 1;
+                    foreach ($collection as $list) { ?>
+                    <li>
+                        <a href="#"><?= $list['txtMenuIcon']?>&nbsp;&nbsp;<?= $list['txtMenu']?></a>
                         <ul id="sub-nav">
                             <?php           
                             if($_SESSION['txtUserLevel'] == "admin"){
@@ -35,15 +35,17 @@ $collection = getMenus();
                             ?>
                         </ul>
                     </li>
-                    <?php } ?>
+                    <?php 
+                        $i++;
+                    } ?>
                 </ul>
             </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <ul id="nav">
                     <li>
                         <a href="<?= _SITE_URL?>/admin/logout.php"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Log Out</a>        
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <?php } ?>
         </div>

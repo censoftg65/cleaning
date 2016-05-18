@@ -25,7 +25,7 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
 }
 
 $collection_offer = $objOffers->getOfferDetails();
-$collection_user = $objOffers->getuser();
+$collection_user = $objOffers->getOfferUser();
 
 ?>
 
@@ -46,22 +46,23 @@ $collection_user = $objOffers->getuser();
             <input type="hidden" id="form_edit_value" name="form_edit_value" value="">
             <input type="hidden" id="edit_offer" name="edit_offer" value="">
             <div class="modal-body">
-              <div class="col-md-12">
-                <button type="button" class="btn btn-warning" id="btnGeneratCode">Generate Code</button>
-              </div>
-              <div class="col-md-12">&nbsp;</div>
               <div class="col-md-6 form-group">
                 <label>Offer Code&nbsp;<span>*</span></label>
                 <input class="form-control input-sm" type="text" id="txtPromoCode" name="txtPromoCode" value="" readonly="">
               </div>
+              <div class="col-md-3 form-group">
+                <label>&nbsp;</label>
+                <button type="button" class="btn btn-md btn-warning" id="btnGeneratCode">Generate Code</button>
+              </div>
+              <div class="col-md-3 form-group">&nbsp;</div>
               <div class="col-md-6 form-group">
                 <label>Offer Discount (%)&nbsp;<span>*</span></span>&nbsp;<span class="errmsg"></span></label>
                 <input class="form-control input-sm restrict-zero" type="text" id="txtOffer" name="txtOffer" value="" maxlength="2">
               </div>
-              <div class="col-md-6 form-group">
+              <div class="col-md-12 form-group">
                 <label>Client Email&nbsp;<span>*</span></span>&nbsp;<span id="errmsg"></span></label>
                 <select class="form-control input-sm" id="txtOfferTaken" name="txtOfferTaken">
-                  <?= getOptions($collection_user,'txtId','txtEmail',$selected)?>
+                  <?= getOptions($collection_user,'txtId','txtEmail','')?>
                 </select>
               </div>
             </div>

@@ -18,22 +18,25 @@
     <link href="<?= _CSS_URL?>/style_global.css" type=text/css rel=stylesheet>
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap.css" type=text/css rel=stylesheet>
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap.min.css" type=text/css rel=stylesheet>
-    <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap-theme.min.css" type=text/css rel=stylesheet>
     <link href="<?= _BOOTSTRAP_URL?>/css/jquery.timepicker.css" rel="stylesheet" type="text/css">
     <link href="<?= _BOOTSTRAP_URL?>/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
+    <link href="<?= _BOOTSTRAP_URL?>/css/star-rating.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<?= _JS_URL?>/DataTables/media/css/jquery.dataTables.css">
     
     <!-- ALL SCRIPT TAGGS INCLUDE HERE -->
+    <script type="text/javaScript" src="<?= _JS_URL?>/jquery-1.11.2.min.js"></script>
     <script type="text/javaScript" src="<?= _BOOTSTRAP_URL?>/js/bootstrap.js"></script>
     <script type="text/javaScript" src="<?= _BOOTSTRAP_URL?>/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?= _BOOTSTRAP_URL?>/js/jquery.timepicker.js"></script>
     <script type="text/javascript" src="<?= _BOOTSTRAP_URL?>/js/bootstrap-datepicker.js"></script>
-    <script type="text/javaScript" src="<?= _JS_URL?>/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="<?= _BOOTSTRAP_URL?>/js/star-rating.js"></script>
     <script type="text/JavaScript" src="<?= _JS_URL?>/functions.js"></script>    
     <script type="text/javascript" src="<?= _JS_URL?>/pr-tools.js"></script>
     <script type="text/javaScript" src="<?= _EDITOR_URL?>/tinymce.min.js"></script>
     <script type="text/javaScript" src="<?= _JS_URL?>/script_custom.js"></script>
-
+    <script src="<?= _JS_URL?>/DataTables/media/js/jquery.dataTables.js"></script>
+    
     <script>
     function rememberMe(val) {
         if(document.getElementById("txtRemember").checked == true) {

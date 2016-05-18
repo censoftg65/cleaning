@@ -17,12 +17,7 @@ $contact_detail = $objPage->getContactDetails();
             } 
             ?>
         </div>
-        <div class="footerMid">
-            <ul>
-                <li><a href="#">Booking Form</a></li>
-                <li><a href="#">Cleaning Professional</a></li>                
-            </ul>
-        </div>
+        <div class="footerMid"></div>
         <div class="footerRight">
             <h3>Follow Us On</h3>
             <div class="socialBox">

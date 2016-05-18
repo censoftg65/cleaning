@@ -1,0 +1,25 @@
+[14-Apr-2016 08:37:20 UTC] PHP Notice:  Use of undefined constant _USER_PATH - assumed '_USER_PATH' in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:37:20 UTC] PHP Warning:  include_once(_USER_PATH/cls_user.php): failed to open stream: No such file or directory in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:37:20 UTC] PHP Warning:  include_once(): Failed opening '_USER_PATH/cls_user.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:37:20 UTC] PHP Notice:  Undefined variable: NewyorkCitisObj in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:37:20 UTC] PHP Fatal error:  Call to a member function getUSCities() on a non-object in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:37:20 UTC] PHP Notice:  Use of undefined constant _USER_PATH - assumed '_USER_PATH' in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:37:20 UTC] PHP Warning:  include_once(_USER_PATH/cls_user.php): failed to open stream: No such file or directory in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:37:20 UTC] PHP Warning:  include_once(): Failed opening '_USER_PATH/cls_user.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:37:20 UTC] PHP Notice:  Undefined variable: NewyorkCitisObj in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:37:20 UTC] PHP Fatal error:  Call to a member function getUSCities() on a non-object in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:38:16 UTC] PHP Notice:  Use of undefined constant _USER_PATH - assumed '_USER_PATH' in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:38:16 UTC] PHP Warning:  include_once(_USER_PATH/cls_user.php): failed to open stream: No such file or directory in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:38:16 UTC] PHP Warning:  include_once(): Failed opening '_USER_PATH/cls_user.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:38:16 UTC] PHP Notice:  Undefined variable: NewyorkCitisObj in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:38:16 UTC] PHP Fatal error:  Call to a member function getUSCities() on a non-object in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:38:21 UTC] PHP Notice:  Use of undefined constant _USER_PATH - assumed '_USER_PATH' in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:38:21 UTC] PHP Warning:  include_once(_USER_PATH/cls_user.php): failed to open stream: No such file or directory in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:38:21 UTC] PHP Warning:  include_once(): Failed opening '_USER_PATH/cls_user.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:38:21 UTC] PHP Notice:  Undefined variable: NewyorkCitisObj in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:38:21 UTC] PHP Fatal error:  Call to a member function getUSCities() on a non-object in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:39:27 UTC] PHP Notice:  Use of undefined constant _USER_PATH - assumed '_USER_PATH' in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:39:27 UTC] PHP Warning:  include_once(_USER_PATH/cls_user.php): failed to open stream: No such file or directory in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:39:27 UTC] PHP Warning:  include_once(): Failed opening '_USER_PATH/cls_user.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/centurys/public_html/cleaning/user/register.php on line 39
+[14-Apr-2016 08:39:27 UTC] PHP Notice:  Undefined variable: NewyorkCitisObj in /home/centurys/public_html/cleaning/user/register.php on line 120
+[14-Apr-2016 08:39:27 UTC] PHP Fatal error:  Call to a member function getUSCities() on a non-object in /home/centurys/public_html/cleaning/user/register.php on line 120

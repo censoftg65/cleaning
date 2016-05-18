@@ -59,11 +59,11 @@ class Offers
         $db->query($sql_query);
     }
 
-    public function getuser() {
+    public function getOfferUser() {
         $db = new Config();
         $sql_query = $db->select('*');
         $sql_query .= $db->from(_DB_PREFIX.'user');
-        $sql_query .= $db->where("txtStatus = '1' AND txtUserLevel != 'admin'");
+        $sql_query .= $db->where("txtStatus = '1' AND txtUserLevel != 'admin' AND txtOfferShare = 0");
         $db->query($sql_query);
         $collection = array();
         while ($row = $db->fetchAssoc()) {

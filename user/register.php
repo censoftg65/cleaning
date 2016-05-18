@@ -32,7 +32,10 @@ $collection_zips = $objUser->getZipCodes();
 
         <div class="container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_form">
-                <h2><strong>Registration Form</strong></h2>
+                <h2 class="pull-left"><strong>Registration Form</strong></h2>
+                <span class="pull-right login-reg-link">
+                    Have an account? <a href="<?= _SITE_URL?>/user/">Login Here</a>
+                </span>
             </div>
         
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 reg_box">

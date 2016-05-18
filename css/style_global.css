@@ -33,11 +33,6 @@ label {font-weight: 500 !important}
 .clear { clear: both; }
 
 /*-- Admin menus --*/
-/*#nav {border-top: 1px solid #999;border-right: 1px solid #999;border-left: 1px solid #999;padding:0;}*/
-/*#nav li a {display: block;padding: 10px 15px;background: #ccc;border-top: 1px solid #eee;border-bottom: 1px solid #999;text-decoration: none;color: #000;}*/
-/*#nav li a:hover, #nav li a.active {background: #999;color: #fff;}*/
-/*#nav li ul li a {padding: 10px 25px;background: #ececec;border-bottom: 1px dotted #ccc;}*/
-/*#nav li ul li a {background: #999999 none repeat scroll 0 0;border-bottom: 1px dotted #ccc;padding: 10px 25px;}*/
 #nav {padding:0;}
 #nav li a {background: #574135 none repeat scroll 0 0;border-top: 1px solid #eee;/*border-top-left-radius: 4px;border-top-right-radius: 4px;*/color: #fff;display: block;font-size: 13px;font-weight: 600;padding: 10px 15px;text-decoration: none;}
 #nav li a:hover, #nav li a.active {background: #907959 none repeat scroll 0 0;color: #fff;}
@@ -72,13 +67,14 @@ a#uname {color: #275e8e;text-decoration: none;text-transform: uppercase;}
 .nav-tabs > li {cursor: pointer;}
 .nav-tabs > li > a {border:1px solid #ccc !important;color:#555;font-weight:bold;}
 .nav-tabs > li > a:hover {background-color:#286090 !important;border-color:#286090 !important;color:#fff;font-weight:bold;}
+.subnav-selected {background-color:#286090 !important;border-color:#286090 !important;color:#fff !important;font-weight:bold;}
 .col-md-12.extract-div {margin-top: 10px;padding: initial;}
 .no-record {background-color:#f5f5f5;color:#BC5438;text-align:center;font-weight:bold}
 .log-img {width: 30px;}
 #admin-back-color {background: #333 none repeat scroll 0 0;height:100%;opacity: 0.5;position: fixed;top: 0;width: 100%;z-index: 1}
 #show-profile {background-color: #dddddd;border: 1px solid #ccc;font-weight: 600;padding: 15px;position: absolute;width: 500px;z-index: 999;}
 #page-success {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
-
+.clean_process {cursor: pointer;}
 
 /*
 * Auther : Vinek T.
@@ -106,6 +102,7 @@ button > span > img {width: 20px;}
 .control-label > span {color: red;}
 button > span > img {width: 20px;}
 #succ-resp {border:1px solid transparent;font-weight:600;margin-bottom:10px;margin-top:10px;z-index:9999;}
+.login-reg-link {font-weight: 600;padding-top: 35px;}
 
 /*-- Forgot password page --*/
 #frmForpass .inputfocus::-webkit-input-placeholder {color: red !important;}    
@@ -131,5 +128,10 @@ label.btn span {font-size:1em;}
 .bookingButtons a:hover {opacity:0.6;}
 .bookingButtons a.cancelBtn{background:url(../images/cancel-btn-bg.png) repeat-x 0 0; border:1px solid #cbcaca; color:#3c3c3c; text-shadow:none;}
 #frmBookCleaning .err { color: red }
-.col-sm-9.ser-left-pad {padding-left: 5px;}
+.col-sm-9.ser-left-pad {padding-left: 6px;}
 #success-preview {font-size: 18px;left: 380px;line-height: 38px;margin: 0;position: fixed;text-align: center;top: 15%;z-index: 1;}
+#cancel-service-loader {left: 45%;position: fixed;top: 35%;z-index: 9999;}
+#msg-request {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;z-index: 999}
+#com-msg-request {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;z-index: 999}
+select#txtServiceAmt {-webkit-appearance: none;-moz-appearance: none;text-indent: 1px;text-overflow: '';}
+#frmRating span.err {color: red}

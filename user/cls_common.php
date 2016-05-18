@@ -33,8 +33,9 @@ class Common
         $this->txtRecurring         = $arr_book['txtRecurring'];
         $this->txtPromoCode         = $arr_book['txtPromoCode'];
         $this->txtPromoOffer        = $arr_book['txtPromoOffer'];
-        $this->txtTotal             = $arr_book['txtTotal'];
+        $this->txtServiceAmt        = $arr_book['txtServiceAmt'];
         $this->txtExtraServiceAmt   = $arr_book['txtExtraServiceAmt'];
+        $this->txtTotalAmt          = $arr_book['txtTotalAmt'];
         $this->txtGrandTotal        = $arr_book['txtGrandTotal'];
     }
 
@@ -53,8 +54,9 @@ class Common
                                                         txtRecurring,
                                                         txtPromoCode,
                                                         txtPromoOffer,
-                                                        txtTotal,
+                                                        txtServiceAmt,
                                                         txtExtraServiceAmt,
+                                                        txtTotalAmt,
                                                         txtGrandTotal,
                                                         txtStatus
                                                    )
@@ -71,8 +73,9 @@ class Common
                                                         '$this->txtRecurring',
                                                         '$this->txtPromoCode',
                                                         '$this->txtPromoOffer',
-                                                        '$this->txtTotal',
+                                                        '$this->txtServiceAmt',
                                                         '$this->txtExtraServiceAmt',
+                                                        '$this->txtTotalAmt',
                                                         '$this->txtGrandTotal',
                                                         '1'
                                                    )";
@@ -135,19 +138,19 @@ class Common
     public function updateProfile($param) {
         $db = new Config();
         $data_time = getCurrentDateTime('all');
-        $query  = "UPDATE "._DB_PREFIX."user SET txtFirstName = '$this->txtFirstName',
-        										 txtLastName = '$this->txtLastName',
-        										 txtPhone = '$this->txtPhone',
+        $query  = "UPDATE "._DB_PREFIX."user SET txtFirstName    = '$this->txtFirstName',
+        										 txtLastName     = '$this->txtLastName',
+        										 txtPhone        = '$this->txtPhone',
         										 txtAddressLine1 = '$this->txtAddressLine1',
         										 txtAddressLine2 = '$this->txtAddressLine2',
-        										 txtCity = '$this->txtCity',
-        										 txtZipcode = '$this->txtZipcode',
-        										 txtUpdateTime = '$data_time'	
-        									WHERE txtId = '$param' ";
+        										 txtCity         = '$this->txtCity',
+        										 txtZipcode      = '$this->txtZipcode',
+        										 txtUpdateTime   = '$data_time'	
+        								   WHERE txtId = '$param' ";
         $db->query($query);
     }
 
-    public function getExtraServices(){
+    public function getExtraServices() {
         $db = new Config();
         $query = $db->select("txtId,txtServiceName,txtServicePrice,txtServiceHours");
         $query .= $db->from(_DB_PREFIX."extra_services");
@@ -157,6 +160,192 @@ class Common
             array_push($collection,$rows);
         }
         return $collection;
+    }
+
+    public function getPendingServices($uid) {
+        $db = new Config();
+        $query = $db->select("*");
+        $query .= $db->from(_DB_PREFIX."booking");
+        $query .= $db->where("txtUserId = '$uid' AND txtStatus = '1'");
+        $query .= $db->orderby("txtId DESC");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getCompleteServices($uid) {
+        $db = new Config();
+        $query = "SELECT "._DB_PREFIX."booking.*,"._DB_PREFIX."rating.txtStatus AS rateStatus,"._DB_PREFIX."rating.txtId AS rateId 
+                  FROM "._DB_PREFIX."booking
+                  LEFT JOIN "._DB_PREFIX."rating
+                    ON "._DB_PREFIX."booking.txtId = "._DB_PREFIX."rating.txtBookingId
+                  WHERE "._DB_PREFIX."booking.txtUserId = '$uid' AND "._DB_PREFIX."booking.txtStatus = '0'";
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getUser($param) {
+        $db = new Config();
+        $query = "SELECT "._DB_PREFIX."user.txtEmail FROM "._DB_PREFIX."booking
+                                                     LEFT JOIN "._DB_PREFIX."user
+                                                        ON "._DB_PREFIX."user.txtId = "._DB_PREFIX."booking.txtUserId
+                                                     WHERE "._DB_PREFIX."booking.txtId = '$param'";
+        $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc()){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function cancelServices($param) {
+        $db = new Config();
+        $query = "UPDATE "._DB_PREFIX."booking SET txtAction = 'cancel',txtStatus = '0' WHERE txtId = '$param'";
+        $db->query($query);
+    }
+
+    public function getPendingPreviewServices($param) {
+        $db = new Config();
+        $query = $db->select("*");
+        $query .= $db->from(_DB_PREFIX."booking");
+        $query .= $db->where("txtId = '$param'");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function setRating($arr_rating) {
+        $this->txtUserId            = $arr_rating['txtUserId'];
+        $this->txtBookingId         = $arr_rating['txtBookingId'];
+        $this->txtServiceProvider   = $arr_rating['txtServiceProvider'];
+        $this->txtRatingComment     = $arr_rating['txtRatingComment'];
+        $this->txtRating            = $arr_rating['txtRating'];
+        $this->txtPreRating         = $arr_rating['txtPreRating'];
+    }
+
+    public function insertRating() {
+        $db = new Config();
+        $sql = "INSERT INTO "._DB_PREFIX."rating( 
+                                                   txtUserId,
+                                                   txtBookingId,
+                                                   txtServiceProvider,
+                                                   txtRatingComment,
+                                                   txtRating,
+                                                   txtStatus
+                                                )
+                                         VALUES (
+                                                   '$this->txtUserId',
+                                                   '$this->txtBookingId', 
+                                                   '$this->txtServiceProvider', 
+                                                   '$this->txtRatingComment', 
+                                                   '$this->txtRating', 
+                                                   '1' 
+                                                )";
+        $db->query($sql);
+    }
+
+    public function updateRating($param) {
+        $db = new Config();
+        $sql = "UPDATE "._DB_PREFIX."rating SET txtServiceProvider = '$this->txtServiceProvider', 
+                                                txtRatingComment   = '$this->txtRatingComment', 
+                                                txtRating          = '$this->txtPreRating'
+                                          WHERE txtId = '$param' ";
+        $db->query($sql);
+    }
+
+    public function getServiceRat($param) {
+        $db = new Config();
+        $query = $db->select("*");
+        $query .= $db->from(_DB_PREFIX."rating");
+        $query .= $db->where("txtId = '$param'");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getAllRatings($uid) {
+        $db = new Config();
+        $query = $db->select("*");
+        $query .= $db->from(_DB_PREFIX."rating");
+        $query .= $db->where("txtUserId = '$uid'");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getCommnets($param) {
+        $db = new Config();
+        $query = $db->select("txtRatingComment");
+        $query .= $db->from(_DB_PREFIX."rating");
+        $query .= $db->where("txtId = '$param'");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getServiceData($param,$uid) {
+        $db = new Config();
+        $query = $db->select("*");
+        $query .= $db->from(_DB_PREFIX."booking");
+        $query .= $db->where("txtId = '$param' AND txtUserId = '$uid'");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getBathOnBed($param) {
+        $db = new Config();
+        $query = $db->select("*");
+        $query .= $db->from(_DB_PREFIX."booking_hrs_price");
+        $query .= $db->where("txtBedRoom = '$param'");
+        $result = $db->query($query);
+        $collection = array();
+        while($rows = $db->fetchAssoc($result)){
+            array_push($collection,$rows);
+        }
+        return $collection;
+    }
+
+    public function getUpdateBooking($param) {
+        $db = new Config();
+        $query = "UPDATE "._DB_PREFIX."booking SET  txtBedroom           = '$this->txtBedroom',
+                                                    txtBathroom          = '$this->txtBathroom',
+                                                    txtExtraService      = '$this->txtExtraService',
+                                                    txtServiceDate       = '$this->txtServiceDate',
+                                                    txtServiceTime       = '$this->txtServiceTime',
+                                                    txtServiceHours      = '$this->txtServiceHours',
+                                                    txtExtraServiceHrs   = '$this->txtExtraServiceHrs',
+                                                    txtServiceTip        = '$this->txtServiceTip',
+                                                    txtBathroom          = '$this->txtBathroom',
+                                                    txtRecurring         = '$this->txtRecurring',
+                                                    txtServiceAmt        = '$this->txtServiceAmt',
+                                                    txtExtraServiceAmt   = '$this->txtExtraServiceAmt',
+                                                    txtTotalAmt          = '$this->txtTotalAmt',
+                                                    txtGrandTotal        = '$this->txtGrandTotal'
+                                              WHERE txtId = '$param'";
+        $db->query($query);
     }
 	
 }

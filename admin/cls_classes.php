@@ -39,11 +39,9 @@ class Siteconfig
 		$this->txtForgotSub			= $arr_config['txtForgotSub'];
 		$this->txtForgotMailFrom	= $arr_config['txtForgotMailFrom'];
 		$this->txtForgotBody		= $arr_config['txtForgotBody'];
-		$this->txtForgotAdminBody	= $arr_config['txtForgotAdminBody'];
 		$this->txtOfferSub			= $arr_config['txtOfferSub'];
 		$this->txtOfferMailFrom		= $arr_config['txtOfferMailFrom'];
 		$this->txtOfferBody			= $arr_config['txtOfferBody'];
-		$this->txtOfferAdminBody	= $arr_config['txtOfferAdminBody'];
 		$this->txtAccountSub		= $arr_config['txtAccountSub'];
 		$this->txtAccountMailFrom	= $arr_config['txtAccountMailFrom'];
 		$this->txtAccountBody		= $arr_config['txtAccountBody'];
@@ -99,11 +97,9 @@ class Siteconfig
 														txtForgotSub 		= '$this->txtForgotSub',
 														txtForgotMailFrom 	= '$this->txtForgotMailFrom',
 														txtForgotBody 		= '$this->txtForgotBody',
-														txtForgotAdminBody 	= '$this->txtForgotAdminBody',
 														txtOfferSub 		= '$this->txtOfferSub',
 														txtOfferMailFrom 	= '$this->txtOfferMailFrom',
 														txtOfferBody 		= '$this->txtOfferBody',
-														txtOfferAdminBody 	= '$this->txtOfferAdminBody',
 														txtAccountSub 		= '$this->txtAccountSub',
 														txtAccountMailFrom 	= '$this->txtAccountMailFrom',
 														txtAccountBody 		= '$this->txtAccountBody',

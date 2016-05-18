@@ -5,25 +5,136 @@
 * Date : 26th April'16
 */
 $(document).ready(function(){
-	/*
+    /*
+    * Auther : Vinek T.
+    * Description : Script for ajax sereaching
+    * Date : 16th May'2016
+    */
+    $("#txtSearch").keyup(function () {
+        var value = this.value.toLowerCase().trim();
+        $("table tr").each(function (index) {
+            if (!index) return;
+            $(this).find("td").each(function () {
+                var id = $(this).text().toLowerCase().trim();
+                var not_found = (id.indexOf(value) == -1);
+                $(this).closest('tr').toggle(!not_found);
+                return not_found;
+            })
+        })
+    });
+
+    /*
     * Auther : Vinek T.
     * Description : Script for setting up the datepicker and timepicker
     * Date : 26th March'2016
     */
     var date = new Date();
     date.setDate(date.getDate()-0);
-	jQuery('#txtServiceDate').datepicker({
-		format: 'yyyy-mm-dd',
-		startDate: date,
-		autoclose: true
-	});
+    jQuery('#txtServiceDate').datepicker({
+        format: 'yyyy-mm-dd',
+        startDate: date,
+        autoclose: true
+    });
 
-	jQuery('#txtServiceTime').timepicker({
+    jQuery('#txtServiceTime').timepicker({
         'showDuration': true,
         'timeFormat': 'g:ia',
     });
-    /*-- End --*/
+    /* ---- End ---- */
 
+    /* -- Initialize the variable for base url & base64_encode & base64_decodes -- */
+    var baseuri = window.location.origin+'/cleaning';
+    var Base64 = {
+        _keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+        encode:function(e){
+            var t="";
+            var n,r,i,s,o,u,a;
+            var f=0;
+            e=Base64._utf8_encode(e);
+            while(f<e.length){
+                n=e.charCodeAt(f++);
+                r=e.charCodeAt(f++);
+                i=e.charCodeAt(f++);
+                s=n>>2;
+                o=(n&3)<<4|r>>4;
+                u=(r&15)<<2|i>>6;
+                a=i&63;
+                if(isNaN(r)){
+                    u=a=64
+                }else if(isNaN(i)){
+                    a=64
+                }
+                t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)
+            }
+            return t
+        },
+        decode:function(e){
+            var t="";
+            var n,r,i;
+            var s,o,u,a;
+            var f=0;
+            e=e.replace(/[^A-Za-z0-9+/=]/g,"");
+            while(f<e.length){
+                s=this._keyStr.indexOf(e.charAt(f++));
+                o=this._keyStr.indexOf(e.charAt(f++));
+                u=this._keyStr.indexOf(e.charAt(f++));
+                a=this._keyStr.indexOf(e.charAt(f++));
+                n=s<<2|o>>4;
+                r=(o&15)<<4|u>>2;
+                i=(u&3)<<6|a;
+                t=t+String.fromCharCode(n);
+                if(u!=64){
+                    t=t+String.fromCharCode(r)
+                }
+                if(a!=64){
+                    t=t+String.fromCharCode(i)
+                }
+            }
+            t=Base64._utf8_decode(t);
+            return t
+        },
+        _utf8_encode:function(e){
+            e=e.replace(/rn/g,"n");
+            var t="";
+            for(var n=0;n<e.length;n++){
+                var r=e.charCodeAt(n);
+                if(r<128){
+                    t+=String.fromCharCode(r)
+                }else if(r>127&&r<2048){
+                    t+=String.fromCharCode(r>>6|192);
+                    t+=String.fromCharCode(r&63|128)
+                }else{
+                    t+=String.fromCharCode(r>>12|224);
+                    t+=String.fromCharCode(r>>6&63|128);
+                    t+=String.fromCharCode(r&63|128)
+                }
+            }
+            return t
+        },
+        _utf8_decode:function(e){
+            var t="";
+            var n=0;
+            var r=c1=c2=0;
+            while(n<e.length){
+                r=e.charCodeAt(n);
+                if(r<128){
+                    t+=String.fromCharCode(r);
+                    n++
+                }else if(r>191&&r<224){
+                    c2=e.charCodeAt(n+1);
+                    t+=String.fromCharCode((r&31)<<6|c2&63);
+                    n+=2
+                }else{
+                    c2=e.charCodeAt(n+1);
+                    c3=e.charCodeAt(n+2);
+                    t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3
+                }
+            }
+            return t
+        }
+    };
+    /* ---- End ---- */
+	
     /*
     * Auther : Vinek T.
     * Description : Script for user profile and account settings in user dashboard
@@ -45,7 +156,6 @@ $(document).ready(function(){
 
     /* ---- Script for updating account settings ---- */
     jQuery('#btnAccount').click(function() {
-        var baseuri = window.location.origin+'/cleaning';
         var new_pass = jQuery('#txtNewPassword').val();
         if (new_pass != '') {
             if (new_pass.length < 6) {
@@ -277,7 +387,7 @@ $(document).ready(function(){
     var price = 0.0;
     var bathroom_options = $("#txtBathroom");
     var hours_options = $("#txtServiceHours");
-    var prices_options = $("#txtTotal");
+    var prices_options = $("#txtServiceAmt");
     var price_value = 0.0;
     var price_text = 0.0;
     var hour_value = 0;
@@ -321,6 +431,7 @@ $(document).ready(function(){
         }],
         "7": [{"0": 0}]
     };
+    /* ---- End ---- */
 
     /*On change bedroom Selection*/
     $("#txtBedroom").change(function() {
@@ -350,23 +461,23 @@ $(document).ready(function(){
                     $.each(bathroom[bedroom], function(index, value) {
                         bathroom_options.append(new Option(value, value));
                     });
-                    var tot_sel = $('#txtTotal option:selected').val();
+                    var tot_sel = $('#txtServiceAmt option:selected').val();
                     $('#hidtotal').val(tot_sel);
                 });
             }
         }
 		
     });
-    /*-- End --*/
+    /* ---- End ---- */
 
     /*-- Change total on hours selection --*/
 	$("#txtServiceHours").change(function() {
         var selectedIndex = $(this)[0].selectedIndex;
-        var price_options = $('#txtTotal option').eq(selectedIndex).prop('selected', true);
-        var obj_val = $( "#txtTotal option:selected" ).val();
+        var price_options = $('#txtServiceAmt option').eq(selectedIndex).prop('selected', true);
+        var obj_val = $( "#txtServiceAmt option:selected" ).val();
         $('#hidtotal').val(obj_val);
     });
-	/*-- End --*/
+	/* ---- End ---- */
 
 	/*-- Display total on extra services selection --*/
     $(":checkbox").on("change", function() {
@@ -387,7 +498,7 @@ $(document).ready(function(){
 			return sum;
 		});
     });
-    /*-- End --*/
+    /* ---- End ---- */
     
     /*
     * Auther : Vinek T.
@@ -396,7 +507,6 @@ $(document).ready(function(){
     */
     /*-- Script for applying coupon code --*/
     jQuery("#btnPromoCode").click(function() {
-        var baseuri = window.location.origin+'/cleaning';
         var promo_code = jQuery('#txtPromoCode').val();
         jQuery('#booking_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
         jQuery('#booking_loading').show();
@@ -474,7 +584,7 @@ $(document).ready(function(){
             }
         })
     });
-    /*-- End --*/
+    /* ---- End ---- */
     
     /*-- Script for removing coupon code --*/
     jQuery("#remove-offer").click(function() {
@@ -508,7 +618,7 @@ $(document).ready(function(){
             }
         })        
     });
-    /*-- End --*/
+    /* ---- End ---- */
 
     /*
     * Auther : Vinek T.
@@ -536,7 +646,8 @@ $(document).ready(function(){
                 }
             });
         }
-    });    
+    });
+    /* ---- End ---- */
 
     /*
     * Auther : Vinek T.
@@ -545,7 +656,6 @@ $(document).ready(function(){
     */
     /*-- Script for cancel booking  --*/
     $('#btnCancelBooking').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var promo_code = jQuery('#promo').val();
         jQuery.ajax({
             type: 'POST',
@@ -557,11 +667,10 @@ $(document).ready(function(){
             }
         }) 
     });
-    /*-- End --*/
+    /* ---- End ---- */
 
     /*-- Script for confirm booking and pay for service --*/
     $('#btnConfirmBooking').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         jQuery('#cinfirm_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
         jQuery('#cinfirm_loading').show();
         jQuery.ajax({
@@ -574,15 +683,276 @@ $(document).ready(function(){
                     jQuery("#back-color").show();
                     jQuery(".modal-body").html(response);
                     jQuery("#success-preview").modal('show');
-                }, 3000);
+                }, 2000);
                 setTimeout(function(){
-                    window.location = baseuri+'/home.php';
-                }, 10000);
+                    window.location = baseuri+'/user/pending_services.php';
+                }, 8000);
             } 
         }) 
     });
-    /*-- End --*/
-   
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for leftmenu booking tab dropdown
+    * Date : 5th May'2016
+    */
+    jQuery(".dropdown-toggle").click(function() {
+        jQuery("#book-tab").slideToggle('fast');
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for cancel and rate booking on user dashboard
+    * Date : 6th May'2016
+    */
+    /*-- Script for cancel booking on pending booking list--*/
+    jQuery("button#cancelService").click(function() {
+        var book_id = jQuery(this).val();
+        if(confirm("Are you sure you want to cancel this service now?")) {
+            jQuery("#back-color").show();
+            jQuery('#cancel-service-loader').html('<img src="'+baseuri+'/images/new_loader.gif">');
+            jQuery('#cancel-service-loader').show();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/cancelService.php',
+                data: {book_id:book_id},
+                dataType: 'json',
+                success: function(response) {
+                    if (response.error == 'yes') {
+                        setTimeout(function() {
+                            jQuery('#cancel-service-loader').hide();
+                            jQuery("#back-color").hide();
+                        }, 1000);
+                        setTimeout(function() {
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            jQuery("#msg-request").html(response.message);
+                            jQuery("#msg-request").fadeIn(500);
+                        }, 1000);
+                        setTimeout(function() {location.reload();}, 6000);
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for priview the booking on pending services, rate services from user end
+    * Date : 7th May'2016
+    */    
+    /*-- Script for view preview booking on pending/complete booking list--*/
+    jQuery('.view_booking').click(function() {
+        var process_id = jQuery(this).data('id');
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/preview_booking.php',
+            data: { process_id:process_id, pre_pending:'pre_pending' },
+            success: function(response) {
+                jQuery(".modal-body").html(response);
+                jQuery("#book-preview").modal('show');
+            }    
+        })
+        
+    });
+    /* ---- End ---- */
+
+    /*-- Script for rate booking on complete booking list --*/
+    jQuery("button#btnRateUs").click(function() {
+        var book_id = jQuery(this).val();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/getRating.php',
+            data: {book_id:book_id},
+            success: function(response) {
+                jQuery("#body-rate").html(response);
+                jQuery("#rate-pop-up").modal('show');
+                jQuery('#book_id').val(book_id);
+                jQuery('#rating-input').on('rating.change', function() {
+                    var rate_cnt = jQuery('#rating-input').val();
+                    jQuery('#txtRating').val(rate_cnt);
+                });
+            }
+        });
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for rate services from user end
+    * Date : 11th May'2016
+    */  
+    jQuery("#btnSubRate").click(function() {
+        var userId = jQuery('#book_id').val();
+        var rating = jQuery('#txtRating').val();
+        var ser_provider = jQuery('#txtServiceProvider').val();
+        if ((userId == '' && rating == '') || (ser_provider == '')) {
+            alert('Please fill the required (*) field');
+            return false;
+        } else {
+            jQuery('.rate-service-loader').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
+            jQuery('.rate-service-loader').show();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/processRating.php',
+                data: jQuery('#frmRating').serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.msg == 'insert') {
+                        setTimeout(function() {
+                            jQuery('.rate-service-loader').hide();
+                            jQuery("#rate-pop-up").modal('hide');
+                        }, 500);
+                        setTimeout(function() {
+                            jQuery("#com-msg-request").html(response.message);
+                            jQuery("#com-msg-request").fadeIn(500);
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                        }, 500);
+                        setTimeout(function() {location.reload();}, 4000);
+                    }
+                }    
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for editing the rating on complete service list
+    * Date : 12th May'2016
+    */  
+    /* For getting the saved content to be edit */
+    jQuery("button#btnRated").click(function() {
+        var rate_id = jQuery(this).val();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/getRating.php',
+            data: {rate_id:rate_id},
+            success: function(response) {
+                jQuery("#body-edit-rate").html(response);
+                jQuery("#rated-pop-up").modal('show');
+                jQuery('#rate_id').val(rate_id);
+                jQuery('#rating-input-edit').on('rating.change', function() {
+                    var rate_cnt = jQuery('#rating-input-edit').val();
+                    jQuery('#txtRatingEdit').val(rate_cnt);
+                });
+                
+            }        
+        });
+    });
+    /* ---- End ---- */
+
+    /*-- For updating the content into database --*/
+    jQuery("#btnSubEditRate").click(function() {
+        var rate_id = jQuery('#rate_id').val();
+        if (jQuery('#txtRatingEdit').val() == '') {
+            jQuery('#rating-input-edit').val();
+        } else {
+            jQuery('#txtRatingEdit').val();
+        }
+        jQuery('.rate-service-loader').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
+        jQuery('.rate-service-loader').show();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/processRating.php',
+            data: jQuery('#frmRatingEdit').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.msg == 'update') {
+                    setTimeout(function() {
+                        jQuery('.rate-service-loader').hide();
+                        jQuery("#rated-pop-up").modal('hide');
+                    }, 500);
+                    setTimeout(function() {
+                        jQuery("#com-msg-request").html(response.message);
+                        jQuery("#com-msg-request").fadeIn(500);
+                        jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                    }, 500);
+                    setTimeout(function() {location.reload();}, 4000);
+                }
+            }        
+        });
+
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Aawaan A.
+    * Description : Script for front end dashboard link dropdown menu
+    * Date : 13th May'2016
+    */
+	$("button.caret").on('click', function(){
+        $("ul#drpMenu").slideToggle();
+	});
+	/* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for read more link to read full rating comment properly
+    * Date : 13th May'2016
+    */  
+    $("a#read-more").on('click', function(){
+        var more = jQuery(this).data('id');
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/getComments.php',
+            data: {more:more},
+            success: function(response) {
+                jQuery("#pre-comment").html(response);
+                jQuery("#comment-pop-up").modal('show');
+            }        
+        });
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for read more link to read full rating comment properly
+    * Date : 13th May'2016
+    */  
+    $("#btnUpdate").click(function(){
+        var book_id = jQuery(this).val();
+        jQuery('#cinfirm_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
+        jQuery('#cinfirm_loading').show();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/editBooking.php',
+            data: jQuery('#frmUpdateCleaning').serialize(),
+            success: function(response) {
+                setTimeout(function() {
+                    jQuery('#cinfirm_loading').hide();
+                    jQuery('#back-color').show();
+                    jQuery(".modal-body").html(response);
+                    jQuery("#success-preview").modal('show');
+                }, 2000);
+                setTimeout(function(){
+                    window.location = baseuri+'/user/pending_services.php';
+                }, 8000);
+            }
+        })
+    });
+    /* ---- End ---- */
+
+    /*-- Script for previewing the services fields while updating --*/
+    jQuery('#btnUpdatePreview').click(function() {
+        var formdata = jQuery("#frmUpdateCleaning").serialize();
+        var modal_preview = '';
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/preview_update.php',
+            data: formdata,
+            success: function(response) {
+                jQuery("#pre-update").html(response);
+                jQuery("#update-preview").modal('show');
+            }
+        });
+    });
+    /* ---- End ---- */
+
 })
 
 
@@ -611,3 +981,5 @@ function validateBookingForm() {
         return false;
     }
 }
+
+

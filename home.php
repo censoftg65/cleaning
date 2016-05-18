@@ -53,11 +53,11 @@ $_SESSION['page_title'] = "Home | Unwritten Cleaning";
             	<img src="images/book-img.png" alt="Book Cleaning" title="Book Cleaning" />
                 <div class="bookTxt">
                 	<div class="bookTxtLft">
-                    	<h3>BOOK CLEANING</h3>
-                        <span>Step One, fill out our booking form</span>
+                    	<h3>SIGN UP</h3>
+                        <span>Book Cleaning Today!</span>
                     </div>
                     <div class="bookTxtRight">
-                    	<a href="#">Click Here</a>
+                    	<a href="<?= _SITE_URL?>/user/new_booking.php">Click Here</a>
                     </div>
                 </div>
                 <div class="clear"></div>

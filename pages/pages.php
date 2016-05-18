@@ -30,34 +30,35 @@ $_SESSION['page_title'] = ucfirst($page_entity)." | "._SITE_NAME;
 
 		<?php include dirname(__DIR__).'/includes/header-menu.php' ?>
 
-		<div style="margin-top:200px !important;"></div>
+		<!-- <div style="margin-top:200px !important;"></div> -->
+
+		<?php
+        foreach ($coolection as $page) {
+		    if ($page['txtPageEntity'] ==  $page_entity) {
+        		echo $page["txtSliderContent"] 
+        ?>
+        
 		<div id="main-content">
 	    	<div class="container page-container">
 	        	<div class="row">
 	        		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	        			<?php
-		        		foreach ($coolection as $page) {
-		        			if ($page['txtPageEntity'] ==  $page_entity) {
-		        		?>
-						<div class="col-md-6">
+	        			<div class="col-md-6">
 							<h2><?= $page['txtPageTitle']?></h2>
 						</div>
 						<div class="col-md-12"><hr></div>
 						<div class="col-md-12 page-content">
-							<?= $page['txtSliderContent']?>
-						</div>
-						<div class="col-md-12 page-content">
 							<?= $page['txtTextContent']?>
 						</div>
-						<?php 
-							}
-						}	
-						?>
 						<div class="col-md-12">&nbsp;</div>
 	        		</div>
 				</div>
 			</div>
 		</div>			
+        <?php 
+            }
+        }    
+        ?>
+
 	</div>	
 
 	<?php include dirname(__DIR__).'/includes/footer-upper-grid.php' ?>

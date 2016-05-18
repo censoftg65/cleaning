@@ -21,8 +21,12 @@ require_once dirname(__DIR__).'/inc/function.inc.php';
 include_once 'cls_common.php';
 
 if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
-   header("location:"._SITE_URL."/user/");
+   header("location:"._SITE_URL."/user/register.php");
 }
+
+$bedroom = array('0'=>'Choose Number','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7 & up');
+$bathroom = array('0'=>'Choose Number','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6');
+$recurring = array('One Time'=>'One Time','Every Week'=>'Every Week','Every 2 Weeks'=>'Every 2 Weeks','Every 3 Weeks'=>'Every 3 Weeks','Once a Month'=>'Once a Month');
 
 $_SESSION['page_title'] = "New Booking | "._SITE_NAME;
 $db = new Config(); 
@@ -33,24 +37,6 @@ $extra_services = $objCommon->getExtraServices();
 <?php include dirname(__DIR__).'/includes/head.php'; ?>
 
     <?php  include dirname(__DIR__).'/includes/user_header.php'; ?>
-
-    <!-- Preview Booking Form Popup-->
-    <div class="modal fade" id="book-preview" tabindex="-1" role="dialog" aria-labelledby="step1-preview" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="step1_previewLabel">Booking Preview</h3>
-                </div>
-                <div class="modal-body" style="padding-bottom:160px !important;">
-                </div>
-                <div class="clear"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel & Edit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End-->
 
     <section>
         <div class="container contentMain">
@@ -69,27 +55,17 @@ $extra_services = $objCommon->getExtraServices();
                         	<div class="col-sm-3">
                                 <label>Choose Bedroom <span class="err">*</span></label>
                                 <select id="txtBedroom" name="txtBedroom">
-                                    <option value="0">&nbsp;Choose Number</option>
-                                    <option value="1">&nbsp;1</option>
-                                    <option value="2">&nbsp;2</option>
-                                    <option value="3">&nbsp;3</option>
-                                    <option value="4">&nbsp;4</option>
-                                    <option value="5">&nbsp;5</option>
-                                    <option value="6">&nbsp;6</option>
-                                    <option value="7">&nbsp;7 & up</option>
+                                    <?php foreach ($bedroom as $key => $value) { ?>
+                                    <option value="<?= $key?>">&nbsp;<?= $value?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="col-sm-3">
                                 <label>Choose Bathroom</label>
                                 <select id="txtBathroom" name="txtBathroom">
-                                    <option value="0">&nbsp;Choose Number</option>
-                                    <option value="1">&nbsp;1</option>
-                                    <option value="2">&nbsp;2</option>
-                                    <option value="3">&nbsp;3</option>
-                                    <option value="4">&nbsp;4</option>
-                                    <option value="5">&nbsp;5</option>
-                                    <option value="6">&nbsp;6</option>
-                                    <option value="6">&nbsp;7</option>
+                                    <?php foreach ($bathroom as $key => $value) { ?>
+                                    <option value="<?= $key?>">&nbsp;<?= $value?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -149,19 +125,13 @@ $extra_services = $objCommon->getExtraServices();
                         <div class="row">
                             <div class="col-sm-3">
                                 <label>Choose Number of hours</label>
-                                <div class="input-group">
-                                    <select id="txtServiceHours" name="txtServiceHours">
-                                        <option value="0">Number of hours....</option>
-                                    </select>
-                                    <div class="input-group-addon" id="cal"><i class="glyphicon glyphicon-hourglass"></i></div>
-                                </div>
+                                <select id="txtServiceHours" name="txtServiceHours">
+                                    <option value="0">Number of hours....</option>
+                                </select>
                             </div>
                             <div class="col-sm-3">
                                 <label>Extra Services (if any)</label>
-                                <div class="input-group">
-                                    <input type="text" id="txtExtraServiceHrs" name="txtExtraServiceHrs" readonly="" placeholder="Extra service hours">
-                                    <div class="input-group-addon" id="cal"><i class="glyphicon glyphicon-hourglass"></i></div>
-                                </div>
+                                <input type="text" id="txtExtraServiceHrs" name="txtExtraServiceHrs" readonly="" placeholder="Extra service hours">
                             </div>
                         </div>
                         <br><br>
@@ -169,18 +139,16 @@ $extra_services = $objCommon->getExtraServices();
                             <div class="col-sm-3">
                                 <label>Add Tip</label>
                                 <div class="input-group">
-                                    <input type="text" name="txtServiceTip" id="txtServiceTip" placeholder="$00000" />
-                                    <div class="input-group-addon" id="cal">.00</div>
+                                    <div class="input-group-addon" id="cal">$</div>
+                                    <input type="text" name="txtServiceTip" id="txtServiceTip" />
                                 </div>
                             </div>
                         	<div class="col-sm-3">
                             	<label>Recurring Cleaning</label>
                                 <select id="txtRecurring" name="txtRecurring">
-                                	<option>One Time</option>
-                                    <option>Every Week</option>
-                                    <option>Every 2 Weeks</option>
-                                    <option>Every 3 Weeks</option>
-                                    <option>Once a Month</option>
+                                	<?php foreach ($recurring as $key => $value) { ?>
+                                    <option value="<?= $key?>">&nbsp;<?= $value?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -206,9 +174,8 @@ $extra_services = $objCommon->getExtraServices();
                                 <label>Service Amount</label>
                                 <div class="input-group">
                                     <div class="input-group-addon" id="cal">$</div>
-                                    <select id="txtTotal" name="txtTotal" required="" disabled=""></select>
+                                    <select id="txtServiceAmt" name="txtServiceAmt" required="" disabled=""></select>
                                     <input type="hidden" name="hidtotal" id="hidtotal" value="">
-                                    <div class="input-group-addon" id="cal">.00</div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -216,13 +183,12 @@ $extra_services = $objCommon->getExtraServices();
                                 <div class="input-group">
                                     <div class="input-group-addon" id="cal">$</div>
                                     <input type="text" name="txtExtraServiceAmt" id="txtExtraServiceAmt" value="" readonly="">
-                                    <div class="input-group-addon" id="cal">.00</div>
                                 </div>    
                             </div>
                         </div>
                         <div class="bookingButtons">
                             <button type="button" class="btn btn-warning" id="btnPreview">Preview</button>
-                        	<input type="submit" class="btn btn-primary" value="Submit">
+                        	<input type="submit" class="btn btn-primary" id="subSubmit" value="Submit">
                         </div>
                     </form>
                 </div>
@@ -231,3 +197,22 @@ $extra_services = $objCommon->getExtraServices();
     </section>
 
     <?php  include dirname(__DIR__).'/includes/user_footer.php'; ?>
+
+    <!-- Preview Booking Form Popup-->
+    <div class="modal fade" id="book-preview" tabindex="-1" role="dialog" aria-labelledby="step1-preview" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="step1_previewLabel">Booking Preview</h3>
+                </div>
+                <div class="modal-body" style="padding-bottom:160px !important;">
+                </div>
+                <div class="clear"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End-->

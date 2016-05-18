@@ -43,7 +43,7 @@ if (!empty($site_config_id)) {
             <input type="hidden" id="hidSiteInfoId" name="hidSiteInfoId" value="<?= $site_config_id?>">
             <div class="col-md-12">
                 <ul class="nav nav-tabs">
-                  <li class="subtab"><a>Site Info</a></li>
+                  <li class="subtab"><a class="subnav-selected">Site Info</a></li>
                   <li class="subtab"><a>Registration</a></li>
                   <li class="subtab"><a>Forgot Password</a></li>
                   <li class="subtab"><a>Discount Offer</a></li>
@@ -186,12 +186,6 @@ if (!empty($site_config_id)) {
                             <textarea class="form-control input-md" id="txtForgotBody" name="txtForgotBody"><?= $site_config['txtForgotBody']?></textarea>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Mail Body For Admin</label>
-                            <textarea class="form-control input-md" id="txtForgotAdminBody" name="txtForgotAdminBody"><?= $site_config['txtForgotAdminBody']?></textarea>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- Forgot Password SMTP setup end -->
@@ -216,12 +210,6 @@ if (!empty($site_config_id)) {
                         <div class="form-group">
                             <label>Mail Body</label>
                             <textarea class="form-control input-md" id="txtOfferBody" name="txtOfferBody"><?= $site_config['txtOfferBody']?></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Mail Body For Admin</label>
-                            <textarea class="form-control input-md" id="txtOfferAdminBody" name="txtOfferAdminBody"><?= $site_config['txtOfferAdminBody']?></textarea>
                         </div>
                     </div>
                 </div>

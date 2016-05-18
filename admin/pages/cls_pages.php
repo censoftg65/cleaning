@@ -45,7 +45,6 @@ class Pages
     public function updatePage($param) {
         $db = new Config();
         $sql_query = "UPDATE "._DB_PREFIX."pages SET txtPageTitle    = '$this->pageTitle',
-                                                     txtPageUrl      = '$this->pageUrl',
                                                      txtSliderContent= '$this->sliderContent',
                                                      txtTextContent  = '$this->textContent'
                                                WHERE txtId = '$param'";

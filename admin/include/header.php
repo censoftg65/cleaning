@@ -16,8 +16,8 @@ include_once 'head.php';
     		<div class="col-md-12">
     			<div class="col-md-12">&nbsp;</div>
 	    		<div class="col-md-6">
-		            <a href="<?= _SITE_URL?>/admin/dashboard.php">
-		                <img src="<?= _SITE_URL?>/images/logo.png" alt="Unwritten Cleaning" title="Unwritten Cleaning" />
+	    			<a href="<?= _SITE_URL?>/admin/dashboard.php">
+		                <img src="<?= _SITE_URL?>/images/logo.png" alt="Unwritten Cleaning" title="Unwritten Cleaning" width="210px" border="0" />
 		            </a>
 		        </div>
 		        <div class="col-md-4 open-up-msg">
@@ -30,12 +30,12 @@ include_once 'head.php';
 		        <div class="col-md-2">
 		        	<?php if ($ulevel == 'admin') { ?>
 		            <div class="dropdown pull-right">
-						<button class="btn btn-danger dropdown-toggle active" type="button" data-toggle="dropdown">
+						<button class="btn btn-danger user-dropdown-toggle active" type="button" data-toggle="dropdown">
 					  		<span class="glyphicon glyphicon-user"></span>
 					  		Admin
 					  		<span class="caret"></span>
 					  	</button>
-						<ul class="dropdown-menu">
+						<ul id="user-menu" class="dropdown-menu">
 							<span id="cross"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span>
 							<li><a href="#" id="profile"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</a></li>
 							<li><a href="#" id="account"><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Account</a></li>

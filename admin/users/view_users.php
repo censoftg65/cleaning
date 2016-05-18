@@ -39,7 +39,6 @@ if (!empty($del_id) && $del_stat == 'delete') {
   header("Location:".basename($_SERVER['PHP_SELF']));
 }
   
-
 ?>
 
 <?php include dirname(__DIR__).'/include/header.php' ?>
@@ -139,19 +138,20 @@ if (!empty($del_id) && $del_stat == 'delete') {
         <div class="modal-content">
           <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-            <h4 id="myModalLabel" class="modal-title">Assign Discount Offer</h4>
+            <h4 id="myModalLabel" class="modal-title">Create Discount Offer</h4>
           </div>
           <form method="post" action="#" name="frmShareOffer" id="frmShareOffer" class="frmMenus">
             <input type="hidden" id="get_user_id" name="get_user_id" value="">
             <div class="modal-body">
-              <div class="col-md-12">
-                <button type="button" class="btn btn-warning" id="btnGeneratCode">Generate Code</button>
-              </div>
-              <div class="col-md-12">&nbsp;</div>
               <div class="col-md-6 form-group">
-                <label>Offer Code&nbsp;<span>*</span></label>
+                <label>Offer Code&nbsp;<span>*</span>&nbsp;</label>
                 <input class="form-control input-sm" type="text" id="txtPromoCode" name="txtPromoCode" value="" readonly="">
               </div>
+              <div class="col-md-3 form-group">
+                <label>&nbsp;</label>
+                <button type="button" class="form-control btn btn-xs btn-warning" id="btnGeneratCode">Generate Code</button>
+              </div>
+              <div class="col-md-3 form-group"></div>
               <div class="col-md-6 form-group">
                 <label>Offer Discount (%)&nbsp;<span>*</span></span>&nbsp;<span class="errmsg"></span></label>
                 <input class="form-control input-sm restrict-zero" type="text" id="txtOffer" name="txtOffer" value="" maxlength="2">

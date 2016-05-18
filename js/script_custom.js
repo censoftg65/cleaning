@@ -17,8 +17,6 @@ jQuery(document).ready(function($) {
     var min_height = jQuery(window).height();
     jQuery('div.register-page-container').css('min-height', min_height);
     jQuery('div.register-page-container').css('line-height', min_height + 'px');
-
-    //$(".inner", ".boxed").fadeIn(500);
 });
 /* ---- End ---- */
 
@@ -40,23 +38,119 @@ jQuery(document).ready(function() {
             })
         })
     });
-});    
+}); 
+/* ---- End ---- */   
 
-/*
-* Auther : Vinek T.
-* Description : Script for user menu in admin section header
-* Date : 18th April'2016
-*/
 jQuery(window).load(function(){
-    jQuery(".dropdown-toggle").click(function() {
-        jQuery(".dropdown-menu").slideDown('fast');
+    /*
+    * Auther : Vinek T.
+    * Description : Script for user menu in admin section header
+    * Date : 18th April'2016
+    */
+    jQuery(".user-dropdown-toggle").click(function() {
+        jQuery("#user-menu").slideToggle('fast');
     });
     jQuery("#cross").click(function() {
-        jQuery(".dropdown-menu").slideUp('fast');
+        jQuery("#user-menu").slideUp('fast');
     });
+    /* ---- End ---- */   
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for to make active class to selected pages
+    * Date : 5th may'2016
+    */
+    var path = window.location.pathname.substring(1);
+    if (path == 'cleaning/admin/dashboard.php') {
+        $('#nav li:nth-child(1) a').addClass('active');
+        $('#nav li:nth-child(1) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(1) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(1) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/site_config.php') {
+        $('#nav li:nth-child(1) a').addClass('active');
+        $('#nav li:nth-child(1) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(1) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(1) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/contact_details.php') {
+        $('#nav li:nth-child(1) a').addClass('active');
+        $('#nav li:nth-child(1) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(1) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(1) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/users/view_users.php') {
+        $('#nav li:nth-child(2) a').addClass('active');
+        $('#nav li:nth-child(2) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(2) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(2) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/users/view_users_deactive.php') {
+        $('#nav li:nth-child(2) a').addClass('active');
+        $('#nav li:nth-child(2) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(2) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(2) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/users/trash.php') {
+        $('#nav li:nth-child(2) a').addClass('active');
+        $('#nav li:nth-child(2) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(2) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(2) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/bookings/pending_services.php') {
+        $('#nav li:nth-child(3) a').addClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/bookings/complete_services.php') {
+        $('#nav li:nth-child(3) a').addClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/bookings/trash.php') {
+        $('#nav li:nth-child(3) a').addClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/add_pages.php') {
+        $('#nav li:nth-child(6) a').addClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/edit_pages.php') {
+        $('#nav li:nth-child(6) a').addClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/view_pages.php') {
+        $('#nav li:nth-child(6) a').addClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/trash.php') {
+        $('#nav li:nth-child(6) a').addClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/offers/view_offers.php') {
+        $('#nav li:nth-child(7) a').addClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(7) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/ratings/view_ratings.php') {
+        $('#nav li:nth-child(8) a').addClass('active');
+        $('#nav li:nth-child(8) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(8) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(8) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else {
+        $('#nav li a').removeClass('active');
+        $('#nav li ul#sub-nav').slideUp('slow');
+    }
+    /* ---- End ---- */   
+    
 })
+/* ---- End ---- */
 
 jQuery(document).ready(function() {
+    /* -- Initialize the variable for base url & base64_encode & base64_decodes -- */
+    var baseuri = window.location.origin+'/cleaning';
+    var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
+    /* ---- End ---- */   
+
     /*
     * Auther : Vinek T.
     * Description : Tinymce Editor teaxtarea filed visibilities
@@ -175,35 +269,7 @@ jQuery(document).ready(function() {
         image_advtab: true, 
     });
     tinymce.init({ 
-        selector: "textarea#txtForgotAdminBody",
-        height: 300,
-        theme: 'modern',
-        plugins: [
-        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen',
-        'insertdatetime media nonbreaking save table contextmenu directionality',
-        'emoticons template paste textcolor colorpicker textpattern imagetools'
-        ],
-        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        toolbar2: 'print preview media | forecolor backcolor emoticons',
-        image_advtab: true, 
-    });
-    tinymce.init({ 
         selector: "textarea#txtOfferBody",
-        height: 300,
-        theme: 'modern',
-        plugins: [
-        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen',
-        'insertdatetime media nonbreaking save table contextmenu directionality',
-        'emoticons template paste textcolor colorpicker textpattern imagetools'
-        ],
-        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        toolbar2: 'print preview media | forecolor backcolor emoticons',
-        image_advtab: true, 
-    });
-    tinymce.init({ 
-        selector: "textarea#txtOfferAdminBody",
         height: 300,
         theme: 'modern',
         plugins: [
@@ -253,7 +319,6 @@ jQuery(document).ready(function() {
     */
     /*--Add/Create Pages--*/
     jQuery('#btnCreatePage').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var pageTitle = jQuery("#txtPageTitle").val();
         var pageSliderContent = tinyMCE.get('txtPageSliderContent').getContent();
         var pageTextContent = tinyMCE.get('txtPageTextContent').getContent();
@@ -286,7 +351,6 @@ jQuery(document).ready(function() {
 
     /*--Edit/Update Pages--*/
     jQuery('#btnUpdatePage').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var pageid = jQuery("#hidPageId").val();
         var pageTitle = jQuery("#txtEditPageTitle").val();
         var pageUri = jQuery("#txtEditPageUri").val();
@@ -326,7 +390,6 @@ jQuery(document).ready(function() {
 
     /*--Edit/Update Contact Details--*/
     jQuery('#btnContactDetails').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var contactId = jQuery("#hidContactId").val();
         var title = jQuery("#txtTitle").val();
         var contactDetail = tinyMCE.get('txtEditContactDetails').getContent();
@@ -373,8 +436,8 @@ jQuery(document).ready(function() {
         }
     });
     /* ---- End ---- */
-	
-	/*
+
+    /*
     * Auther : Vinek T.
     * Description : Script for creating/adding users from back-end
     * Date : 4th April'2016
@@ -396,7 +459,6 @@ jQuery(document).ready(function() {
         setTimeout(function(){location.reload();}, 500);
     });
     jQuery('#btnAddUser').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var location_path = $(location).attr('href');
         var fname = jQuery("#txtFirstName").val();
         var lname = jQuery("#txtLastName").val();
@@ -498,10 +560,10 @@ jQuery(document).ready(function() {
         })
     });
     /* ---- End ---- */
+
     
     /*-- Update Deactivate User Profile --*/
     jQuery('button#deactiveUser').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to deactive the user?")) {
             document.frmViewUsers.action = "view_users.php?status=deactive&flag="+Base64.encode(user_id);
@@ -514,7 +576,6 @@ jQuery(document).ready(function() {
 
     /*-- Update Delete User Profile --*/
     jQuery('button#deleteUser').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to delete the user?")) {
             document.frmViewUsers.action = "view_users.php?status=delete&flag="+Base64.encode(user_id);
@@ -527,7 +588,6 @@ jQuery(document).ready(function() {
 
     /*-- Activate user profile --*/
     jQuery('button#btnActivate').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to enable/activate this user?")) {
             document.frmViewDeactiveUsers.action = "view_users_deactive.php?status=active&flag="+Base64.encode(user_id);
@@ -540,7 +600,6 @@ jQuery(document).ready(function() {
     
     /*-- Delete User Profile Permanently --*/
     jQuery('button#deleteUser_permant').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to permanently delete user?")) {
             document.frmViewDeactiveUsers.action = "view_users_deactive.php?status=delete&flag="+Base64.encode(user_id);
@@ -553,7 +612,6 @@ jQuery(document).ready(function() {
 
     /*-- Activate user profile --*/
     jQuery('button#btnActivateUser').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to enable/activate this user?")) {
             document.frmViewTrashUsers.action = "trash.php?status=active&flag="+Base64.encode(user_id);
@@ -566,7 +624,6 @@ jQuery(document).ready(function() {
 
     /*-- Activate user profile --*/
     jQuery('button#delete_permanant').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to delete the user?")) {
             document.frmViewTrashUsers.action = "trash.php?status=delete&flag="+Base64.encode(user_id);
@@ -579,7 +636,6 @@ jQuery(document).ready(function() {
 
     /*-- Update Pages to Disable --*/
     jQuery('button#deletePage').click(function() {
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
         var user_id = jQuery(this).val();
         if(confirm("Are you sure you want to delete/disable page?")) {
             document.frmViewPages.action = "view_pages.php?flag="+Base64.encode(user_id);
@@ -597,7 +653,6 @@ jQuery(document).ready(function() {
     * Updated : 13th April'2016
     */
     jQuery('#btnSiteInfo').click(function() {
-        var baseuri = window.location.origin+'/cleaning';
         var info_id = jQuery('#hidSiteInfoId').val();
         var site_name = jQuery('#txtSiteName').val();
         var site_lang = jQuery('#txtSiteLanguage').val();
@@ -616,11 +671,9 @@ jQuery(document).ready(function() {
         var site_forgot_sub = jQuery('#txtForgotSub').val();
         var site_forgot_mailfrom = jQuery('#txtForgotMailFrom').val();
         var site_forgot_body = tinyMCE.get('txtForgotBody').getContent();
-        var site_forgot_adminbody = tinyMCE.get('txtForgotAdminBody').getContent();
         var site_offer_sub = jQuery('#txtOfferSub').val();
         var site_offer_mailfrom = jQuery('#txtOfferMailFrom').val();
         var site_offer_body = tinyMCE.get('txtOfferBody').getContent();
-        var site_offer_adminbody = tinyMCE.get('txtOfferAdminBody').getContent();
         var site_account_sub = jQuery('#txtAccountSub').val();
         var site_account_mailfrom = jQuery('#txtAccountMailFrom').val();
         var site_account_body = tinyMCE.get('txtAccountBody').getContent();
@@ -631,7 +684,7 @@ jQuery(document).ready(function() {
         jQuery.ajax({
             type: "POST",
             url: 'processSiteInfo.php',
-            data: {info_id:info_id,site_name:site_name,site_lang:site_lang,site_host:site_host,site_port:site_port,site_uname:site_uname,site_pword:site_pword,site_fromname:site_fromname,site_replymail:site_replymail,site_ccmail:site_ccmail,site_bccmail:site_bccmail,site_reg_sub:site_reg_sub,site_reg_mailfrom:site_reg_mailfrom,site_reg_body:site_reg_body,site_reg_adminbody:site_reg_adminbody,site_forgot_sub:site_forgot_sub,site_forgot_mailfrom:site_forgot_mailfrom,site_forgot_body:site_forgot_body,site_forgot_adminbody:site_forgot_adminbody,site_offer_sub:site_offer_sub,site_offer_mailfrom:site_offer_mailfrom,site_offer_body:site_offer_body,site_offer_adminbody:site_offer_adminbody,site_account_sub:site_account_sub,site_account_mailfrom:site_account_mailfrom,site_account_body:site_account_body,site_account_adminbody:site_account_adminbody},
+            data: {info_id:info_id,site_name:site_name,site_lang:site_lang,site_host:site_host,site_port:site_port,site_uname:site_uname,site_pword:site_pword,site_fromname:site_fromname,site_replymail:site_replymail,site_ccmail:site_ccmail,site_bccmail:site_bccmail,site_reg_sub:site_reg_sub,site_reg_mailfrom:site_reg_mailfrom,site_reg_body:site_reg_body,site_reg_adminbody:site_reg_adminbody,site_forgot_sub:site_forgot_sub,site_forgot_mailfrom:site_forgot_mailfrom,site_forgot_body:site_forgot_body,site_offer_sub:site_offer_sub,site_offer_mailfrom:site_offer_mailfrom,site_offer_body:site_offer_body,site_account_sub:site_account_sub,site_account_mailfrom:site_account_mailfrom,site_account_body:site_account_body,site_account_adminbody:site_account_adminbody},
             success: function(response) {
                 // alert(response);
                 setTimeout(function(){
@@ -658,31 +711,40 @@ jQuery(document).ready(function() {
         var index = jQuery(".subtab").index(this);
         if (index == 0) {
             jQuery("#subtab-div0").fadeIn("slow");
-            // $(this).closest('li').addClass('active');
+            jQuery(".nav-tabs li a").removeClass("subnav-selected");
+            jQuery(".nav-tabs li:nth-child(1) a").addClass("subnav-selected");
             jQuery("#subtab-div1").hide();
             jQuery("#subtab-div2").hide();
             jQuery("#subtab-div3").hide();
             jQuery("#subtab-div4").hide();
         } else if (index == 1) {
             jQuery("#subtab-div1").fadeIn("slow");
+            jQuery(".nav-tabs li a").removeClass("subnav-selected");
+            jQuery(".nav-tabs li:nth-child(2) a").addClass("subnav-selected");
             jQuery("#subtab-div0").hide();
             jQuery("#subtab-div2").hide();
             jQuery("#subtab-div3").hide();
             jQuery("#subtab-div4").hide();
         } else if (index == 2) {
             jQuery("#subtab-div2").fadeIn("slow");
+            jQuery(".nav-tabs li a").removeClass("subnav-selected");
+            jQuery(".nav-tabs li:nth-child(3) a").addClass("subnav-selected");
             jQuery("#subtab-div0").hide();
             jQuery("#subtab-div1").hide();
             jQuery("#subtab-div3").hide();
             jQuery("#subtab-div4").hide();
         } else if (index == 3) {
             jQuery("#subtab-div3").fadeIn("slow");
+            jQuery(".nav-tabs li a").removeClass("subnav-selected");
+            jQuery(".nav-tabs li:nth-child(4) a").addClass("subnav-selected");
             jQuery("#subtab-div0").hide();
             jQuery("#subtab-div1").hide();
             jQuery("#subtab-div2").hide();
             jQuery("#subtab-div4").hide();
         } else if (index == 4) {
             jQuery("#subtab-div4").fadeIn("slow");
+            jQuery(".nav-tabs li a").removeClass("subnav-selected");
+            jQuery(".nav-tabs li:nth-child(5) a").addClass("subnav-selected");
             jQuery("#subtab-div0").hide();
             jQuery("#subtab-div1").hide();
             jQuery("#subtab-div2").hide();
@@ -762,7 +824,6 @@ jQuery(document).ready(function() {
         self.remove();
     });
     jQuery('#btnSaveOffer').click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var offerCode = jQuery('#txtPromoCode').val();
         var offerPrice = jQuery('#txtOffer').val();
         var offerTaken = jQuery('#txtOfferTaken').val();
@@ -813,7 +874,6 @@ jQuery(document).ready(function() {
     * Date : 14th April'2016
     */
     jQuery("button#shareOffer").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var user_id = jQuery(this).val();
         var user_email = jQuery(this).data('email');
         jQuery('#frmShareOffer')[0].reset();
@@ -868,7 +928,6 @@ jQuery(document).ready(function() {
     * Date : 18th April'2016
     */
     jQuery("#btnRegister").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var firstname = jQuery('#txtFirstName').val();
         var lastname = jQuery('#txtLastName').val();
         var addr1 = jQuery('#txtAddressLine1').val();
@@ -901,6 +960,7 @@ jQuery(document).ready(function() {
                 data: $("#frm-registration").serialize(),
                 dataType :'json',
                 success: function(response) {
+                    // alert(response);
                     if (response.success == 'yes') {
                         setTimeout(function() {
                             jQuery('#reg_user_loading').hide();
@@ -935,7 +995,6 @@ jQuery(document).ready(function() {
     */
     /* ---- Admin profile ---- */
     jQuery("#profile").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var user_id = jQuery('#get_user').val();
         $.ajax({
             type: "POST",
@@ -971,7 +1030,6 @@ jQuery(document).ready(function() {
         jQuery('#admin-back-color').hide();
     });
     jQuery("#btnAdminInfo").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         jQuery('#admin_profile_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing... ');
         jQuery('#admin_profile_loading').show();
         $.ajax({
@@ -996,8 +1054,6 @@ jQuery(document).ready(function() {
 
     /* ---- Admin account settings ---- */
     jQuery("#account").click(function(){
-        var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
-        var baseuri = window.location.origin+'/cleaning';
         var user_id = jQuery('#get_user').val();
         $.ajax({
             type: "POST",
@@ -1024,7 +1080,6 @@ jQuery(document).ready(function() {
         jQuery('#admin-back-color').hide();
     });
     jQuery("#btnAdminAcc").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var user_id = jQuery('#get_user').val();
         jQuery('#admin_account_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing... ');
         jQuery('#admin_account_loading').show();
@@ -1247,7 +1302,6 @@ jQuery(document).ready(function() {
     */
     /* ---- Script for forgot password on front-end---- */
     jQuery("#btnForPass").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var email = jQuery('#txtEmail').val();
         if (email == "") {
             jQuery('input#txtEmail').focus();
@@ -1300,7 +1354,6 @@ jQuery(document).ready(function() {
 
     /* ---- Script for reset password on front-end---- */
     jQuery("#btnResetPass").click(function(){
-        var baseuri = window.location.origin+'/cleaning';
         var pass_word = jQuery('#txtPassword').val();
         var con_Pass = jQuery('#txtConfirmPass').val();
         
@@ -1552,5 +1605,221 @@ jQuery(document).ready(function() {
             }
         });
     });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for to change zipcode by changing city
+    * Date : 2nd May'2016
+    */
+    jQuery('.clean_process').click(function() {
+        var process_id = jQuery(this).data('id');
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/preview_booking.php',
+            data: { process_id:process_id },
+            success: function(response) {
+                jQuery(".modal-body").html(response);
+                jQuery("#preview-process").modal('show');
+            }    
+        })
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for viewing the rating on each services
+    * Date : 13th May'2016
+    */
+    jQuery('button#viewRating').click(function() {
+        var rate_id = jQuery(this).val();
+        // alert(rate_id);
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/preview_rating.php',
+            data: { rate_id:rate_id },
+            success: function(response) {
+                // alert(response);
+                jQuery("#view-rate").html(response);
+                jQuery("#preview-rating").modal('show');
+            }    
+        })
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for multiple booked service select and delete the sevice etc.
+    * Date : 16th May'2016
+    */
+    /* ---- Script for multiple checked / unchecked by clicking on checkbox ---- */
+    jQuery('#selAllProcess').click(function(event) {
+        if (this.checked) {
+            jQuery('.chkService').each(function() {
+                this.checked = true;
+            });
+        } else {
+            jQuery('.chkService').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple delete the booked services ---- */
+    jQuery("#btnDelAllBooking").click(function() {
+        var inputs = jQuery('input#selProcess');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "selProcess" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='selProcess[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one service(s) to delete");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete the booked service?");
+        } else {
+            res = confirm("Are you sure you want to delete these booked service(s)?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/delete.php',
+                data: {selProcess:vals,status:"deleteAll"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple delete the booked services permanantly ---- */
+    jQuery("#btnDelAllPermanantly").click(function() {
+        var inputs = jQuery('input#selProcess');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "selProcess" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='selProcess[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one service(s) to delete");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete the service permanantly?");
+        } else {
+            res = confirm("Are you sure you want to delete these service(s) permanantly?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/delete.php',
+                data: {selProcess:vals,status:"deletePermanantly"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple activation of the booked services ---- */
+    jQuery("#btnEnableSer").click(function() {
+        var inputs = jQuery('input#selProcess');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "selProcess" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='selProcess[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one service(s) to active");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to active the service?");
+        } else {
+            res = confirm("Are you sure you want to active these service(s)?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/delete.php',
+                data: {selProcess:vals,status:"moveActive"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for trash booked services ---- */
+    jQuery("button#trashService").click(function() {
+        var book_id = jQuery(this).val();
+        if(confirm("Are you sure you want to delete the service?")) {
+            document.frmViewBooking.action = "view_bookings.php?status=trash&flag="+Base64.encode(book_id);
+            document.frmViewBooking.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for delete booked services ---- */
+    jQuery("button#deleteService").click(function() {
+        var book_id = jQuery(this).val();
+        if(confirm("Are you sure you want to delete the service?")) {
+            document.frmViewTrashBooking.action = "trash.php?status=delete&flag="+Base64.encode(book_id);
+            document.frmViewTrashBooking.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for read more remark writtenin start comment ---- */
+    $("a#read-more").on('click', function(){
+        var more = jQuery(this).data('id');
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/getComments.php',
+            data: {more:more},
+            success: function(response) {
+                jQuery("#pre-comment").html(response);
+                jQuery("#comment-pop-up").modal('show');
+            }        
+        });
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for delete rating given to services ---- */
+    jQuery("button#deleteRating").click(function() {
+        var rate_id = jQuery(this).val();
+        if(confirm("Are you sure you want to delete the rating?")) {
+            document.frmViewRating.action = "view_ratings.php?status=delete&flag="+Base64.encode(rate_id);
+            document.frmViewRating.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
 
 });
