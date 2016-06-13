@@ -37,7 +37,7 @@ if (!empty($book_id)) {
 	$mail->send();
 	
 	$objCommon->cancelServices($book_id);
-	$data = array('message' => 'Your request has been initiated.<br> You will shortly receive the notification on your cancel request.', 'error' => 'yes');
+	$data = array('message' => 'Your request has been initiated.', 'error' => 'yes');
 	$output = json_encode($data);
  	echo $output;
 }

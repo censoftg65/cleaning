@@ -55,7 +55,7 @@ if (!empty($bookId)) {
                         <h2 class="compHead">Booking Form</h2>
                     </div>
                     
-                    <form name="frmUpdateCleaning" id="frmUpdateCleaning" method="post">
+                    <form name="frmUpdateCleaning" id="frmUpdateCleaning" method="post" action="payment_update.php">
                         <div class="row">
                             <div class="col-sm-3">
                                 <label>Choose Bedroom <span class="err">*</span></label>
@@ -92,8 +92,10 @@ if (!empty($bookId)) {
                                     if($i == 8) break;
                                         $checked = (in_array($ex_service['txtId'], explode(",", $service['txtExtraService']))) ? "checked" : "";
                                 ?>
-                                <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>" <?= $checked?>>
-                                <label><?= $ex_service['txtServiceName']?></label>
+                                <label>
+                                    <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>" <?= $checked?>>
+                                    <?= $ex_service['txtServiceName']?>
+                                </label>
                                 <?php 
                                     $i++;
                                 endforeach;
@@ -108,8 +110,10 @@ if (!empty($bookId)) {
                                     if($i > 7) :
                                         $checked = (in_array($ex_service['txtId'], explode(",", $service['txtExtraService']))) ? "checked" : "";
                                 ?>
-                                <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>" <?= $checked?>>
-                                <label><?= $ex_service['txtServiceName']?></label>
+                                <label>
+                                    <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>" <?= $checked?>>
+                                    <?= $ex_service['txtServiceName']?>
+                                </label>
                                 <?php 
                                     endif;
                                     $i++;
@@ -123,14 +127,14 @@ if (!empty($bookId)) {
                                 <label>Date of Service <span class="err">*</span></label> 
                                 <div class="input-group">
                                     <input type="text" name="txtServiceDate" id="txtServiceDate" value="<?= $service['txtServiceDate']?>" readonly>
-                                    <div class="input-group-addon" id="cal"><i class="glyphicon glyphicon-calendar"></i></div>
+                                    <div class="input-group-addon" id="cal"><i class="fa fa-calendar" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <label>Time of Service <span class="err">*</span></label> 
                                 <div class="input-group">
                                     <input type="text" class="time start" name="txtServiceTime" id="txtServiceTime" value="<?= $service['txtServiceTime']?>">
-                                    <div class="input-group-addon" id="time"><i class="glyphicon glyphicon-time"></i></div>
+                                    <div class="input-group-addon" id="time"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -199,17 +203,35 @@ if (!empty($bookId)) {
                                 </div>    
                             </div>
                         </div>
-                        <div class="bookingButtons">
-                            <button type="button" class="btn btn-warning" id="btnUpdatePreview">Preview</button>
-                            <button type="button" class="btn btn-primary" id="btnUpdate" value="<?= $bookId?>">
-                                <span id="cinfirm_loading" style="display:none"></span> Update
-                            </button>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div>
+                                    <input type="hidden" name="hidBookId" id="hidBookId" value="<?= $bookId?>">
+                                    <input type="hidden" name="hidServiceAmt" id="hidtotal" value="<?= $service['txtServiceAmt']?>">
+                                    <input type="hidden" name="hidPromoOffer" id="hidPromoOffer" value="<?= $service['txtPromoOffer']?>">
+                                    <input type="hidden" name="hidOldGrandTot" id="hidOldGrandTot" value="<?= $service['txtGrandTotal']?>">
+                                    <input type="hidden" name="hidTotDiff" id="hidTotDiff" value="">
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <input type="hidden" name="hidBookId" id="hidBookId" value="<?= $bookId?>">
-                            <input type="hidden" name="hidServiceAmt" id="hidtotal" value="<?= $service['txtServiceAmt']?>">
-                            <input type="hidden" name="hidPromoOffer" id="hidPromoOffer" value="<?= $service['txtPromoOffer']?>">
-                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-warning" id="btnUpdatePreview">Preview</button>
+                                <button type="button" class="btn btn-primary" id="btnUpdate" value="<?= $bookId?>">
+                                    <span id="cinfirm_loading" style="display:none"></span> Update
+                                </button>
+                                <span id="btnpay" style="display:none">
+                                    <script src="https://checkout.stripe.com/checkout.js" 
+                                        class="stripe-button" 
+                                        data-key="pk_test_06cyiC9ossQzpksn09Lh7EbK" 
+                                        data-image="http://centurysoftwares.com/cleaning/images/logo.png" 
+                                        data-name="Unwritten Cleaning" 
+                                        data-description="Test Transaction"
+                                        data-amount="" />
+                                    </script>
+                                </span>
+                            </div>    
+                        </div>        
                     </form>
                 </div>
             </div>

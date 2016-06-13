@@ -24,6 +24,7 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
    header("location:"._SITE_URL."/admin/");
 }
 
+$objOffers->clearOfferNotty();
 $collection_offer = $objOffers->getOfferDetails();
 $collection_user = $objOffers->getOfferUser();
 
@@ -32,6 +33,76 @@ $collection_user = $objOffers->getOfferUser();
 <?php include dirname(__DIR__).'/include/header.php' ?>
 
   <?php include dirname(__DIR__).'/include/left_menu.php' ?>
+
+  <div class="col-md-9">
+      <div class="col-md-12">
+        <h4><strong>VIEW OFFERS</strong></h4>
+        <div class="pull-left">
+          <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
+        </div>
+        <div class="pull-right">
+          <button type="button" id="btnCreateOffer" class="btn btn-sm btn-primary">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Create Offers
+          </button>
+        </div>
+        <div class="col-md-12 open-up-msg">
+            <div class="form-group">
+                <div id="save-offer-dialog" title="Thank you" style="display: none">
+                    Offer created/shared successfully.
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <form name="frmViewOffers" id="frmViewOffers" method="post">
+            <table class="table table-bordered table-striped table-hover" id="dTable">
+              <thead class="thead-default">
+                <tr>
+                  <th>#</th>
+                  <th>Offer Code</th>
+                  <th>Offer Amount</th>
+                  <th>Offer Created</th>
+                  <th>Offer Taken</th>
+                  <th><center>Status</center></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $i = 1;
+                foreach ($collection_offer as $offers) {
+                ?>
+                <tr>
+                  <th scope="row"><?php echo $i?></th>
+                  <td><a id="uname" title="Offer Code"><?= $offers['txtPromoCode']?></a></td>
+                  <td><?= $offers['txtOffer']."%"?></td>
+                  <td><?= $offers['txtCreated']?></td>
+                  <td><?= $offers['firstname']." ".$offers['lastname']?></td>
+                  <td>
+                    <center>
+                      <?= $offer = ($offers['txtStatus'] == 1) ? 
+                        '<button type="button" class="btn btn-xs btn-success">Available</button>' : 
+                        '<button type="button" class="btn btn-xs btn-danger">Used</button>'
+                      ?>
+                    </center>
+                  </td>
+                </tr>
+                <?php
+                    $i++;
+                }
+                if (empty($collection_offer)) {
+                ?>
+                <tr class="no-record">
+                  <td colspan="10">Sorry..! No records found.</td>
+                </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+        </form>
+      </div>
+  </div>
+
+  <?php include dirname(__DIR__).'/include/footer.php' ?>
 
   <!-- Ppo-up To Create Promotional Offers Start -->
   <div style="display:none;" id="back-color"></div>
@@ -79,73 +150,14 @@ $collection_user = $objOffers->getOfferUser();
   </div>
   <!-- Ppo-up To Create Promotional Offers End -->
 
-  <div class="col-md-9">
-      <div class="col-md-12">
-        <h4><strong>VIEW OFFERS</strong></h4>
-        <div class="pull-left">
-          <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
-        </div>
-        <div class="pull-right">
-          <button type="button" id="btnCreateOffer" class="btn btn-sm btn-primary">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Create Offers
-          </button>
-        </div>
-        <div class="col-md-12 open-up-msg">
-            <div class="form-group">
-                <div id="save-offer-dialog" title="Thank you" style="display: none">
-                    Offer created/shared successfully.
-                </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <form name="frmViewOffers" id="frmViewOffers" method="post">
-            <table class="table table-bordered table-hover">
-              <thead class="thead-default">
-                <tr>
-                  <th>#</th>
-                  <th>OFFER CODE</th>
-                  <th>OFFER AMOUNT</th>
-                  <th>OFFER CREATED</th>
-                  <th>OFFER TAKEN</th>
-                  <th><center>STATUS</center></th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                $i = 1;
-                foreach ($collection_offer as $offers) {
-                  $bgcolor = ($offers['txtStatus'] == 0) ? "#dddddd" : "";
-                ?>
-                <tr style="background-color:<?= $bgcolor?>">
-                  <th scope="row"><?php echo $i?></th>
-                  <td><a id="uname" title="Offer Code"><?= $offers['txtPromoCode']?></a></td>
-                  <td><?= $offers['txtOffer']."%"?></td>
-                  <td><?= $offers['txtCreated']?></td>
-                  <td><?= $offers['firstname']." ".$offers['lastname']?></td>
-                  <td>
-                    <center>
-                      <?= $offer = ($offers['txtStatus'] == 1) ? 
-                        '<button type="button" class="btn btn-xs btn-success">Available</button>' : 
-                        '<button type="button" class="btn btn-xs btn-danger">Used</button>'
-                      ?>
-                    </center>
-                  </td>
-                </tr>
-                <?php
-                    $i++;
-                }
-                if (empty($collection_offer)) {
-                ?>
-                <tr class="no-record">
-                  <td colspan="10">Sorry..! No records found.</td>
-                </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-        </form>
-      </div>
-  </div>
-
-  <?php include dirname(__DIR__).'/include/footer.php' ?>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#dTable').DataTable( {
+      "pagingType": "numbers",
+      "ordering": false,
+      "info":     false,
+      "bFilter": false,
+      "bInfo": false
+  });
+});
+</script>

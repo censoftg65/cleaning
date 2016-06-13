@@ -75,6 +75,19 @@ a#uname {color: #275e8e;text-decoration: none;text-transform: uppercase;}
 #show-profile {background-color: #dddddd;border: 1px solid #ccc;font-weight: 600;padding: 15px;position: absolute;width: 500px;z-index: 999;}
 #page-success {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;}
 .clean_process {cursor: pointer;}
+#frmAddQuestion .err { color: red }
+#frmEditQuestion .err { color: red }
+.notty > li > a {font-weight:bold !important;}
+.notty > li > a:focus, 
+.notty > li > a:hover {color:#AC2925 !important;font-weight:bold !important;}
+.badge-notify{background: #ab2925 !important;position:relative;top: -15px;left: -15px;}
+#frmNewBooking label span {color: red;}
+#frmUpdateBooking label span {color: red;}
+#read-more {cursor: pointer;}
+.table.create-list tbody, .table.create-list tr{display: block;}
+.table.create-list tr td {display:inline-block;/*margin:0 -5px 0 0*/} 
+.table.create-list tr td.radio-col { width: 100%;}
+.table.create-list tr td.radio-name {width: 91%;}
 
 /*
 * Auther : Vinek T.
@@ -127,7 +140,7 @@ label.btn span {font-size:1em;}
 .bookingButtons a {background:url(../images/btm-btn-bg.png) repeat-x scroll 0 0; border: 1px solid #736660; color: #ffffff; float: left; font-size: 17px; font-weight: 400; height: 37px; line-height: normal; padding: 7px 17px 0; margin:0 10px 0 0;}
 .bookingButtons a:hover {opacity:0.6;}
 .bookingButtons a.cancelBtn{background:url(../images/cancel-btn-bg.png) repeat-x 0 0; border:1px solid #cbcaca; color:#3c3c3c; text-shadow:none;}
-#frmBookCleaning .err { color: red }
+#frmBookCleaning .err, #frmNewBooking .err{ color: red }
 .col-sm-9.ser-left-pad {padding-left: 6px;}
 #success-preview {font-size: 18px;left: 380px;line-height: 38px;margin: 0;position: fixed;text-align: center;top: 15%;z-index: 1;}
 #cancel-service-loader {left: 45%;position: fixed;top: 35%;z-index: 9999;}
@@ -135,3 +148,20 @@ label.btn span {font-size:1em;}
 #com-msg-request {background-color: green;border-radius: 5px;color: #fff;font-size: 15px;font-weight: 500;letter-spacing: 1.3px;opacity: 0.8;padding: 15px;z-index: 999}
 select#txtServiceAmt {-webkit-appearance: none;-moz-appearance: none;text-indent: 1px;text-overflow: '';}
 #frmRating span.err {color: red}
+.text-desc {color: green;font-size: 13px;}
+.not-avail {color: red !important;font-size: 15px;font-weight: 700;text-align: center;}
+
+#frmNewBooking .radio-col label span, #frmUpdateBooking .radio-col label span {color: #000;vertical-align: top;}
+#frmNewBooking .panel-primary input[type="text"], #frmUpdateBooking .panel-primary input[type="text"] {border: 1px solid #ccc;}
+#frmNewBooking a#seluser {background: #574135;  color: #fff;font-weight: bold;padding: 10px;}
+#frmNewBooking .panel-primary .panel-heading {background-color: #907959;border-color: #907959; font-size: 15px;font-weight: bold; border-radius: 0;}
+#frmNewBooking .panel-primary {border-color: #907959;border-radius: 0;}
+
+#frmNewBooking select, #frmNewBooking input[type="text"], #frmNewBooking input[type="email"], #frmUpdateBooking select, #frmUpdateBooking input[type="text"], #frmUpdateBooking input[type="email"]{border: 1px solid #232323;padding: 10px 5px 8px;width: 100%;border-radius: 0;height: 40px;}
+.bookingLft label {clear: both;color: #000;display: block; margin: 0 0 6px;}
+.bookingLft label input {float: left;margin: -4px 10px 0 0;width: 10px;}
+#frmNewBooking #cal, #frmNewBooking #time, #frmUpdateBooking #cal, #frmUpdateBooking #time {cursor: pointer;}
+#frmNewBooking label, #frmUpdateBooking label {color: #000;}
+
+.contentPart {  border: 1px solid #363636; padding: 20px 14px;}
+.col-lg-12.col-md-12.col-sm-12.col-xs-12.succ-content {min-height: 500px;}

@@ -24,15 +24,22 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
    header("location:"._SITE_URL."/admin/");
 }
 
+$objBooking->clearNewBookNotty();
 $collection_booking = $objBooking->getPendingBooking();
 
 $delId = base64_decode($db->getParam('flag'));
 $delStat = $db->getParam('status');
-if (!empty($delId) && $delStat == 'trash') {
+if (!empty($delId) && $delStat == 'pending_trash') {
   $objBooking->trashBooking($delId);
   $objBooking->trashRating($delId);
   header("Location:".basename($_SERVER['PHP_SELF']));
-} 
+} elseif (!empty($delId) && $delStat == 'cancel') {
+  $objBooking->cancelServices($delId);
+  header("Location:".basename($_SERVER['PHP_SELF']));
+} elseif (!empty($delId) && $delStat == 'complete') {
+  $objBooking->completeServices($delId);
+  header("Location:".basename($_SERVER['PHP_SELF']));
+}
 
 ?>
 
@@ -67,11 +74,11 @@ if (!empty($delId) && $delStat == 'trash') {
               <tr>
                 <th>#</th>
                 <th><center><input type="checkbox" name="selAllProcess" id="selAllProcess" value=""></center></th>
-                <th>CLEANING PROCESS</th>
-                <th>CLIENT NAME</th>
-                <th>BOOKING DATE</th>
-                <th>BOOKING TIME</th>
-                <th><center>#</center></th>
+                <th>Cleaning Process</th>
+                <th>Client Name</th>
+                <th>Booking Date/Time</th>
+                <th>Price</th>
+                <th><center>Action</center></th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +86,7 @@ if (!empty($delId) && $delStat == 'trash') {
               $i = 1;
               foreach ($collection_booking as $booked) {
               ?>
-              <tr class="<?= $class?>">
+              <tr>
                 <th scope="row"><?php echo $i?></th>
                 <td><center><input class="chkService" type="checkbox" name="selProcess[]" id="selProcess" value="<?= $booked['txtId']?>"></center></td>
                 <td>
@@ -88,12 +95,27 @@ if (!empty($delId) && $delStat == 'trash') {
                   </a>
                 </td>
                 <td><?= $booked['txtFirstName']." ".$booked['txtLastName']?></td>
-                <td><?= $booked['txtServiceDate']?></td>
-                <td><?= $booked['txtServiceTime']?></td>
+                <td><?= $booked['txtServiceDate']." - ".$booked['txtServiceTime']?></td>
+                <td><?= "$ ".$booked['txtGrandTotal']?></td>
                 <td>
                   <center>
+                      <a title="Complete" href="#">
+                          <button type="button" id="completeService" title="Complete Service" value="<?= $booked['txtId']?>">
+                              <i class="fa fa-check-square" aria-hidden="true"></i>
+                          </button>
+                      </a>
+                      <a title="Edit" href="edit_services.php?bookid=<?= base64_encode($booked['txtId'])?>">
+                          <button type="button" id="editService" title="Edit/Update Service" value="<?= $booked['txtId']?>">
+                              <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </button>
+                      </a>
+                      <a title="Cancel" href="#">
+                          <button type="button" id="cancelBooking" title="Cancel Service" value="<?= $booked['txtId']?>">
+                              <i class="fa fa-ban" aria-hidden="true"></i>
+                          </button>
+                      </a>
                       <a title="Delete">
-                          <button type="button" title="Delete Process" id="trashService" value="<?= $booked['txtId']?>">
+                          <button type="button" title="Delete Process" id="trashPendingService" value="<?= $booked['txtId']?>">
                               <i class="fa fa-trash"></i>
                           </button>
                       </a>

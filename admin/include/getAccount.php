@@ -8,7 +8,7 @@ include_once dirname(__DIR__).'/cls_classes.php';
 $db = new Config();
 
 $user_id = $db->getParam('user_id');
-$db->query("SELECT "._DB_PREFIX."user.txtEmail,"._DB_PREFIX."user.txtUsername,"._DB_PREFIX."user.txtPassword FROM "._DB_PREFIX."user WHERE txtId = '$user_id'");
+$db->query("SELECT "._DB_PREFIX."user.txtUsername,"._DB_PREFIX."user.txtPassword FROM "._DB_PREFIX."user WHERE txtId = '$user_id'");
 $row = $db->fetchAssoc();
 $output = json_encode($row);
 print_r($output);

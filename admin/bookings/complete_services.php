@@ -28,7 +28,7 @@ $collection_booking = $objBooking->getCompleteBooking();
 
 $delId = base64_decode($db->getParam('flag'));
 $delStat = $db->getParam('status');
-if (!empty($delId) && $delStat == 'trash') {
+if (!empty($delId) && $delStat == 'complete_trash') {
   $objBooking->trashBooking($delId);
   $objBooking->trashRating($delId);
   header("Location:".basename($_SERVER['PHP_SELF']));
@@ -42,7 +42,7 @@ if (!empty($delId) && $delStat == 'trash') {
 
   <div class="col-md-9">
       <div class="col-md-12">
-        <h4><strong>VIEW COMPLETE SERVICES</strong></h4>
+        <h4><strong>VIEW COMPLETED SERVICES</strong></h4>
         <div class="pull-left">
           <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
         </div>
@@ -67,11 +67,11 @@ if (!empty($delId) && $delStat == 'trash') {
               <tr>
                 <th>#</th>
                 <th><center><input type="checkbox" name="selAllProcess" id="selAllProcess" value=""></center></th>
-                <th>CLEANING PROCESS</th>
-                <th>CLIENT NAME</th>
-                <th>BOOKING DATE</th>
-                <th>BOOKING TIME</th>
-                <th><center>#</center></th>
+                <th>Cleaning Process</th>
+                <th>Client Name</th>
+                <th>Booking Date/Time</th>
+                <th>Price</th>
+                <th><center>Action</center></th>
               </tr>
             </thead>
             <tbody>
@@ -89,12 +89,12 @@ if (!empty($delId) && $delStat == 'trash') {
                   </a>
                 </td>
                 <td><?= $booked['txtFirstName']." ".$booked['txtLastName']?></td>
-                <td><?= $booked['txtServiceDate']?></td>
-                <td><?= $booked['txtServiceTime']?></td>
+                <td><?= $booked['txtServiceDate']." - ".$booked['txtServiceTime']?></td>
+                <td><?= "$ ".$booked['txtGrandTotal']?></td>
                 <td>
                   <center>
                       <a title="Delete">
-                          <button type="button" title="Delete Process" id="trashService" value="<?= $booked['txtId']?>">
+                          <button type="button" title="Delete Process" id="trashCompleteService" value="<?= $booked['txtId']?>">
                               <i class="fa fa-trash"></i>
                           </button>
                       </a>

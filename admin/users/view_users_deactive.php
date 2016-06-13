@@ -62,16 +62,16 @@ endif;
       
       <div class="col-md-12">
         <form name="frmViewDeactiveUsers" id="frmViewDeactiveUsers" method="post">
-          <table class="table table-bordered table-hover" id="table-data">
+          <table class="table table-bordered table-striped table-hover" id="dTable">
             <thead>
               <tr>
                 <th>#</th>
                 <th><center><input type="checkbox" name="selAllUser" id="selAllUser" value=""></center></th>
-                <th>NAME</th>
-                <th>EMAIL ID</th>
-                <th>PHONE</th>
-                <th>ACCESS LEVEL</th>
-                <th><center>ACTION</center></th>
+                <th>Name</th>
+                <th>Email ID</th>
+                <th>Phone</th>
+                <th>Access Level</th>
+                <th><center>Action</center></th>
               </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ endif;
               <tr>
                 <th scope="row"><?php echo $i?></th>
                 <td><center><input class="checkbox1" type="checkbox" name="allSelect[]" id="allSelect" value="<?= $users['txtId']?>"></center></td>
-                <td><a id="uname" title="User Name"><?= $users['txtFirstName']." ".$users['txtLastName']?></a></td>
+                <td><a id="uname"><?= $users['txtFirstName']." ".$users['txtLastName']?></a></td>
                 <td><?= $users['txtEmail']?></td>
                 <td><?= $users['txtPhone']?></td>
                 <td><?= $users['txtUserLevel']?></td>
@@ -118,3 +118,15 @@ endif;
   </div>
 
   <?php include dirname(__DIR__).'/include/footer.php' ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#dTable').DataTable( {
+      "pagingType": "numbers",
+      "ordering": false,
+      "info":     false,
+      "bFilter": false,
+      "bInfo": false
+  });
+});
+</script>

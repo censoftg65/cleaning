@@ -50,7 +50,7 @@ $collection = $objCommon->getPendingServices($uid);
 
                     <div class="clear"></div>
                     <div class="col-sm-6">
-                        <input type="text" name="txtSearch" id="txtSearch" placeholder="Sereach services here..." />
+                        <input type="text" name="txtSearch" id="txtSearch" placeholder="Search services here..." />
                     </div>
                     
                     <div class="col-sm-12 table-responsive">
@@ -58,6 +58,7 @@ $collection = $objCommon->getPendingServices($uid);
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Service Requestor</th>
                                         <th>Cleaning Process</th>
                                         <th>Extra Services</th>
                                         <th>Service Date/Time</th>
@@ -68,6 +69,7 @@ $collection = $objCommon->getPendingServices($uid);
                                 <tbody>
                                     <?php foreach ($collection as $pending) { ?>
                                     <tr>
+                                        <td><?= $pending['txtFirstName']." ".$pending['txtLastName']?></td>
                                         <td>
                                             <a class="view_booking" title="View Booking" data-id="<?= $pending['txtId']?>">
                                                 <?= $pending['txtBedroom']."-BED,&nbsp;".$pending['txtBathroom']."-BATH"?></td>
@@ -89,7 +91,7 @@ $collection = $objCommon->getPendingServices($uid);
                                         <td>
                                             <center>
                                                 <a href="update_booking.php?book_id=<?= base64_encode($pending['txtId'])?>">
-                                                    <button type="button" class="btn btn-xs btn-default" title="Edit Booking" id="editBooking">
+                                                    <button type="button" class="btn btn-xs btn-default" title="Edit Service" id="editBooking">
                                                         <i class="fa fa-pencil-square" aria-hidden="true"></i> Edit
                                                     </button>
                                                 </a>

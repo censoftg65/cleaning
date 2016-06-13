@@ -80,8 +80,10 @@ $extra_services = $objCommon->getExtraServices();
                                 foreach ($extra_services as $ex_service):
                                     if($i == 8) break;
                                 ?>
-                                <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>">
-                                <label><?= $ex_service['txtServiceName']?></label>
+                                <label>
+                                    <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService<?= $ex_service['txtId']?>" value="<?= $ex_service['txtId']?>">
+                                    <?= $ex_service['txtServiceName']?>
+                                </label>
                                 <?php 
                                     $i++;
                                 endforeach;
@@ -95,8 +97,10 @@ $extra_services = $objCommon->getExtraServices();
                                 foreach ($extra_services as $ex_service):
                                     if($i > 7) :
                                 ?>
-                                <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>">
-                                <label><?= $ex_service['txtServiceName']?></label>
+                                <label>
+                                    <input type="checkbox" class="serviceChkBox" data-serviceprice="<?= $ex_service['txtServicePrice']?>" data-servicehrs="<?= $ex_service['txtServiceHours']?>" name="txtExtraService[]" id="txtExtraService" value="<?= $ex_service['txtId']?>">
+                                    <?= $ex_service['txtServiceName']?>
+                                </label>
                                 <?php 
                                     endif;
                                     $i++;
@@ -110,14 +114,14 @@ $extra_services = $objCommon->getExtraServices();
                                 <label>Date of Service <span class="err">*</span></label> 
                                 <div class="input-group">
                                     <input type="text" name="txtServiceDate" id="txtServiceDate" readonly>
-                                    <div class="input-group-addon" id="cal"><i class="glyphicon glyphicon-calendar"></i></div>
+                                    <div class="input-group-addon" id="cal"><i class="fa fa-calendar" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <label>Time of Service <span class="err">*</span></label> 
                                 <div class="input-group">
                                     <input type="text" class="time start" name="txtServiceTime" id="txtServiceTime">
-                                    <div class="input-group-addon" id="time"><i class="glyphicon glyphicon-time"></i></div>
+                                    <div class="input-group-addon" id="time"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                         </div>

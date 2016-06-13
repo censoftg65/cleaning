@@ -51,6 +51,7 @@ class Users
                                                         txtUserLevel,
                                                         txtIpAddress,
                                                         txtUserType,
+                                                        txtCreatedBy,
                                                         txtStatus
                                             ) VALUES(
                                                         '$this->email',
@@ -68,6 +69,7 @@ class Users
                                                         '$this->ulevel',
                                                         '$this->ipaddr',
                                                         'new',
+                                                        'admin',
                                                         '$this->status'
                                                     ) ";
         $db->query($sql_query);
@@ -213,6 +215,12 @@ class Users
             array_push($collection,$row);
         }
         return $collection;
+    }
+
+    public function clearUserNotty() {
+        $db = new Config();
+        $query  = "UPDATE "._DB_PREFIX."user SET txtNotify = 0";
+        $db->query($query);
     }
 
 }

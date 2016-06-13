@@ -1,12 +1,13 @@
 <?php
-
-$ulevel = $_SESSION["txtUserLevel"];
 /* header.php
 *  This file for header section
 */
 
 /*this include header section*/
 include_once 'head.php';
+
+$uId = $_SESSION["txtId"];
+$ulevel = $_SESSION["txtUserLevel"];
 
 ?>
 
@@ -15,7 +16,7 @@ include_once 'head.php';
     	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     		<div class="col-md-12">
     			<div class="col-md-12">&nbsp;</div>
-	    		<div class="col-md-6">
+	    		<div class="col-md-4">
 	    			<a href="<?= _SITE_URL?>/admin/dashboard.php">
 		                <img src="<?= _SITE_URL?>/images/logo.png" alt="Unwritten Cleaning" title="Unwritten Cleaning" width="210px" border="0" />
 		            </a>
@@ -28,6 +29,15 @@ include_once 'head.php';
 				  	</div>
 				</div>
 		        <div class="col-md-2">
+					<div class="pull-right">
+						<button type="button" class="btn dropdown-toggle active" id="main-notify">
+							<i class="fa fa-bell" aria-hidden="true"></i>
+			        	</button>
+						<span class="badge badge-notify" id="show-notty-tot"></span>
+			        	<ul id="sub-notify" class="dropdown-menu notty"></ul>
+					</div>
+		        </div>
+		        <div class="col-md-2">
 		        	<?php if ($ulevel == 'admin') { ?>
 		            <div class="dropdown pull-right">
 						<button class="btn btn-danger user-dropdown-toggle active" type="button" data-toggle="dropdown">
@@ -39,6 +49,7 @@ include_once 'head.php';
 							<span id="cross"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span>
 							<li><a href="#" id="profile"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Profile</a></li>
 							<li><a href="#" id="account"><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;Account</a></li>
+							<li role="separator" class="divider"></li>
 							<li>
 								<a href="<?= _SITE_URL?>/admin/logout.php">
 									<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout
@@ -61,7 +72,7 @@ include_once 'head.php';
 						<h4 id="myModalLabel" class="modal-title">Admin Profile Info</h4>
 					</div>
 					<form method="post" action="#" name="frmAdminProfile" id="frmAdminProfile" class="frmMenus">
-						<input type="hidden" id="get_user" name="get_user" value="<?= $_SESSION['txtId']?>">
+						<input type="hidden" id="get_user" name="get_user" value="<?= $uId?>">
 						<input type="hidden" id="form_edit_value" name="form_edit_value" value="Editprofile">
 						<div class="modal-body">
 							<div class="col-md-4 form-group">
@@ -148,7 +159,7 @@ include_once 'head.php';
 						<h4 id="myModalLabel" class="modal-title">Admin Account Setting</h4>
 					</div>
 					<form method="post" action="#" name="frmAdminAccount" id="frmAdminAccount" class="frmMenus">
-						<input type="hidden" id="get_user" name="get_user" value="<?= $_SESSION['txtId']?>">
+						<input type="hidden" id="get_user" name="get_user" value="<?= $uId?>">
 						<input type="hidden" id="form_edit_value" name="form_edit_value" value="Editaccount">
 						<div class="modal-body">
 							<div class="col-md-12 form-group">

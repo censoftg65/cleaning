@@ -45,9 +45,11 @@ echo '<div class="col-sm-12">';
 				if (empty($arr_book['txtExtraService'])) {
 					echo "Not Selected";	
 				} else {
+					$result_names = '';
 					foreach ($arr_book['txtExtraService'] as $service_val) {
-						echo displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
+						$result_names .= displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
 					}
+					echo rtrim($result_names,', ');
 				}
 			echo '</div>';
 		echo '</div>';	

@@ -43,6 +43,7 @@ class User
 														txtUserLevel,
 														txtIpAddress,
 														txtUserType,
+														txtCreatedBy,
 														txtStatus
 											  )VALUES(
 											  			'$this->txtEmail',
@@ -60,6 +61,7 @@ class User
 														'user',
 											  			'$this->txtIpAddress',
 											  			'new',
+											  			'user',
 											  			'1'
 													)";
 		$db->query($sql_query);											

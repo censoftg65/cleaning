@@ -98,6 +98,12 @@ function checkUser($email) {
     $mysql_query = $db->query($sql_chk);
     return $mysql_query = $db->numRows();
 }
+function checkAppl($email) {
+    $db = new Config();
+    $sql_chk = "SELECT * FROM "._DB_PREFIX."appl_form WHERE txtMailingAddr = '$email'";
+    $mysql_query = $db->query($sql_chk);
+    return $mysql_query = $db->numRows();
+}
 function getOptions($collection,$id,$name,$selected) {
     echo "<option value='0'>-- Select --</option>";
     foreach($collection as $object) {

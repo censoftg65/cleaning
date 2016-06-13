@@ -24,6 +24,7 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
    header("location:"._SITE_URL."/admin/");
 }
 
+$objRating->clearRateNotty();
 $rating_coll = $objRating->getRatingDetails();
 
 $delId = base64_decode($db->getParam('flag'));
@@ -55,14 +56,14 @@ if (!empty($delId) && $delState == 'delete') {
       
       <div class="col-md-12">
         <form name="frmViewRating" id="frmViewRating" method="post">
-          <table class="table table-bordered table-hover" id="dTable">
+          <table class="table table-bordered table-striped table-hover" id="dTable">
             <thead>
               <tr>
                 <th>#</th>
-                <th><center><input type="checkbox" name="selAllProcess" id="selAllProcess" value=""></center></th>
-                <th>SERVICE PROVIDER</th>
-                <th>RATING</th>
-                <th>REMARK</th>
+                <th><center><input type="checkbox" name="selAllRating" id="selAllRating" value=""></center></th>
+                <th>Service Provider</th>
+                <th>Rating</th>
+                <th>Remark</th>
                 <th><center>#</center></th>
               </tr>
             </thead>
@@ -71,9 +72,9 @@ if (!empty($delId) && $delState == 'delete') {
               $i = 1;
               foreach ($rating_coll as $rating) {
               ?>
-              <tr class="<?= $class?>">
+              <tr>
                 <th scope="row"><?php echo $i?></th>
-                <td><center><input class="chkService" type="checkbox" name="selProcess[]" id="selProcess" value="<?= $rating['txtId']?>"></center></td>
+                <td><center><input class="chkAllReat" type="checkbox" name="selAllRate[]" id="selAllRate" value="<?= $rating['txtId']?>"></center></td>
                 <td><?= strtoupper($rating['txtServiceProvider'])?></td>
                 <td>
                 <?php
@@ -194,7 +195,6 @@ if (!empty($delId) && $delState == 'delete') {
 
 <script type="text/javascript">
 $(document).ready(function() {
-  //var _$ = jQuery.noConflict(true);
   $('#dTable').DataTable( {
       "pagingType": "numbers",
       "ordering": false,

@@ -73,7 +73,7 @@ class Siteconfig
 	public function updateAdminAccount($param) {
 		$db = new Config();
 		$date_time = getCurrentDateTime("all");
-		echo $sql_query = "UPDATE "._DB_PREFIX."user SET txtPassword	= '$this->txtPassword',
+		$sql_query = "UPDATE "._DB_PREFIX."user SET txtPassword	= '$this->txtPassword',
 													txtUpdateTime	= '$date_time'
 											  WHERE txtId = '$param'";
 		$db->query($sql_query);
@@ -138,6 +138,48 @@ class Siteconfig
 														txtAccountAdminBody = '$this->txtAccountAdminBody'
 											  	  WHERE txtId = '$param'";
 		$db->query($sql_query);
+	}
+
+	public function getBookingNotify() {
+		$db = new Config();
+		$query = "SELECT txtId FROM "._DB_PREFIX."booking WHERE txtNotify = 1";
+		$db->query($query);
+		return $db->numRows();
+	}
+
+	public function getUpdateNotify() {
+		$db = new Config();
+		$query = "SELECT txtId FROM "._DB_PREFIX."booking WHERE txtNotify = 2";
+		$db->query($query);
+		return $db->numRows();
+	}
+
+	public function getDiscountNotify() {
+		$db = new Config();
+		$query = "SELECT txtId FROM "._DB_PREFIX."promo_offers WHERE txtNotify = 1 AND txtStatus = 0";
+		$db->query($query);
+		return $db->numRows();
+	}
+
+	public function getRateNotify() {
+		$db = new Config();
+		$query = "SELECT txtId FROM "._DB_PREFIX."rating WHERE txtNotify = 1";
+		$db->query($query);
+		return $db->numRows();
+	}
+
+	public function getUpdateRateNotify() {
+		$db = new Config();
+		$query = "SELECT txtId FROM "._DB_PREFIX."rating WHERE txtNotify = 2";
+		$db->query($query);
+		return $db->numRows();
+	}
+
+	public function getUserNotify() {
+		$db = new Config();
+		$query = "SELECT txtId FROM "._DB_PREFIX."user WHERE txtCreatedBy = 'user' AND txtNotify = 1";
+		$db->query($query);
+		return $db->numRows();
 	}
 
 }

@@ -53,16 +53,16 @@ if (!empty($del_id)) {
       </div>
       <div class="col-md-12">
         <form name="frmViewPages" id="frmViewPages" method="post">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-striped table-hover" id="dTable">
               <thead class="thead-default">
                 <tr>
                   <th>#</th>
                   <th><center><input type="checkbox" name="selAllPage" id="selAllPage" value=""></center></th>
-                  <th>PAGE TITLE</th>
-                  <th>PAGE URL</th>
-                  <th>CREATED DATE</th>
-                  <th>PAGE STATUS</th>
-                  <th><center>ACTION</center></th>
+                  <th>Page Title</th>
+                  <th>Page URL</th>
+                  <th>Created Date</th>
+                  <th>Page Status</th>
+                  <th><center>Action</center></th>
                 </tr>
               </thead>
               <tbody>
@@ -115,3 +115,15 @@ if (!empty($del_id)) {
   </div>
 
   <?php include dirname(__DIR__).'/include/footer.php' ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#dTable').DataTable( {
+      "pagingType": "numbers",
+      "ordering": false,
+      "info":     false,
+      "bFilter": false,
+      "bInfo": false
+  });
+});
+</script>

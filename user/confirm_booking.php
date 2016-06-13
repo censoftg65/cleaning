@@ -27,6 +27,7 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
 $_SESSION['page_title'] = "Confirm Booking | "._SITE_NAME;
 $db = new Config(); 
 
+$arr_book['txtOrderId']         = randomNumber(9);
 $arr_book['txtBedroom']         = $db->getParam('txtBedroom');
 $arr_book['txtBathroom']        = $db->getParam('txtBathroom');
 $arr_book['extraService']       = $db->getParam('txtExtraService');
@@ -69,7 +70,7 @@ $grand_tot = $tot_amt - $dis_tot;
                         </div>
                     </div>
                    
-                    <form name="frm-ConfirmBooking" id="frm-ConfirmBooking" method="post">
+                    <form name="frm-ConfirmBooking" id="frm-ConfirmBooking" method="post" action="payment.php">
                         <div class="row">
                         <?php
                         echo '<div class="col-sm-12">';
@@ -92,10 +93,11 @@ $grand_tot = $tot_amt - $dis_tot;
                                     echo '<div class="col-sm-12">';
                                         echo '<label class="col-sm-3 control-label"><strong>Extra Services</strong></label>';
                                         echo '<div class="col-sm-9 ser-left-pad">';
+                                                $result_names = '';
                                                 foreach ($arr_book['extraService'] as $service_val) {
                                                     $result_names .= displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
                                                 }
-                                                echo rtrim($result_names, ', ');
+                                                echo rtrim($result_names,', ');
                                         echo '</div>';
                                     echo '</div>';  
                                 }
@@ -150,13 +152,13 @@ $grand_tot = $tot_amt - $dis_tot;
                                 }
                                 echo '<div class="col-sm-6">';  
                                     echo '<label class="col-sm-6 control-label"><strong>Total Amount</strong></label>';
-                                    echo '<div class="col-sm-6">$ '.$tot_amt.'</div>';
+                                    echo '<div class="col-sm-6">$ '.number_format($tot_amt).'</div>';
                                 echo '</div>';  
                                 if (empty($arr_book['txtPromoCode'])) {
                                 } else {
                                     echo '<div class="col-sm-12">'; 
                                         echo '<label class="col-sm-3 control-label"><strong>Grand Total</strong></label>';
-                                        echo '<div class="col-sm-9 ser-left-pad">$ '.$grand_tot.'</div>';
+                                        echo '<div class="col-sm-9 ser-left-pad">$ '.number_format($grand_tot).'</div>';
                                     echo '</div>';  
                                 }    
 
@@ -167,12 +169,19 @@ $grand_tot = $tot_amt - $dis_tot;
 
                         <div class="bookingButtons">
                         	<button type="button" class="btn btn-default" id="btnCancelBooking">Cancel Booking</button>
-                            <button type="button" class="btn btn-primary" name="btnConfirmBooking" id="btnConfirmBooking">
-                                <span id="cinfirm_loading" style="display: none"></span> Confirm To Pay
-                            </button>
+                            
+                            <!-- Payment Integration Form -->
+                            <script src="https://checkout.stripe.com/checkout.js" 
+                                class="stripe-button" 
+                                data-key="pk_test_06cyiC9ossQzpksn09Lh7EbK" 
+                                data-image="http://centurysoftwares.com/cleaning/images/logo.png" 
+                                data-name="Unwritten Cleaning" 
+                                data-description="Test Transaction ($<?= number_format($grand_tot)?>)"
+                                data-amount="<?= number_format($grand_tot)?>00" />
+                            </script>
                         </div>
                         <div style="display: none">
-                            <input type="hidden" name="promo" id="promo" value="<?= $arr_book['txtPromoCode']?>">
+                            <input type="hidden" name="orderid" id="orderid" value="<?= $arr_book['txtOrderId']?>">
                             <input type="hidden" name="bedroom" id="bedroom" value="<?= $arr_book['txtBedroom']?>">
                             <input type="hidden" name="bathrrom" id="bathrrom" value="<?= $arr_book['txtBathroom']?>">
                             <input type="hidden" name="ex-service" id="ex-service" value="<?= $arr_book['txtExtraService']?>">
@@ -184,9 +193,10 @@ $grand_tot = $tot_amt - $dis_tot;
                             <input type="hidden" name="ex-serviceamt" id="ex-serviceamt" value="<?= $arr_book['txtExtraServiceAmt']?>">
                             <input type="hidden" name="servicetip" id="servicetip" value="<?= $arr_book['txtServiceTip']?>">
                             <input type="hidden" name="recurring" id="recurring" value="<?= $arr_book['txtRecurring']?>">
+                            <input type="hidden" name="promo" id="promo" value="<?= $arr_book['txtPromoCode']?>">
                             <input type="hidden" name="offerprice" id="offerprice" value="<?= $arr_book['hidOfferPrice']?>">
-                            <input type="hidden" name="totamt" id="totamt" value="<?= $tot_amt?>">
-                            <input type="hidden" name="grandtot" id="grandtot" value="<?= $grand_tot?>">
+                            <input type="hidden" name="totamt" id="totamt" value="<?= number_format($tot_amt)?>">
+                            <input type="hidden" name="grandtot" id="grandtot" value="<?= number_format($grand_tot)?>">
                         </div>
                     </form>
                 </div>

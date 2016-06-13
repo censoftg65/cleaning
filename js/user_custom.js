@@ -35,14 +35,19 @@ $(document).ready(function(){
         startDate: date,
         autoclose: true
     });
-
+    jQuery("#cal").click(function() { 
+        jQuery("#txtServiceDate").datepicker("show");
+    });
     jQuery('#txtServiceTime').timepicker({
         'showDuration': true,
         'timeFormat': 'g:ia',
     });
+    jQuery("#time").click(function() { 
+        jQuery("#txtServiceTime").timepicker("show");
+    });
     /* ---- End ---- */
 
-    /* -- Initialize the variable for base url & base64_encode & base64_decodes -- */
+    /* -- Initialize the variable for base url, base64_encode, base64_decodes, email-id & number validator -- */
     var baseuri = window.location.origin+'/cleaning';
     var Base64 = {
         _keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
@@ -133,6 +138,16 @@ $(document).ready(function(){
             return t
         }
     };
+    function isValidEmailAddress(emailAddress) {
+        var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+        return pattern.test(emailAddress);
+    }
+    $("#txtZipcode").keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            $(".errmsg").html("<b>Digits Only</b>").css("color","red").css("font-size","13px").show().fadeOut("slow");
+            return false;
+        }
+    });
     /* ---- End ---- */
 	
     /*
@@ -442,11 +457,13 @@ $(document).ready(function(){
         prices_options.html('');
         if (bedroom !== null || bedroom !== "") {
             if (filter_type == 'bedroom') {
-                $(':checkbox').each(function() {
-                    if ($(this).prop("checked") === true) {
-                        price = Number($(this).attr('data-serviceprice')); /*Add Extra Charge*/
-                    }
-                });
+                // $(':checkbox').each(function() {
+                //     if ($(this).prop("checked") === true) {
+                //         price = Number($(this).attr('data-serviceprice')); /*Add Extra Charge*/
+                //     }
+                //     alert(price);
+                // });
+                var price = 0; 
                 $.each(cal_data[bedroom], function(index, jsonObject) {
                     $.each(jsonObject, function(index, value) {
                         var temp = index.toString();
@@ -463,6 +480,7 @@ $(document).ready(function(){
                     });
                     var tot_sel = $('#txtServiceAmt option:selected').val();
                     $('#hidtotal').val(tot_sel);
+                    calTotal();
                 });
             }
         }
@@ -476,6 +494,7 @@ $(document).ready(function(){
         var price_options = $('#txtServiceAmt option').eq(selectedIndex).prop('selected', true);
         var obj_val = $( "#txtServiceAmt option:selected" ).val();
         $('#hidtotal').val(obj_val);
+        calTotal();
     });
 	/* ---- End ---- */
 
@@ -497,6 +516,7 @@ $(document).ready(function(){
 			});
 			return sum;
 		});
+        calTotal();
     });
     /* ---- End ---- */
     
@@ -669,29 +689,6 @@ $(document).ready(function(){
     });
     /* ---- End ---- */
 
-    /*-- Script for confirm booking and pay for service --*/
-    $('#btnConfirmBooking').click(function(){
-        jQuery('#cinfirm_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
-        jQuery('#cinfirm_loading').show();
-        jQuery.ajax({
-            type: 'POST',
-            url: 'form-wizard/processBooking.php',
-            data: $('#frm-ConfirmBooking').serialize(),
-            success: function(response) {
-                setTimeout(function() {
-                    jQuery('#cinfirm_loading').hide();
-                    jQuery("#back-color").show();
-                    jQuery(".modal-body").html(response);
-                    jQuery("#success-preview").modal('show');
-                }, 2000);
-                setTimeout(function(){
-                    window.location = baseuri+'/user/pending_services.php';
-                }, 8000);
-            } 
-        }) 
-    });
-    /* ---- End ---- */
-
     /*
     * Auther : Vinek T.
     * Description : Script for leftmenu booking tab dropdown
@@ -751,7 +748,7 @@ $(document).ready(function(){
         jQuery.ajax({
             type: 'POST',
             url: 'form-wizard/preview_booking.php',
-            data: { process_id:process_id, pre_pending:'pre_pending' },
+            data: { process_id:process_id, pre_booking:'pre_booking' },
             success: function(response) {
                 jQuery(".modal-body").html(response);
                 jQuery("#book-preview").modal('show');
@@ -928,7 +925,7 @@ $(document).ready(function(){
                     jQuery('#back-color').show();
                     jQuery(".modal-body").html(response);
                     jQuery("#success-preview").modal('show');
-                }, 2000);
+                }, 1500);
                 setTimeout(function(){
                     window.location = baseuri+'/user/pending_services.php';
                 }, 8000);
@@ -953,6 +950,139 @@ $(document).ready(function(){
     });
     /* ---- End ---- */
 
+    jQuery('#user-notify').click(function () {
+        jQuery.ajax({
+            type: 'POST',
+            url: baseuri+'/includes/getUserNotification.php',
+            data: {complete_nitify:'complete_nitify'},
+            success: function(response) {
+                jQuery('#user-notifications').slideToggle('fast');
+                jQuery('#user-notifications').html(response);
+            }
+        })
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for employee application form
+    * Date : 1st June'2016
+    */
+    /* Script for changing the sizes for mens and womens*/
+    jQuery("input:radio[name=txtTshirtPreference]").click(function(){
+        var gender = jQuery(this).val();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/get_sizes.php',
+            data: {gender:gender},
+            success: function(response){
+                jQuery("#txtTshirtSize").html(response);
+            }
+        });
+    });
+    /* ---- End ---- */
+
+    /* Script for clear the application form data */
+    jQuery("#btnClear").click(function(){
+        jQuery('#frm-Application').trigger("reset");
+    });
+    /* ---- End ---- */
+
+    /* Script for submiting the employee application form */
+    jQuery("#btnApplication").click(function(){
+        var fname = jQuery('#txtFirstName').val();
+        var lname = jQuery('#txtLastName').val();
+        var mailaddr = jQuery('#txtMailingAddr').val();
+        var city = jQuery('#txtState').val();
+        var state = jQuery('#txtCity').val();
+        var zipcode = jQuery('#txtZipcode').val();
+        var experience = jQuery('#txtWorkExp').val();
+        var paidcleaning = jQuery('#txtPaidCleaning').val();
+        var aboutUC = jQuery('#txtHearAbout').val();
+        var tshirtsize = jQuery('#txtTshirtSize').val();
+        
+        if ((fname == "") || (lname == "") || (city == 0) || (state == 0) || (zipcode == "") || (experience == "") || (paidcleaning == "") || (aboutUC == 0) || (tshirtsize == 0)) {
+            jQuery('.alert-danger').html('Please fill all required (*) fields');
+            jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+            jQuery('.alert-danger').show();
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+            return false
+        } else if (!$("input[name='txtEligibleToWork']:checked").val()) {
+            jQuery('.alert-danger').html('Please select the eligibility criteria');
+            jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+            jQuery('.alert-danger').show();
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+            return false
+        } else if(!isValidEmailAddress(mailaddr)) {
+            jQuery('.alert-danger').html('Please enter a valid mail address');
+            jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+            jQuery('.alert-danger').show();
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+            return false
+        } else if(zipcode.length < 4) {
+            jQuery('.alert-danger').html('Please provide valid zipcode');
+            jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+            jQuery('.alert-danger').show();
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+            return false
+        } else if(!$("input#txtAgreeTerms").is(":checked")) {
+            jQuery('.alert-danger').html('Please accept the terms and conditions');
+            jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+            jQuery('.alert-danger').show();
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+            return false
+        } 
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for submitting employee application form and quiz section
+    * Date : 7st June'2016
+    */
+    jQuery("#btnSubQuiz").click(function(){
+        jQuery('#applform_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
+        jQuery('#applform_loading').show();
+        var formdata = $("#frm-Empquiz").serialize();
+        count = jQuery("#hidQueCount").val();
+        newCount = 0;
+        values = new Array();
+        for(i=0; i<=count; i++){
+            $("input[id='txtAnswer"+i+"']:checked").each(function(){
+                que_val = $(this).attr("data-queid");
+                ans_val = $(this).val();
+                values.push(que_val,ans_val);
+                newCount++;
+            });
+        }
+        if(newCount == count) {
+            // console.log(values);
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/quizResult.php',
+                data: {values:values, formdata:formdata},
+                success: function(response) {
+                    setTimeout(function() {
+                        jQuery('#applform_loading').hide();
+                        jQuery('#back-color').show();
+                        jQuery(".modal-body").html(response);
+                        jQuery("#success-preview").modal('show');
+                    }, 2000);
+                    setTimeout(function(){
+                        window.location = baseuri;
+                    }, 8000);
+                }
+            })
+        } else {
+            jQuery('#applform_loading').hide();
+            jQuery('.alert-danger').html('Please solve all the questions first.');
+            jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+            jQuery('.alert-danger').show();
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+        }
+    });
+    /* ---- End ---- */
+
 })
 
 
@@ -964,22 +1094,96 @@ $(document).ready(function(){
 function validateBookingForm() {
     var bedroom = document.getElementById("txtBedroom").value;
     if(bedroom == "0"){
-        alert("Please select bedrooms.");
+        alert("Please select the Bedroom Numbers");
         document.getElementById("txtBedroom").focus();
         return false;
     }
     var service_date = document.getElementById("txtServiceDate").value;
     if(service_date == ""){
-        alert("Please select service date.");
+        alert("Please select the Date of Service");
         document.getElementById("txtServiceDate").focus();
         return false;
     }
     var service_time = document.getElementById("txtServiceTime").value;
     if(service_time == ""){
-        alert("Please select service date.");
+        alert("Please select the Time of Service");
         document.getElementById("txtServiceTime").focus();
         return false;
     }
 }
+/* ---- End ---- */
 
 
+/*
+* Auther : Vinek T.
+* Description : Script for making notification for user dashboard
+* Date : 23th May'2016
+*/
+(function showUserNotty(){
+    setTimeout(showUserNotty, 10000);
+    var baseuri = window.location.origin+'/cleaning';
+    jQuery.ajax({
+        type: 'POST',
+        url: baseuri+'/includes/getUserNotification.php',
+        data: {count:'count'},
+        success: function(response) {
+            jQuery('#user-notifications').html(response);
+            var tot_noti = jQuery('input[name=hidUserNottyTot]').val();
+            jQuery('#showUserNotyTot').html(tot_noti);
+        }
+    })
+})();
+/* ---- End ---- */
+
+/*
+* Auther : Vinek T.
+* Description : Script for making the adding or substracting the services on edit and let it go to checkout on at time
+* Date : 2nd June'2016
+*/
+function calTotal() {
+    var tip = document.getElementById('txtServiceTip').value;
+    var service = document.getElementById('hidtotal').value;
+    var extraservice = document.getElementById('txtExtraServiceAmt').value;
+    var tot = parseInt(tip) + parseInt(service) + parseInt(extraservice);
+    var old_tot = document.getElementById('hidOldGrandTot').value;
+    if (tot > old_tot) {
+        document.getElementById('btnUpdate').style.display = 'none';
+        document.getElementById('btnpay').style.display = 'block    ';
+    } else {
+        document.getElementById('btnUpdate').style.display = 'block';
+        document.getElementById('btnpay').style.display = 'none';
+    }
+    var tot_diff = parseInt(tot) - parseInt(old_tot);
+    document.getElementById('hidTotDiff').value = tot_diff;
+}
+/* ---- End ---- */
+
+
+/*
+* Auther : Vinek T.
+* Description : Script for checking the mail address is present or not
+* Date : 2nd June'2016
+*/
+function checkMailAddr(email) {
+    jQuery.ajax({
+        type: "POST",
+        url: "form-wizard/checkMailAddr.php",
+        data: {email : email},
+        dataType: "json",
+        success: function(response) {
+            if (response.error == 'no') {
+                var suc_mesg = JSON.stringify(response.message);
+                suc_mesg = suc_mesg.replace(/^"/, "");
+                suc_mesg = suc_mesg.replace(/"$/, "");
+                jQuery('.alert-danger').html(suc_mesg);
+                jQuery('.alert-danger').css({'font-size':'15','font-weight':'bold'});
+                jQuery('.alert-danger').show();
+                jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                jQuery('#btnApplication').attr('disabled','disabled');
+            } else if (response.error == 'yes') {
+                jQuery('#btnApplication').removeAttr('disabled');
+                jQuery('.alert-danger').hide();
+            }
+        }
+    }) 
+}

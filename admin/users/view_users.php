@@ -24,6 +24,7 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
    header("location:"._SITE_URL."/admin/");
 }
 
+$objUser->clearUserNotty();
 $collection_users = $objUser->getUserDetails();
 $collection_city = $objUser->getCities();
 $collection_zips = $objUser->getZipCodes();
@@ -44,6 +45,126 @@ if (!empty($del_id) && $del_stat == 'delete') {
 <?php include dirname(__DIR__).'/include/header.php' ?>
 
   <?php include dirname(__DIR__).'/include/left_menu.php' ?>
+
+  <div class="col-md-9">
+      <div class="col-md-12">
+        <h4><strong>VIEW ACTIVE USERS</strong></h4>
+        <div class="pull-left">
+          <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
+        </div>
+        <div class="pull-right">
+        <button type="button" id="btnDelActUsers" id="btnDelActUsers" class="btn btn-sm  btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>&nbsp;Delete
+          </button>
+          <button type="button" id="btnAddPopUp" class="btn btn-sm btn-primary">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Add User
+          </button>
+        </div>
+        <br>
+        <div class="col-md-12 open-up-msg pull-left">
+            <div class="form-group">
+                <div id="success-dialog-offer" title="Thank you" style="display: none">
+                    Offer sent/share successfully.
+                </div>
+                <div id="user-success-dialog" title="Thank you" style="display: none">
+                    User profile added/updated successfully.
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <div class="col-md-12">
+        <form name="frmViewUsers" id="frmViewUsers" method="post">
+          <table class="table table-bordered table-striped table-hover" id="dTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th><center><input type="checkbox" name="selAllUser" id="selAllUser" value=""></center></th>
+                <th>Name</th>
+                <th>Email ID</th>
+                <th>Phone</th>
+                <th>Access Level</th>
+                <th><center>Action</center></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $i = 1;
+              foreach ($collection_users as $users) {
+                // if ($users['txtUserLevel'] != 'admin') {
+              ?>
+              <tr>
+                <th scope="row"><?php echo $i?></th>
+                <td>
+                  <?php if ($users['txtUserLevel'] != 'admin') {?>
+                  <center><input class="checkbox1" type="checkbox" name="allSelect[]" id="allSelect" value="<?= $users['txtId']?>"></center>
+                  <?php } else { } ?>
+                </td>
+                <td><a id="uname"><?= $users['txtFirstName']." ".$users['txtLastName']?></a></td>
+                <td><?= $users['txtEmail']?></td>
+                <td><?= $users['txtPhone']?></td>
+                <td>
+                  <?php if ($users['txtUserLevel'] == 'admin') { ?>
+                  <strong><?= strtoupper($users['txtUserLevel'])?></strong>
+                  <?php } else { ?>
+                  <strong><?= strtoupper($users['txtUserLevel'])?></strong>
+                  <?php } ?>
+                </td>
+                <td>
+                  <center>
+                      <?php if ($users['txtUserLevel'] != 'admin') {?>
+                      <a title="Edit User">
+                          <button type="button" title="Edit/Update User" id="editUser" value="<?php echo $users['txtId']?>">
+                              <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                          </button>
+                      </a>
+                      &nbsp;
+                      <?php if ($users['txtOfferShare'] == 1) { ?>
+                      <button type="button" title="Offer Already Sent" disabled="">
+                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                      </button>
+                      <?php } else { ?>
+                      <a title="Send/Share Offer">
+                          <button type="button" title="Send/Share Offer" id="shareOffer" data-email="<?php echo $users['txtEmail']?>" value="<?php echo $users['txtId']?>">
+                              <i class="fa fa-share-square" aria-hidden="true"></i>
+                          </button>
+                      </a>
+                      <?php } ?>
+                      &nbsp;
+                      <a title="Delete">
+                          <button type="button" title="Deactive User" id="deactiveUser" value="<?php echo $users['txtId']?>">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                          </button>
+                      </a>
+                      &nbsp;
+                      <a title="Delete">
+                          <button type="button" title="Delete User" id="deleteUser" value="<?php echo $users['txtId']?>">
+                              <i class="fa fa-trash"></i>
+                          </button>
+                      </a>
+                      <?php } else { ?>
+
+                      <?php } ?>
+                  </center>
+                </td>
+              </tr>
+              <?php
+                  $i++;
+                // }
+              }
+              if (empty($collection_users)) {
+              ?>
+              <tr class="no-record">
+                <td colspan="10">Sorry..! No records found.</td>
+              </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </form>
+      </div>
+  </div>
+
+  <?php include dirname(__DIR__).'/include/footer.php' ?>
 
   <!-- Ppo-up To Add New User Start -->
   <div style="display:none;" id="back-color"></div>
@@ -71,7 +192,7 @@ if (!empty($del_id) && $del_stat == 'delete') {
                     <input class="form-control input-sm" type="text" id="txtPhone" name="txtPhone" value="" maxlength="15">
                 </div>
                 <div class="col-md-12 form-group">
-                    <label>Emai-id&nbsp;<span>*</span></label>
+                    <label>Email-id&nbsp;<span>*</span></label>
                     <input class="form-control input-sm" type="text" id="txtEmail" name="txtEmail" value="">
                 </div>
                 <div class="col-md-6 form-group">
@@ -174,122 +295,14 @@ if (!empty($del_id) && $del_stat == 'delete') {
   </div>
   <!-- Ppo-up To Share Offer End -->
 
-  <div class="col-md-9">
-      <div class="col-md-12">
-        <h4><strong>VIEW ACTIVE USERS</strong></h4>
-        <div class="pull-left">
-          <input class="form-control input-sm" size="30" type="text" name="txtSearch" id="txtSearch" placeholder="Search here...">
-        </div>
-        <div class="pull-right">
-        <button type="button" id="btnDelActUsers" id="btnDelActUsers" class="btn btn-sm  btn-danger">
-            <span class="glyphicon glyphicon-remove"></span>&nbsp;Delete
-          </button>
-          <button type="button" id="btnAddPopUp" class="btn btn-sm btn-primary">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;Add User
-          </button>
-        </div>
-        <br>
-        <div class="col-md-12 open-up-msg pull-left">
-            <div class="form-group">
-                <div id="success-dialog-offer" title="Thank you" style="display: none">
-                    Offer sent/share successfully.
-                </div>
-                <div id="user-success-dialog" title="Thank you" style="display: none">
-                    User profile added/updated successfully.
-                </div>
-            </div>
-        </div>
-      </div>
-      
-      <div class="col-md-12">
-        <form name="frmViewUsers" id="frmViewUsers" method="post">
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th><center><input type="checkbox" name="selAllUser" id="selAllUser" value=""></center></th>
-                <th>NAME</th>
-                <th>EMAIL ID</th>
-                <th>PHONE</th>
-                <th>ACCESS LEVEL</th>
-                <th><center>ACTION</center></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $i = 1;
-              foreach ($collection_users as $users) {
-                // if ($users['txtUserLevel'] != 'admin') {
-              ?>
-              <tr>
-                <th scope="row"><?php echo $i?></th>
-                <td>
-                  <?php if ($users['txtUserLevel'] != 'admin') {?>
-                  <center><input class="checkbox1" type="checkbox" name="allSelect[]" id="allSelect" value="<?= $users['txtId']?>"></center>
-                  <?php } else { } ?>
-                </td>
-                <td><a id="uname" title="User Name"><?= $users['txtFirstName']." ".$users['txtLastName']?></a></td>
-                <td><?= $users['txtEmail']?></td>
-                <td><?= $users['txtPhone']?></td>
-                <td>
-                  <?php if ($users['txtUserLevel'] == 'admin') { ?>
-                  <strong><?= strtoupper($users['txtUserLevel'])?></strong>
-                  <?php } else { ?>
-                  <strong><?= strtoupper($users['txtUserLevel'])?></strong>
-                  <?php } ?>
-                </td>
-                <td>
-                  <center>
-                      <?php if ($users['txtUserLevel'] != 'admin') {?>
-                      <a title="Edit User">
-                          <button type="button" title="Edit/Update User" id="editUser" value="<?php echo $users['txtId']?>">
-                              <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                          </button>
-                      </a>
-                      &nbsp;
-                      <?php if ($users['txtOfferShare'] == 1) { ?>
-                      <button type="button" title="Offer Already Sent" disabled="">
-                        <i class="fa fa-check-square" aria-hidden="true"></i>
-                      </button>
-                      <?php } else { ?>
-                      <a title="Send/Share Offer">
-                          <button type="button" title="Send/Share Offer" id="shareOffer" data-email="<?php echo $users['txtEmail']?>" value="<?php echo $users['txtId']?>">
-                              <i class="fa fa-share-square" aria-hidden="true"></i>
-                          </button>
-                      </a>
-                      <?php } ?>
-                      &nbsp;
-                      <a title="Delete">
-                          <button type="button" title="Deactive User" id="deactiveUser" value="<?php echo $users['txtId']?>">
-                              <i class="fa fa-times" aria-hidden="true"></i>
-                          </button>
-                      </a>
-                      &nbsp;
-                      <a title="Delete">
-                          <button type="button" title="Delete User" id="deleteUser" value="<?php echo $users['txtId']?>">
-                              <i class="fa fa-trash"></i>
-                          </button>
-                      </a>
-                      <?php } else { ?>
-
-                      <?php } ?>
-                  </center>
-                </td>
-              </tr>
-              <?php
-                  $i++;
-                // }
-              }
-              if (empty($collection_users)) {
-              ?>
-              <tr class="no-record">
-                <td colspan="10">Sorry..! No records found.</td>
-              </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        </form>
-      </div>
-  </div>
-
-  <?php include dirname(__DIR__).'/include/footer.php' ?>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#dTable').DataTable( {
+      "pagingType": "numbers",
+      "ordering": false,
+      "info":     false,
+      "bFilter": false,
+      "bInfo": false
+  });
+});
+</script>

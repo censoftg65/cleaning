@@ -100,7 +100,6 @@ $collection_zips = $objUser->getZipCodes();
                                 <label class="control-label">Zip code&nbsp;<span class>*</span></label>
                                 <select id="txtZipcode" name="txtZipcode" class="form-control" required>
                                     <?php getOptions($collection_zips,'txtZip','txtZip','')?>
-                                    <!-- <option value='0'> -- Select -- </option> -->
                                 </select>
                             </div>
                         </div>

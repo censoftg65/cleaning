@@ -38,6 +38,24 @@ jQuery(document).ready(function() {
             })
         })
     });
+
+    $("#txtSearchUser").keyup(function () {
+        if (jQuery("#txtSearchUser").val() != "") {
+            var value = this.value.toLowerCase().trim();
+            $("table tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    $("table").css("display","block");
+                    var id = $(this).text().toLowerCase().trim();
+                    var not_found = (id.indexOf(value) == -1);
+                    $(this).closest('tr').toggle(!not_found);
+                    return not_found;
+                })
+            })
+        } else {
+            $("table").css("display","none");
+        }
+    });
 }); 
 /* ---- End ---- */   
 
@@ -91,51 +109,81 @@ jQuery(window).load(function(){
         $('#nav li:nth-child(2) ul#sub-nav').slideDown('slow');
         $('#nav li:nth-child(2) ul#sub-nav li a').removeClass('active');
         $('#nav li:nth-child(2) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/bookings/pending_services.php') {
+    } else if (path == 'cleaning/admin/bookings/create_services.php') {
         $('#nav li:nth-child(3) a').addClass('active');
         $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
         $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
         $('#nav li:nth-child(3) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/bookings/complete_services.php') {
+    } else if (path == 'cleaning/admin/bookings/pending_services.php' || path == 'cleaning/admin/bookings/edit_services.php') {
         $('#nav li:nth-child(3) a').addClass('active');
         $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
         $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
         $('#nav li:nth-child(3) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/bookings/trash.php') {
+    } else if (path == 'cleaning/admin/bookings/complete_services.php') {
         $('#nav li:nth-child(3) a').addClass('active');
         $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
         $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
         $('#nav li:nth-child(3) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/bookings/trash.php') {
+        $('#nav li:nth-child(3) a').addClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(3) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(3) ul#sub-nav li:nth-child(4) a').css('color','#AB2925');
     } else if (path == 'cleaning/admin/pages/add_pages.php') {
+        $('#nav li:nth-child(4) a').addClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(4) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/edit_pages.php') {
+        $('#nav li:nth-child(4) a').addClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(4) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/view_pages.php') {
+        $('#nav li:nth-child(4) a').addClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(4) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/pages/trash.php') {
+        $('#nav li:nth-child(4) a').addClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(4) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(4) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/offers/view_offers.php') {
+        $('#nav li:nth-child(5) a').addClass('active');
+        $('#nav li:nth-child(5) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(5) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(5) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/ratings/view_ratings.php') {
         $('#nav li:nth-child(6) a').addClass('active');
         $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
         $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
         $('#nav li:nth-child(6) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/pages/edit_pages.php') {
-        $('#nav li:nth-child(6) a').addClass('active');
-        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
-        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
-        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/pages/view_pages.php') {
-        $('#nav li:nth-child(6) a').addClass('active');
-        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
-        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
-        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/pages/trash.php') {
-        $('#nav li:nth-child(6) a').addClass('active');
-        $('#nav li:nth-child(6) ul#sub-nav').slideDown('slow');
-        $('#nav li:nth-child(6) ul#sub-nav li a').removeClass('active');
-        $('#nav li:nth-child(6) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/offers/view_offers.php') {
+    } else if (path == 'cleaning/admin/appl-quiz/add_questions.php') {
         $('#nav li:nth-child(7) a').addClass('active');
         $('#nav li:nth-child(7) ul#sub-nav').slideDown('slow');
         $('#nav li:nth-child(7) ul#sub-nav li a').removeClass('active');
         $('#nav li:nth-child(7) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
-    } else if (path == 'cleaning/admin/ratings/view_ratings.php') {
-        $('#nav li:nth-child(8) a').addClass('active');
-        $('#nav li:nth-child(8) ul#sub-nav').slideDown('slow');
-        $('#nav li:nth-child(8) ul#sub-nav li a').removeClass('active');
-        $('#nav li:nth-child(8) ul#sub-nav li:nth-child(1) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/appl-quiz/edit_questions.php') {
+        $('#nav li:nth-child(7) a').addClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(7) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/appl-quiz/view_questions.php') {
+        $('#nav li:nth-child(7) a').addClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(7) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav li:nth-child(2) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/appl-quiz/view_applications.php') {
+        $('#nav li:nth-child(7) a').addClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(7) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav li:nth-child(3) a').css('color','#AB2925');
+    } else if (path == 'cleaning/admin/appl-quiz/trash.php') {
+        $('#nav li:nth-child(7) a').addClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav').slideDown('slow');
+        $('#nav li:nth-child(7) ul#sub-nav li a').removeClass('active');
+        $('#nav li:nth-child(7) ul#sub-nav li:nth-child(4) a').css('color','#AB2925');
     } else {
         $('#nav li a').removeClass('active');
         $('#nav li ul#sub-nav').slideUp('slow');
@@ -331,7 +379,7 @@ jQuery(document).ready(function() {
             jQuery("#txtPageTitle").focus();
             return false;
         } else {
-            jQuery('#loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+            jQuery('#loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
             jQuery('#loading').show();
             jQuery.ajax( {
                 type: "POST",
@@ -369,7 +417,7 @@ jQuery(document).ready(function() {
             jQuery("#txtEditPageUri").focus();
             return false;
         } else {
-            jQuery('#edit_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+            jQuery('#edit_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
             jQuery('#edit_loading').show();
             jQuery.ajax( {
                 type: "POST",
@@ -398,7 +446,7 @@ jQuery(document).ready(function() {
             jQuery("#txtTitle").focus();
             return false;
         } else {
-            jQuery('#contact_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+            jQuery('#contact_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
             jQuery('#contact_loading').show();
             jQuery.ajax( {
                 type: "POST",
@@ -451,12 +499,12 @@ jQuery(document).ready(function() {
     jQuery('.close').click(function() {
         jQuery('.pop-up-user-form').hide(1000);
         jQuery('#back-color').hide();
-        setTimeout(function(){location.reload();}, 500);
+        // setTimeout(function(){location.reload();}, 500);
     });
     jQuery('#close-user-form').click(function() {
         jQuery('.pop-up-user-form').hide(1000);
         jQuery('#back-color').hide();
-        setTimeout(function(){location.reload();}, 500);
+        // setTimeout(function(){location.reload();}, 500);
     });
     jQuery('#btnAddUser').click(function(){
         var location_path = $(location).attr('href');
@@ -484,7 +532,7 @@ jQuery(document).ready(function() {
             jQuery('#txtPhone').focus();
             return false;
         } else {
-            jQuery('#add_user_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+            jQuery('#add_user_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
             jQuery('#add_user_loading').show();
             jQuery.ajax( {
                 type: "POST",
@@ -679,7 +727,7 @@ jQuery(document).ready(function() {
         var site_account_body = tinyMCE.get('txtAccountBody').getContent();
         var site_account_adminbody = tinyMCE.get('txtAccountAdminBody').getContent();
 
-        jQuery('#siteinfo_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+        jQuery('#siteinfo_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
         jQuery('#siteinfo_loading').show();
         jQuery.ajax({
             type: "POST",
@@ -844,7 +892,7 @@ jQuery(document).ready(function() {
             jQuery('#txtOfferTaken').focus();
             return false;
         } else {
-            jQuery('#createOffer_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+            jQuery('#createOffer_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
             jQuery('#createOffer_loading').show();
             jQuery.ajax( {
                 type: "POST",
@@ -897,7 +945,7 @@ jQuery(document).ready(function() {
                 jQuery('#txtOffer').focus();
                 return false;
             } else {
-                jQuery('#shareOffer_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing...');
+                jQuery('#shareOffer_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing...');
                 jQuery('#shareOffer_loading').show();
                 jQuery.ajax({
                     type: "POST",
@@ -1030,7 +1078,7 @@ jQuery(document).ready(function() {
         jQuery('#admin-back-color').hide();
     });
     jQuery("#btnAdminInfo").click(function(){
-        jQuery('#admin_profile_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing... ');
+        jQuery('#admin_profile_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
         jQuery('#admin_profile_loading').show();
         $.ajax({
             type: "POST",
@@ -1081,7 +1129,7 @@ jQuery(document).ready(function() {
     });
     jQuery("#btnAdminAcc").click(function(){
         var user_id = jQuery('#get_user').val();
-        jQuery('#admin_account_loading').html('<img src="'+baseuri+'/images/loader.gif"> Processing... ');
+        jQuery('#admin_account_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
         jQuery('#admin_account_loading').show();
         $.ajax({
             type: "POST",
@@ -1650,7 +1698,7 @@ jQuery(document).ready(function() {
     /*
     * Auther : Vinek T.
     * Description : Script for multiple booked service select and delete the sevice etc.
-    * Date : 16th May'2016
+    * Date : 17th May'2016
     */
     /* ---- Script for multiple checked / unchecked by clicking on checkbox ---- */
     jQuery('#selAllProcess').click(function(event) {
@@ -1771,11 +1819,23 @@ jQuery(document).ready(function() {
     });
     /* ---- End ---- */
 
-    /* ---- Script for trash booked services ---- */
-    jQuery("button#trashService").click(function() {
+    /* ---- Script for trash pending services ---- */
+    jQuery("button#trashPendingService").click(function() {
         var book_id = jQuery(this).val();
         if(confirm("Are you sure you want to delete the service?")) {
-            document.frmViewBooking.action = "view_bookings.php?status=trash&flag="+Base64.encode(book_id);
+            document.frmViewBooking.action = "pending_services.php?status=pending_trash&flag="+Base64.encode(book_id);
+            document.frmViewBooking.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for trash complete services ---- */
+    jQuery("button#trashCompleteService").click(function() {
+        var book_id = jQuery(this).val();
+        if(confirm("Are you sure you want to delete the service?")) {
+            document.frmViewBooking.action = "complete_services.php?status=complete_trash&flag="+Base64.encode(book_id);
             document.frmViewBooking.submit();
         } else {
             return false;
@@ -1796,7 +1856,7 @@ jQuery(document).ready(function() {
     /* ---- End ---- */
 
     /* ---- Script for read more remark writtenin start comment ---- */
-    $("a#read-more").on('click', function(){
+    jQuery("a#read-more").on('click', function(){
         var more = jQuery(this).data('id');
         jQuery.ajax({
             type: 'POST',
@@ -1822,4 +1882,1021 @@ jQuery(document).ready(function() {
     });
     /* ---- End ---- */
 
+    /* ---- Script for multiple checked / unchecked by clicking on checkbox on rating ---- */
+    jQuery('#selAllRating').click(function(event) {
+        if (this.checked) {
+            jQuery('.chkAllReat').each(function() {
+                this.checked = true;
+            });
+        } else {
+            jQuery('.chkAllReat').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple delete the applications from trash ---- */
+    jQuery("#btnDelAllRating").click(function() {
+        var inputs = jQuery('input#selAllRate');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "selAllRate" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='selAllRate[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one review to delete permanently");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete this review permanently?");
+        } else {
+            res = confirm("Are you sure you want to delete these review(s) permanently?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/deleteRating.php',
+                data: {selAllRate:vals,flag:"multidel"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for making quize with adding question, edit question, view question, update answers etc.
+    * Date : 19th May'2016
+    */
+    /* ---- Script for adding new question ---- */
+    jQuery('#btnCreateQuize').click(function(event) {
+        var formdata = jQuery("#frmAddQuestion").serialize();
+        var que = jQuery("#txtQuestion").val();
+        var ans = jQuery("#txtAnswer").val();
+        var opt_one = jQuery("#txtOptionOne").val();
+        var opt_two = jQuery("#txtOptionTwo").val();
+        if (que == "" || ans == "" || opt_one == "" || opt_two == "") {
+            alert("Please fill the required (*) fields.");
+            return false;
+        } else {
+            jQuery('#ques_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
+            jQuery('#ques_loading').show();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/processQuiz.php',
+                data: formdata,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success == 'add') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'one') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'two') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'three') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'four') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                }        
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for editing the question ---- */
+    jQuery('#btnEditQuize').click(function(event) {
+        var formdata = jQuery("#frmEditQuestion").serialize();
+        var que = jQuery("#txtQuestion").val();
+        var ans = jQuery("#txtAnswer").val();
+        var opt_one = jQuery("#txtOptionOne").val();
+        var opt_two = jQuery("#txtOptionTwo").val();
+        if (que == "" || ans == "" || opt_one == "" || opt_two == "") {
+            alert("Please fill the required (*) fields.");
+            return false;
+        } else {
+            jQuery('#ques_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
+            jQuery('#ques_loading').show();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/processQuiz.php',
+                data: formdata,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success == 'edit') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'one') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'two') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'three') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                    if (response.success == 'four') {
+                        setTimeout(function() {
+                            jQuery('#ques_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#succ-resp').html(suc_mesg);
+                            jQuery('#succ-resp').fadeIn(500);
+                            jQuery('#succ-resp').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#succ-resp').fadeOut();}, 4000);
+                    }
+                }        
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for view detail question ---- */
+    jQuery('button#viewQue').click(function(event) {
+        var queId = jQuery(this).val();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/questions.php',
+            data: {queId:queId,flag:'view'},
+            success: function(response) {
+                jQuery("#view_que").html(response);
+                jQuery('#view-question').modal('show');
+            }        
+        });
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for disable question ---- */
+    jQuery('button#disableQue').click(function() {
+        var queId = jQuery(this).val();
+        if(confirm("Are you sure you want to disable the question?")) {
+            document.frmViewQuestion.action = "view_questions.php?status=disable&flag="+Base64.encode(queId);
+            document.frmViewQuestion.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for enable question ---- */
+    jQuery('button#enableQue').click(function() {
+        var queId = jQuery(this).val();
+        if(confirm("Are you sure you want to enable the question?")) {
+            document.frmViewQuestion.action = "view_questions.php?status=enable&flag="+Base64.encode(queId);
+            document.frmViewQuestion.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for delete question ---- */
+    jQuery('button#deleteQue').click(function() {
+        var queId = jQuery(this).val();
+        if(confirm("Are you sure you want to delete this question?")) {
+            document.frmViewQuestion.action = "view_questions.php?status=delete&flag="+Base64.encode(queId);
+            document.frmViewQuestion.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple checked / unchecked by clicking on checkbox on questions ---- */
+    jQuery('#selAllQue').click(function(event) {
+        if (this.checked) {
+            jQuery('.check-que').each(function() {
+                this.checked = true;
+            });
+        } else {
+            jQuery('.check-que').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple trash the questions ---- */
+    jQuery("#btnTrashQue").click(function() {
+        var inputs = jQuery('input#allSelQue');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "allSelQue" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='allSelQue[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one question(s) to delete");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete the question?");
+        } else {
+            res = confirm("Are you sure you want to delete these question(s)?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/questions.php',
+                data: {allSelQue:vals,flag:"multitrash"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+
+    /* ---- Script for making notification ---- */
+    jQuery('#main-notify').click(function() {
+        jQuery.ajax({
+            type: 'POST',
+            url: baseuri+'/admin/include/getNotification.php',
+            data: {complete_nitify:'complete_nitify'},
+            success: function(response) {
+                jQuery('#sub-notify').slideToggle('fast');
+                jQuery('#sub-notify').html(response);
+            }
+        })
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for setting up the datepicker, timepicker & booking parameter for craeting a new service
+    * Date : 26th may'2016
+    */
+    var date = new Date();
+    date.setDate(date.getDate()-0);
+    jQuery('#txtServiceDate').datepicker({
+        format: 'yyyy-mm-dd',
+        startDate: date,
+        autoclose: true
+    });
+    jQuery("#cal").click(function() { 
+        jQuery("#txtServiceDate").datepicker("show");
+    });
+    jQuery('#txtServiceTime').timepicker({
+        'showDuration': true,
+        'timeFormat': 'g:ia',
+    });
+    jQuery("#time").click(function() { 
+        jQuery("#txtServiceTime").timepicker("show");
+    });
+    /* ---- End ---- */
+
+
+    /*-- Initializing calculation variables for booking form --*/
+    var bathroom = [
+        [],
+        [1, 2],
+        [1, 2],
+        [1, 2, 3],
+        [1, 2, 3],
+        [1, 2, 3, 4],
+        [1, 2, 3, 4, 5],
+        [1, 2, 3, 4, 5, 6]
+    ];
+
+    var bathrooms;
+    var service_price = 0.0;
+    var bedroom = 0;
+    var price = 0.0;
+    var bathroom_options = $("#txtBathroom");
+    var hours_options = $("#txtServiceHours");
+    var prices_options = $("#txtServiceAmt");
+    var price_value = 0.0;
+    var price_text = 0.0;
+    var hour_value = 0;
+    var hour_text = 0;
+    var extra_hour = 0;
+
+    var cal_data = {
+        "1": [{
+            "2.0": 60,
+            "2.5": 75
+        }],
+        "2": [{
+            "3.0": 90,
+            "3.5": 105,
+            "4.0": 120,
+            "4.5": 135
+        }],
+        "3": [{
+            "5.0": 150,
+            "5.5": 165,
+            "6.0": 180,
+            "6.5": 195
+        }],
+        "4": [{
+            "7.0": 210,
+            "7.5": 225,
+            "8.0": 240,
+            "8.5": 255
+        }],
+        "5": [{
+            "9.0": 270,
+            "9.5": 285,
+            "10.0": 300,
+            "10.5": 315
+        }],
+        "6": [{
+            "11.0": 330,
+            "11.5": 345,
+            "12.0": 360,
+            "12.5": 375
+        }],
+        "7": [{"0": 0}]
+    };
+    /* ---- End ---- */
+
+    /*On change bedroom Selection*/
+    $("#txtBedroom").change(function() {
+        filter_type = 'bedroom';
+        bedroom = $(this).val();
+        bathroom_options.html('');
+        hours_options.html('');
+        prices_options.html('');
+        if (bedroom !== null || bedroom !== "") {
+            if (filter_type == 'bedroom') {
+                var price = 0;
+                $.each(cal_data[bedroom], function(index, jsonObject) {
+                    $.each(jsonObject, function(index, value) {
+                        var temp = index.toString();
+                        var val = value.toString();
+                        var lastNum = parseInt(temp[temp.length - 1]); // it's 2
+                        if(lastNum == 0){
+                            index = index.slice(0, -2);
+                        }
+                        hours_options.append(new Option(index, index));
+                        prices_options.append(new Option(Number(value + price), Number(value + price)));
+                    });
+                    $.each(bathroom[bedroom], function(index, value) {
+                        bathroom_options.append(new Option(value, value));
+                    });
+                    var tot_sel = $('#txtServiceAmt option:selected').val();
+                    $('#hidServiceAmt').val(tot_sel);
+                });
+            }
+        }
+        
+    });
+    /* ---- End ---- */
+
+    /*-- Change total on hours selection --*/
+    $("#txtServiceHours").change(function() {
+        var selectedIndex = $(this)[0].selectedIndex;
+        var price_options = $('#txtServiceAmt option').eq(selectedIndex).prop('selected', true);
+        var obj_val = $( "#txtServiceAmt option:selected" ).val();
+        $('#hidServiceAmt').val(obj_val);
+    });
+    /* ---- End ---- */
+
+    /*-- Display total on extra services selection --*/
+    $(":checkbox").on("change", function() {
+        $("#txtExtraServiceHrs").val(function() {
+            var sum = 0;
+            $(":checkbox:checked").each(function() {
+                service_hours = Number($(this).data('servicehrs'));
+                sum += +service_hours;
+            });
+            return sum;
+        });
+        $("#txtExtraServiceAmt").val(function() {
+            var sum = 0;
+            $(":checkbox:checked").each(function() {
+                service_amt = Number($(this).data('serviceprice'));
+                sum += +service_amt;
+            });
+            return sum;
+        });
+    });
+    /* ---- End ---- */
+
+    /*-- Script for preview the current booking form fields --*/
+    jQuery('#btnPreviewNew').click(function() {
+        var bedroom = jQuery('#txtBedroom').val();
+        var service_date = jQuery('#txtServiceDate').val();
+        var service_time = jQuery('#txtServiceTime').val();
+        if (bedroom == 0 || service_date == '' || service_time == '') {
+            alert("Please fill all required fields");
+            return false;
+        } else {
+            var formdata = jQuery("#frmNewBooking").serialize();
+            var modal_preview = '';
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/new_booking_preview.php',
+                data: formdata,
+                success: function(response) {
+                    jQuery(".modal-body").html(response);
+                    jQuery("#book-preview").modal('show');
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for preview the update booking form fields --*/
+    jQuery('#btnPreviewEdit').click(function() {
+        var bedroom = jQuery('#txtBedroom').val();
+        var service_date = jQuery('#txtServiceDate').val();
+        var service_time = jQuery('#txtServiceTime').val();
+        if (bedroom == 0 || service_date == '' || service_time == '') {
+            alert("Please fill all required fields");
+            return false;
+        } else {
+            var formdata = jQuery("#frmUpdateBooking").serialize();
+            var modal_preview = '';
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/new_booking_preview.php',
+                data: formdata,
+                success: function(response) {
+                    jQuery(".modal-body").html(response);
+                    jQuery("#book-preview").modal('show');
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for create the new booking service --*/
+    jQuery('#btnNewBook').click(function() {
+        var bedroom = jQuery('#txtBedroom').val();
+        var service_date = jQuery('#txtServiceDate').val();
+        var service_time = jQuery('#txtServiceTime').val();
+        if (!jQuery('input[name=rdoUser]:checked').val() ) {          
+            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+            jQuery("#getUser").slideDown();
+            jQuery('#txtSearchUser').focus();
+            jQuery("#txtSearchUser").attr("placeholder","Please search for user first...");
+            jQuery("#txtSearchUser").addClass('inputfocus');
+            return false
+            return false;
+        } else if (bedroom == 0 || service_date == '' || service_time == '') {
+            alert("Please fill all required fields");
+            return false;
+        } else {
+            var formdata = jQuery("#frmNewBooking").serialize();
+            jQuery('#service_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
+            jQuery('#service_loading').show();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/create_booking.php',
+                data: formdata,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.err == 'create') {
+                        setTimeout(function() {
+                            jQuery('#service_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#booking-service').html(suc_mesg);
+                            jQuery('#booking-service').fadeIn(500);
+                            jQuery('#booking-service').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#booking-service').fadeOut();}, 3000);
+                    }
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for update the booking service --*/
+    jQuery('#btnEditBook').click(function() {
+        var bedroom = jQuery('#txtBedroom').val();
+        var service_date = jQuery('#txtServiceDate').val();
+        var service_time = jQuery('#txtServiceTime').val();
+        if (bedroom == 0 || service_date == '' || service_time == '') {
+            alert("Please fill all required fields");
+            return false;
+        } else {
+            var formdata = jQuery("#frmUpdateBooking").serialize();
+            jQuery('#service_loading').html('<img src="'+baseuri+'/images/new_loader.gif"> Processing... ');
+            jQuery('#service_loading').show();
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/create_booking.php',
+                data: formdata,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.err == 'update') {
+                        setTimeout(function() {
+                            jQuery('#service_loading').hide();
+                            jQuery('html, body').animate({scrollTop: $('body').offset().top}, 500);
+                            var suc_mesg = JSON.stringify(response.message);
+                            suc_mesg = suc_mesg.replace(/^"/, "");
+                            suc_mesg = suc_mesg.replace(/"$/, "");
+                            jQuery('#booking-service').html(suc_mesg);
+                            jQuery('#booking-service').fadeIn(500);
+                            jQuery('#booking-service').css({
+                                'background-color':'green',
+                                'border-radius':'3px',
+                                'color':'#ffffff',
+                                'font-size':'15px',
+                                'font-weight':'600',
+                                'padding':'10px',
+                                'text-align':'center'
+                            });
+                        }, 1000);
+                        setTimeout(function() {jQuery('#booking-service').fadeOut();}, 3000);
+                    }
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for cancel the booking service --*/
+    jQuery('button#cancelBooking').click(function() {
+        var book_id = jQuery(this).val();
+        if(confirm("Are you sure you want to cancel this service?")) {
+            document.frmViewBooking.action = "pending_services.php?status=cancel&flag="+Base64.encode(book_id);
+            document.frmViewBooking.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for complete the booking service --*/
+    jQuery('button#completeService').click(function() {
+        var book_id = jQuery(this).val();
+        alert(book_id);
+        if(confirm("Are you sure you want to make complete this service?")) {
+            document.frmViewBooking.action = "pending_services.php?status=complete&flag="+Base64.encode(book_id);
+            document.frmViewBooking.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for complete the booking on edit service page --*/
+    jQuery('#completedService').click(function() {
+        var book_id = jQuery(this).val();
+        if(confirm("Are you sure you want to make complete this service?")) {
+            document.frmUpdateBooking.action = "edit_services.php?status=complete&flag="+Base64.encode(book_id);
+            document.frmUpdateBooking.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for getting user for booking services --*/
+    jQuery('#seluser').click(function() {
+        jQuery("#getUser").slideToggle();
+        jQuery("#txtSearchUser").focus();
+    });
+    /* ---- End ---- */
+
+    /*-- Script for getting only one user to be display --*/
+    jQuery('.chk-rdo').click(function() {
+        var user_click = jQuery('input[name=rdoUser]:checked').val();
+        if (user_click) {
+            var uname = jQuery('#rdoUser'+user_click).attr("data-userval");
+            jQuery("#txtSearchUser").val(uname);
+            jQuery("#tab-hid").hide();
+        }
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for viewing the application form and multiple delete and edit and single delete the appl forms
+    * Date : 9th June'2016
+    */
+    /*-- Script for viewing applications --*/
+    jQuery('button#view-appl').click(function() {
+        var applid = jQuery(this).val();
+        jQuery.ajax({
+            type: 'POST',
+            url: 'form-wizard/applications.php',
+            data: {applid:applid, flag:"view"},
+            success: function(response) {
+                jQuery("#view_appl").html(response);
+                jQuery('#view-applications').modal('show');
+            }
+        });
+        
+    });
+    /* ---- End ---- */
+
+    /*-- Script for trashing applications --*/
+    jQuery('button#delete-appl').click(function() {
+        var applid = jQuery(this).val();
+        if(confirm("Are you sure you want to delete this application?")) {
+            document.frmViewApplicaion.action = "view_applications.php?status=trash&flag="+Base64.encode(applid);
+            document.frmViewApplicaion.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for enabling applications --*/
+    jQuery('button#enable-appl').click(function() {
+        var applid = jQuery(this).val();
+        if(confirm("Are you sure you want to enable this application?")) {
+            document.frmTrashApplicaion.action = "trash.php?status=enable&flag="+Base64.encode(applid);
+            document.frmTrashApplicaion.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /*-- Script for delete permanently applications --*/
+    jQuery('button#delete-permanentappl').click(function() {
+        var applid = jQuery(this).val();
+        if(confirm("Are you sure you want to delete this application permanently?")) {
+            document.frmTrashApplicaion.action = "trash.php?status=delete&flag="+Base64.encode(applid);
+            document.frmTrashApplicaion.submit();
+        } else {
+            return false;
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple checked / unchecked by clicking on checkbox on applications ---- */
+    jQuery('#selAllAppl').click(function(event) {
+        if (this.checked) {
+            jQuery('.check-appl').each(function() {
+                this.checked = true;
+            });
+        } else {
+            jQuery('.check-appl').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple trash the applications ---- */
+    jQuery("#btnTrashAppls").click(function() {
+        var inputs = jQuery('input#allSelAllp');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "allSelAllp" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='allSelAllp[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one application(s) to delete");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete the application?");
+        } else {
+            res = confirm("Are you sure you want to delete these application(s)?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/applications.php',
+                data: {allSelAllp:vals,flag:"multitrash"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /*
+    * Auther : Vinek T.
+    * Description : Script for multil delete, view, enable and permanant delete from trash
+    * Date : 10th June'2016
+    */
+    /* ---- Script for multiple checked / unchecked by clicking on checkbox on trash applications ---- */
+    jQuery('#delAllAppl').click(function(event) {
+        if (this.checked) {
+            jQuery('.check-trashappl').each(function() {
+                this.checked = true;
+            });
+        } else {
+            jQuery('.check-trashappl').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple delete the applications from trash ---- */
+    jQuery("#btnDeleteAppls").click(function() {
+        var inputs = jQuery('input#allDelAllp');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "allDelAllp" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='allDelAllp[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one application(s) to delete permanently");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete this application permanently?");
+        } else {
+            res = confirm("Are you sure you want to delete these application(s) permanently?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/applications.php',
+                data: {allDelAllp:vals,flag:"multidel"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for multiple delete the applications from trash ---- */
+    jQuery("#btnDeleteAppls").click(function() {
+        var inputs = jQuery('input#allDelAllp');
+        var vals = [];
+        var res;
+        for(var i = 0; i < inputs.length; i++) { 
+            var type = inputs[i].getAttribute("type");
+            if(type == "checkbox") {
+                if(inputs[i].id == "allDelAllp" && inputs[i].checked){
+                    vals.push(inputs[i].value);
+                }
+            } 
+        }
+        var count_checked = jQuery("[name='allDelAllp[]']:checked").length; 
+        if(count_checked == 0) {
+            alert("Please select atleast one application(s) to delete permanently");
+            return false;
+        } else if(count_checked == 1) {
+            res = confirm("Are you sure you want to delete this application permanently?");
+        } else {
+            res = confirm("Are you sure you want to delete these application(s) permanently?");
+        }
+        if (res) {
+            jQuery.ajax({
+                type: 'POST',
+                url: 'form-wizard/applications.php',
+                data: {allDelAllp:vals,flag:"multidel"},
+                success: function(response) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    /* ---- End ---- */
+
+    /* ---- Script for getting the correct ans value on testfield ---- */
+    jQuery("input[name=rdoCorrect]").click(function(){
+        if(jQuery("#rdoCorrectOne").is(":checked")) {
+            var val_one = jQuery("#txtOptionOne").val();
+            jQuery("#txtAnswer").val(val_one);
+        } else if(jQuery("#rdoCorrectTwo").is(":checked")) {
+            var val_two = jQuery("#txtOptionTwo").val();
+            jQuery("#txtAnswer").val(val_two);
+        } else if(jQuery("#rdoCorrectThree").is(":checked")) {
+            var val_three = jQuery("#txtOptionThree").val();
+            jQuery("#txtAnswer").val(val_three);
+        } else if(jQuery("#rdoCorrectFour").is(":checked")) {
+            var val_four = jQuery("#txtOptionFour").val();
+            jQuery("#txtAnswer").val(val_four);
+        }
+    })    
+    /* ---- End ---- */
+
 });
+
+
+/*
+* Auther : Vinek T.
+* Description : Script for making notification
+* Date : 23th May'2016
+*/
+(function showUpNotty(){
+    setTimeout(showUpNotty, 10000);
+    var baseuri = window.location.origin+'/cleaning';
+    jQuery.ajax({
+        type: 'POST',
+        url: baseuri+'/admin/include/getNotification.php',
+        data: {count:'count'},
+        success: function(response) {
+            jQuery('#sub-notify').html(response);
+            var tot_noti = jQuery('input[name=hidNottyTot]').val();
+            jQuery('#show-notty-tot').html(tot_noti);
+        }
+    })
+})();
+

@@ -41,31 +41,27 @@ span.drpImg{margin:0 0 0 8px; position:relative; top:-2px;}
 .contentPart .col-sm-12.extraTxt{margin-bottom:14px;}
 footer{background:#bda78f; padding:13px 0 10px; text-align:center; font-size:13px; color:#000; font-weight:400;}
 .editProfBtn {margin: 0 auto 34px; width: 183px;}
-.editProfBtn a {background:url(../images/edit-prof-bg.png) repeat-x scroll 0 0; border: 1px solid #736660; color: #ffffff; float: left; font-size: 20px; font-weight: 400; height: 43px; line-height: normal; padding: 8px 25px 0; /*text-shadow:-2px 2px 2px #000000, -2px 2px 2px #000000;*/}
+.editProfBtn a {background:url(../images/edit-prof-bg.png) repeat-x scroll 0 0; border: 1px solid #736660; color: #ffffff; float: left; font-size: 20px; font-weight: 400; height: 43px; line-height: normal; padding: 8px 25px 0; text-shadow:-2px 2px 2px #000000, -2px 2px 2px #000000;}
 .editProfBtn a:hover {opacity:0.6;}
 .bottomButtons {margin: 30px 0 20px; width: 100%; float:left; padding:0 0 0 15px;}
-.bottomButtons a {background:url(../images/btm-btn-bg.png) repeat-x scroll 0 0; border: 1px solid #736660; color: #ffffff; float: left; font-size: 17px; font-weight: 400; height: 37px; line-height: normal; padding: 7px 17px 0; margin:0 10px 0 0; /*text-shadow:-2px 2px 2px #000000, -2px 2px 2px #000000;*/}
+.bottomButtons a {background:url(../images/btm-btn-bg.png) repeat-x scroll 0 0; border: 1px solid #736660; color: #ffffff; float: left; font-size: 17px; font-weight: 400; height: 37px; line-height: normal; padding: 7px 17px 0; margin:0 10px 0 0; text-shadow:-2px 2px 2px #000000, -2px 2px 2px #000000;}
 .bottomButtons a:hover {opacity:0.6;}
 .bottomButtons a.cancelBtn{background:url(../images/cancel-btn-bg.png) repeat-x 0 0; border:1px solid #cbcaca; color:#3c3c3c; text-shadow:none;}
-.container.contentUpperMain{max-width:1500px; width:96%;}
 .container.contentMain{background:url(../images/content-bg.jpg) repeat-y 0 0; max-width:1500px; width:96%;}
 .contentPart .row {margin: 0;}
 .contentPart input[type="checkbox"] {float: left; margin: 4px 10px 0 0;}
 .contentPart .recurring label {display: inline;float: left;margin-top: 4px;margin-right: 10px;}
 .contentPart .recurring select {padding: 5px;width: 200px;}
-.contentPart .serviceBox input[type="text"] {float: left; margin-right: 14px; padding: 6px 7px; width: 37px;}
-.contentPart .serviceBox select {padding:5px; width: 88px;}
+.contentPart .serviceBox input[type="text"] {float: left; margin-right: 14px; padding: 5px 7px; width: 37px;}
+.contentPart .serviceBox select {padding: 2px 5px; width: 88px;}
 .contentPart .addTip label {float: left; margin-top:10px; width: 110px;}
 .contentPart .addTip input[type="text"] {float: left; width: 80px;}
 .contentPart .addTip p {float: left; width:100%;}
-.contentPart input[type="password"]::-moz-placeholder {color: #686868;font-size: 30px;letter-spacing: -2px;line-height: 0;}
-
 .numHr select {max-width: 240px;}
 .ratedTable {width: 100%;}
 .ratedTable tr th {color: #616161; font-size: 14px; text-transform:uppercase;}
 .ratedTable tr td {background: #e8e8e8; font-size: 14px; color: #373737; border-bottom:10px solid #fff;}
 .ratedTable tr th, .ratedTable tr td {padding: 10px;}
-.ratedTable tr th {padding-bottom: 25px;}
 .rated {background: #21ae0e; border-radius: 5px; color: #ffffff; padding: 1px 8px 3px; float: left;}
 .rated:hover{background:#17770a; color:#fff;}
 .rateUs {background: #e2071c; border-radius: 5px; color: #ffffff; padding: 1px 8px 3px; float: left;}
@@ -83,12 +79,6 @@ footer{background:#bda78f; padding:13px 0 10px; text-align:center; font-size:13p
 .leftSidebar ul li.bookServTab:hover:before{background-image:none !important;}
 .leftSidebar ul li .dropdown.bookServ ul.dropdown-menu li.selected:before, .leftSidebar ul li .dropdown.bookServ ul.dropdown-menu li:before{background:url(../images/selected-triangle-drp.png) no-repeat right center; top:22px;}
 .caret.glyphicon.glyphicon-plus {font-weight:normal; border: 0 none; font-size: 10px; position: relative; right: -36px; top: -19px;}
-
-
 @media all and (min-width: 1200px){
 .col-sm-3.leftSidebar{width:264px; padding:0;}	
-.col-sm-9.contentPart {margin: 37px 0 55px 40px; border:1px solid #363636; background:#fff; padding:20px 14px; line-height:normal; width: 75%;}}
-
-@media screen and (min-width: 1367px) {
-.col-sm-3.leftSidebar { padding:0 0 38px;}
-}
+.col-sm-9.contentPart {margin: 37px 0 55px 50px; border:1px solid #363636; background:#fff; padding:20px 14px; line-height:normal; width: 75%;}}

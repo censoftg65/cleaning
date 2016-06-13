@@ -72,6 +72,12 @@ class Offers
         return $collection;
     }
 
+    public function clearOfferNotty() {
+        $db = new Config();
+        $sql_query = "UPDATE "._DB_PREFIX."promo_offers SET txtNotify = 0";
+        $db->query($sql_query);
+    }
+
 }
 
 $objOffers = new Offers();

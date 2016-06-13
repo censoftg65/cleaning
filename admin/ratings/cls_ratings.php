@@ -41,6 +41,12 @@ class Rating
         $query = "DELETE FROM "._DB_PREFIX."rating WHERE txtId = '$param'";
         $db->query($query);
     }
+
+    public function clearRateNotty() {
+        $db = new Config();
+        $query = "UPDATE "._DB_PREFIX."rating SET txtNotify = 0";
+        $db->query($query);
+    }
     
 }
 

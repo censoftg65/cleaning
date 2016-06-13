@@ -12,6 +12,11 @@ $coll_rating = $objBooking->getBookRating($rate_id);
 foreach ($coll_rating as $rate) {
 	echo '<div class="form-group">';
 		echo '<div class="col-sm-12">';
+			echo '<label class="control-label"><strong>Client Name</strong></label>';
+			echo '<div class="">'.displayDoubleName(_DB_PREFIX."user","txtFirstName","txtLastName",$rate['txtUserId'],"txtId").'</div>';
+		echo '</div>';	
+		echo '<div class="col-sm-12">&nbsp;</div>';	
+		echo '<div class="col-sm-12">';
 			echo '<label class="control-label"><strong>Service Provider</strong></label>';
 			echo '<div class="">'.$rate['txtServiceProvider'].'</div>';
 		echo '</div>';	

@@ -65,11 +65,11 @@ if (!empty($delId) && $delStat == 'delete') {
               <tr>
                 <th>#</th>
                 <th><center><input type="checkbox" name="selAllProcess" id="selAllProcess" value=""></center></th>
-                <th>CLEANING PROCESS</th>
-                <th>CLIENT NAME</th>
-                <th>BOOKING DATE</th>
-                <th>BOOKING TIME</th>
-                <th><center>#</center></th>
+                <th>Cleaning Process</th>
+                <th>Client Name</th>
+                <th>Booking Date/Time</th>
+                <th>Price</th>
+                <th><center>Action</center></th>
               </tr>
             </thead>
             <tbody>
@@ -86,8 +86,8 @@ if (!empty($delId) && $delStat == 'delete') {
                   </a>
                 </td>
                 <td><?= $booked['txtFirstName']." ".$booked['txtLastName']?></td>
-                <td><?= $booked['txtServiceDate']?></td>
-                <td><?= $booked['txtServiceTime']?></td>
+                <td><?= $booked['txtServiceDate']." - ".$booked['txtServiceTime']?></td>
+                <td><?= "$ ".$booked['txtGrandTotal']?></td>
                 <td>
                   <center>
                       <a title="Delete">

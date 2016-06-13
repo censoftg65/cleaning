@@ -30,9 +30,11 @@ foreach ($coll_booked as $book) {
 			echo '<div class="col-sm-12">';
 				echo '<label class="col-sm-3 control-label"><strong>Extra Services</strong></label>';
 				echo '<div class="col-sm-9 ser-left-pad">';
+					$result_names = '';
 					foreach ($ex_ser as $service_val) {
-						echo displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
+						$result_names .= displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
 					}
+					echo rtrim($result_names,', ');
 				echo '</div>';
 			echo '</div>';	
 		}	

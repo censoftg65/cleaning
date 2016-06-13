@@ -65,7 +65,7 @@ $collection = $objCommon->getAllRatings($uid);
                                         <td>
                                         <?php 
                                         echo strlen($rating['txtRatingComment']) >= 50 ? 
-                                        substr($rating['txtRatingComment'], 0, 49).'&nbsp;<a id="read-more" data-id="'.$rating["txtId"].'">Read more</a>' :  
+                                        substr($rating['txtRatingComment'], 0, 49).' <a id="read-more" data-id="'.$rating["txtId"].'">[Read more]</a>' :  
                                         $rating['txtRatingComment'];
                                         ?>
                                         </td>

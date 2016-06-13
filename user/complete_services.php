@@ -24,7 +24,7 @@ if(empty($_SESSION["txtId"]) && empty($_SESSION["txtUsername"])){
    header("location:"._SITE_URL."/user/");
 }
 
-$_SESSION['page_title'] = "Complete Services | "._SITE_NAME;
+$_SESSION['page_title'] = "Completed Services | "._SITE_NAME;
 $db = new Config(); 
 
 $collection = $objCommon->getCompleteServices($uid);
@@ -45,14 +45,14 @@ $collection = $objCommon->getCompleteServices($uid);
                 
                 <div class="col-sm-9 contentPart compServ">
                     <div class="col-sm-6">
-                        <h2 class="compHead">Complete Services</h2>
+                        <h2 class="compHead">Completed Services</h2>
                     </div>
 
                     <div class="col-sm-6" id="com-msg-request" style="display: none"></div>
 
                     <div class="clear"></div>
                     <div class="col-sm-6">
-                        <input type="text" name="txtSearch" id="txtSearch" placeholder="Sereach services here..." />
+                        <input type="text" name="txtSearch" id="txtSearch" placeholder="Search services here..." />
                     </div>
                     
                     <div class="col-sm-12 table-responsive">
@@ -60,6 +60,7 @@ $collection = $objCommon->getCompleteServices($uid);
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Service Requestor</th>
                                         <th>Cleaning Process</th>
                                         <th>Extra Services</th>
                                         <th>Service Date/Time</th>
@@ -73,10 +74,12 @@ $collection = $objCommon->getCompleteServices($uid);
                                         $class = ($complete['txtAction'] == 'cancel') ? "warning" : "";
                                     ?>
                                     <tr class="<?= $class?>">
+                                        <td><?= $complete['txtFirstName']." ".$complete['txtLastName']?></td>
                                         <td>
                                             <a class="view_booking" title="View Booking" data-id="<?= $complete['txtId']?>">
-                                                <?= $complete['txtBedroom']."-BED,&nbsp;".$complete['txtBathroom']."-BATH"?></td>
+                                                <?= $complete['txtBedroom']."-BED,&nbsp;".$complete['txtBathroom']."-BATH"?>
                                             </a>
+                                        </td>    
                                         <td>
                                         <?php 
                                         if ($complete['txtExtraService'] == '') {
@@ -94,9 +97,9 @@ $collection = $objCommon->getCompleteServices($uid);
                                         <td>
                                             <center>
                                                 <?php if ($complete['rateStatus'] == '1') { ?>
-                                                <button type="button" class="btn btn-xs btn-success" title="View Rating" id="btnRated" value="<?= $complete['rateId']?>">Rated</button>
+                                                <button type="button" class="btn btn-xs btn-success" title="View Rating" id="btnRated" value="<?= $complete['rateId']?>">Confirmed/Rated</button>
                                                 <?php } else { ?>
-                                                <button type="button" class="btn btn-xs btn-danger" title="Rate Service" id="btnRateUs" value="<?= $complete['txtId']?>">Rate-us</button>
+                                                <button type="button" class="btn btn-xs btn-danger" title="Rate Service" id="btnRateUs" value="<?= $complete['txtId']?>">Job Completed/Rate-Us</button>
                                                 <?php } ?>
                                             </center>
                                             <?php if ($complete['txtAction'] == 'cancel') { ?>

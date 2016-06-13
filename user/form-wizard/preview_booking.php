@@ -8,8 +8,8 @@ require_once dirname(dirname(__DIR__)).'/inc/function.inc.php';
 include_once dirname(__DIR__).'/cls_common.php';
 $db = new Config();
 
-$pre_pending = $db->getParam('pre_pending');
-if (!empty($pre_pending) && $pre_pending = '$pre_pending') {
+$pre_booking = $db->getParam('pre_booking');
+if (!empty($pre_booking) && $pre_booking = 'pre_booking') {
 	$process_id = $db->getParam('process_id');
 	$collection = $objCommon->getPendingPreviewServices($process_id);	
 	foreach ($collection as $arr_book) {
@@ -36,9 +36,11 @@ if (!empty($pre_pending) && $pre_pending = '$pre_pending') {
 						if (empty($arr_book['txtExtraService'])) {
 							echo "Not Selected";	
 						} else {
+							$result_names = '';
 							foreach (explode(",", $arr_book['txtExtraService']) as $service_val) {
-								echo displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
+								$result_names .= displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
 							}
+							echo rtrim($result_names,', ');
 						}
 					echo '</div>';
 				echo '</div>';	
@@ -144,9 +146,11 @@ if (!empty($pre_pending) && $pre_pending = '$pre_pending') {
 					if (empty($arr_book['txtExtraService'])) {
 						echo "Not Selected";	
 					} else {
+						$result_names = '';
 						foreach ($arr_book['txtExtraService'] as $service_val) {
-							echo displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
+							$result_names .= displayName(_DB_PREFIX.'extra_services','txtServiceName',$service_val,'txtId').', ';
 						}
+						echo rtrim($result_names,', ');
 					}
 				echo '</div>';
 			echo '</div>';	
